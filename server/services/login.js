@@ -1,9 +1,9 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const { validationResult } = require("express-validator");
-const config = require("../utils/config");
-const logger = require("../utils/logger");
-const User = require("../models/user");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const { validationResult } = require('express-validator');
+const config = require('../utils/config');
+const logger = require('../utils/logger');
+const User = require('../models/user');
 
 const getUser = async (req, res) => {
   try {
@@ -11,7 +11,7 @@ const getUser = async (req, res) => {
     logger.info(user);
     res.json(user);
   } catch {
-    res.status(500).json({ msg: "Cannot find user" });
+    res.status(500).json({ msg: 'Cannot find user' });
   }
 };
 const loginUser = async (req, res) => {
@@ -27,14 +27,14 @@ const loginUser = async (req, res) => {
     const passwordCorrect = await bcrypt.compare(password, user.password);
 
     if (!passwordCorrect) {
-      return res.status(400).json({ msg: "Invalid password!" });
+      return res.status(400).json({ msg: 'Invalid password!' });
     }
 
     const payload = { user: { id: user.id } };
-    const token = jwt.sign(payload, config.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign(payload, config.JWT_SECRET, { expiresIn: '1h' });
     res.json({ token: token });
   } else {
-    return res.status(400).json({ msg: "Invalid email!" });
+    return res.status(400).json({ msg: 'Invalid email!' });
   }
 };
 

@@ -1,18 +1,18 @@
-const sharp = require("sharp");
-const mkdirp = require("mkdirp");
-const fs = require("fs");
+const sharp = require('sharp');
+const mkdirp = require('mkdirp');
+const fs = require('fs');
 
-const config = require("../utils/config");
-const logger = require("../utils/logger");
-const jwt = require("jsonwebtoken");
+const config = require('../utils/config');
+const logger = require('../utils/logger');
+const jwt = require('jsonwebtoken');
 
-const User = require("../models/user");
+const User = require('../models/user');
 
 const tokenExtractor = (req, res, next) => {
-  const token = req.header("Authorization");
+  const token = req.header('Authorization');
 
   if (!token) {
-    res.status(401).json({ error: "no token provided" });
+    res.status(401).json({ error: 'no token provided' });
   }
 
   const decodedToken = jwt.verify(token, config.JWT_SECRET);
@@ -22,21 +22,15 @@ const tokenExtractor = (req, res, next) => {
 };
 
 const userUpdater = async (request, response, next) => {
-  logger.info("In user updater!");
+  logger.info('In user updater!');
   logger.info(request.body);
 
-  const {
-    name,
-    address,
-    description,
-    student,
-    company,
-    contact,
-  } = request.body;
+  const { name, address, description, student, company, contact } =
+    request.body;
   if (student && company) {
     request
       .status(400)
-      .json({ error: "can't update both company and student info" });
+      .json({ error: 'can`t update both company and student inf' });
   }
   try {
     let searchedUser = await User.findById(request.user.id);
@@ -44,10 +38,11 @@ const userUpdater = async (request, response, next) => {
     // Handling New Profile Picture Upload
     if (request?.files?.profilePicture) {
       let newProfilePicture = request.files.profilePicture;
-      let acceptedFileFormats = ["jpg", "jpeg", "png"];
-      let fileFormat = newProfilePicture.name.split(".")[1];
+      let acceptedFileFormats = ['jpg', 'jpeg', 'png'];
+      let fileFormat = newProfilePicture.name.split('.')[1];
+      // eslint-disable-next-line no-unsafe-negation
       if (!fileFormat in acceptedFileFormats) {
-        throw Error("Unaccepted file format!");
+        throw Error('Unaccepted file format!');
       }
 
       // create directory for sharp image move
@@ -116,51 +111,46 @@ const userUpdater = async (request, response, next) => {
     response.json(searchedUser);
   } catch (error) {
     logger.info(error);
-    response.status(400).json({ error: "no such user found!" });
+    response.status(400).json({ error: 'no such user found!' });
   }
 
   next();
 };
 
 /*
-* Adds a request.limit that specifies the limit of elements on a given page (default 100)
-*/
+ * Adds a request.limit that specifies the limit of elements on a given page (default 100)
+ */
 const limitExtractor = async (req, res, next) => {
   console.log(req.query);
-  if (req.query.limit)
-    req.limit = parseInt(req.query.limit);
-  else
-    req.limit = 100; // set a default limit if none provided 
+  if (req.query.limit) req.limit = parseInt(req.query.limit);
+  else req.limit = 100; // set a default limit if none provided
   next();
 };
 
 /*
-* Adds a request.page that specifies the page to use (default 1)
-*/
+ * Adds a request.page that specifies the page to use (default 1)
+ */
 const pageExtractor = async (req, res, next) => {
-  if (req.query.page)
-    req.page = parseInt(req.query.page);
-  else
-    req.page = 1; // set a default page if none provided
+  if (req.query.page) req.page = parseInt(req.query.page);
+  else req.page = 1; // set a default page if none provided
   next();
 };
 
 /*
-* Adds a request.sort field to a request that specifies what parameters to sort by 
-*/
+ * Adds a request.sort field to a request that specifies what parameters to sort by
+ */
 const sortingExtractor = async (req, res, next) => {
-  if (req.query.sort_by) 
-    req.sort = req.query.sort_by; 
+  if (req.query.sort_by) req.sort = req.query.sort_by;
   next();
 };
 
 /*
-* Adds a request.filter field to a request that specifies the filters that are to be applied
-*/
+ * Adds a request.filter field to a request that specifies the filters that are to be applied
+ */
 const filterExtractor = async (req, res, next) => {
-  req.filter = {}
+  req.filter = {};
   for (let field in req.query) {
-    if (!["limit", "sort_by", "page", "fuzzy"].includes(field))
+    if (!['limit', 'sort_by', 'page', 'fuzzy'].includes(field))
       req.filter[field] = req.query[field];
   }
   next();
@@ -172,25 +162,29 @@ const fuzzySearchExtractor = async (req, res, next) => {
 };
 
 /*
-* Assuming that a req.model with the given model class and optionally a req.populate has been saved in previous functions
-* this function applies provided filters, sorting and pagination on the given model and returns
-* it as JSON or errors out
-*/
+ * Assuming that a req.model with the given model class and optionally a req.populate has been saved in previous functions
+ * this function applies provided filters, sorting and pagination on the given model and returns
+ * it as JSON or errors out
+ */
 const modelResolver = async (req, res) => {
   try {
     let query;
     if (req.fuzzy) {
-      query = req.model.fuzzySearch({query: req.fuzzy, minSize: 4});
+      query = req.model.fuzzySearch({ query: req.fuzzy, minSize: 4 });
     } else {
       query = req.model.find(req.filter);
     }
-    query.populate(req.populate).sort(req.sort).limit(req.limit).skip(req.limit * (req.page - 1));
+    query
+      .populate(req.populate)
+      .sort(req.sort)
+      .limit(req.limit)
+      .skip(req.limit * (req.page - 1));
     const requestedData = await query.exec();
     res.json(requestedData);
   } catch (e) {
     console.log(e);
     res.status(400).send({
-      "error": "bad request"
+      error: 'bad request',
     });
   }
 };

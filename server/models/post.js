@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const mongooseFuzzySearching = require("mongoose-fuzzy-searching");
+const mongoose = require('mongoose');
+const mongooseFuzzySearching = require('mongoose-fuzzy-searching');
 
 const postSchema = new mongoose.Schema({
   title: {
@@ -12,7 +12,7 @@ const postSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
   },
   description: {
     type: String,
@@ -20,7 +20,7 @@ const postSchema = new mongoose.Schema({
   },
   programmingLang: {
     type: String,
-    default: "",
+    default: '',
   },
   workHours: {
     type: Number,
@@ -32,12 +32,12 @@ const postSchema = new mongoose.Schema({
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment",
+      ref: 'Comment',
     },
   ],
 });
 
-postSchema.set("toJSON", {
+postSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
 
@@ -47,9 +47,9 @@ postSchema.set("toJSON", {
 });
 
 postSchema.plugin(mongooseFuzzySearching, {
-  fields: ["programmingLang", "description", "title", "workPlace"],
+  fields: ['programmingLang', 'description', 'title', 'workPlace'],
 });
 
-const Post = mongoose.model("Post", postSchema);
+const Post = mongoose.model('Post', postSchema);
 
 module.exports = Post;

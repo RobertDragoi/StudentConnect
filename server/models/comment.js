@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const commentSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
@@ -6,7 +6,7 @@ const commentSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
   },
   body: {
     type: String,
@@ -14,10 +14,10 @@ const commentSchema = new mongoose.Schema({
   },
   updated: {
     type: String,
-    default: "",
+    default: '',
   },
 });
-commentSchema.set("toJSON", {
+commentSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
 
@@ -25,6 +25,6 @@ commentSchema.set("toJSON", {
     delete returnedObject.__v;
   },
 });
-const Comment = mongoose.model("Comment", commentSchema);
+const Comment = mongoose.model('Comment', commentSchema);
 
 module.exports = Comment;

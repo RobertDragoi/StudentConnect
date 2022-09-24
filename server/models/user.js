@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const uniqueValidator = require("mongoose-unique-validator");
+const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -18,43 +18,43 @@ const userSchema = new mongoose.Schema({
   },
   address: {
     type: String,
-    default: "",
+    default: '',
   },
   description: {
     type: String,
-    default: "",
+    default: '',
   },
   contact: {
     phone: {
       type: String,
-      default: "",
+      default: '',
     },
     github: {
       type: String,
-      default: "",
+      default: '',
     },
     linkedin: {
-        type: String,
-      default: "",
+      type: String,
+      default: '',
     },
     facebook: {
       type: String,
-      default: "",
+      default: '',
     },
     others: {
       type: String,
-      default: "",
+      default: '',
     },
   },
   profilePicture: {
     type: String,
-    default: "public/img/default.jpg",
-  }
+    default: 'public/img/default.jpg',
+  },
 });
 
 userSchema.plugin(uniqueValidator);
 
-userSchema.set("toJSON", {
+userSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     returnedObject.type = returnedObject.__t.toLowerCase();
@@ -66,6 +66,6 @@ userSchema.set("toJSON", {
   },
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

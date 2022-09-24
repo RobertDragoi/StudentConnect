@@ -1,11 +1,11 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const { validationResult } = require("express-validator");
-const config = require("../utils/config");
-const logger = require("../utils/logger");
-const User = require("../models/user");
-const Student = require("../models/student");
-const Company = require("../models/company");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { validationResult } = require('express-validator');
+const config = require('../utils/config');
+const logger = require('../utils/logger');
+const User = require('../models/user');
+const Student = require('../models/student');
+const Company = require('../models/company');
 
 const registerUser = async (req, res) => {
   const validationErrors = validationResult(req);
@@ -19,11 +19,10 @@ const registerUser = async (req, res) => {
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-
+    const { birthDate, school, creationDate, activity } = req.body;
     let user;
     switch (type) {
-      case "student":
-        const { birthDate, school } = req.body;
+      case 'student':
         user = new Student({
           name,
           email,
@@ -34,8 +33,7 @@ const registerUser = async (req, res) => {
         });
         await user.save();
         break;
-      case "company":
-        const { creationDate, activity } = req.body;
+      case 'company':
         user = new Company({
           name,
           email,
@@ -48,11 +46,11 @@ const registerUser = async (req, res) => {
         break;
     }
     const payload = { user: { id: user.id } };
-    const token = jwt.sign(payload, config.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign(payload, config.JWT_SECRET, { expiresIn: '1h' });
     res.json({ token: token });
   } catch (error) {
     console.log(error.message);
-    res.status(400).json({ msg: "An account with this email already exists" });
+    res.status(400).json({ msg: 'An account with this email already exists' });
   }
 };
 
@@ -61,7 +59,7 @@ const getUsers = async (req, res) => {
   res.json(users);
 };
 
-const getUser = async (request, response, next) => {
+const getUser = async (request, response) => {
   const id = request.params.id;
 
   try {
@@ -69,7 +67,7 @@ const getUser = async (request, response, next) => {
     response.json(searchedUser);
   } catch (error) {
     logger.error(error.message);
-    response.status(500).json({ msg: "No such user found!" });
+    response.status(500).json({ msg: 'No such user found!' });
   }
 };
 
@@ -77,7 +75,7 @@ const updateUser = async (request, response, next) => {
   const requestId = request.params.id;
   const requesterId = request.user.id;
   if (requestId !== requesterId)
-    response.status(401).json({ msg: "only make changes to your own user!" });
+    response.status(401).json({ msg: 'only make changes to your own user!' });
   next();
 };
 module.exports = { getUsers, getUser, registerUser, updateUser };
