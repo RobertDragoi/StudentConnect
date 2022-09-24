@@ -7,6 +7,7 @@
     "server": "cross-env NODE_ENV=DEV nodemon server.js",
     "start": "concurrently \"npm run server\" \"npm run frontend\"",
     "frontend": "npm start --prefix frontend",
+    "packages": "npm install && cd ../frontend && npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -37,5 +38,7 @@
     "sharp": "^0.28.1",
     "socket.io": "^4.1.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^8.24.0"
+  }
 }
