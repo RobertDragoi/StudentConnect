@@ -1,13 +1,13 @@
-import React, { useContext, useState } from "react";
-import PostContext from "../PostState/postContext";
-import { Button } from "react-bootstrap";
-import { Modal } from "react-bootstrap";
-import {locations} from "../../placeholders";
+import React, { useContext, useState } from 'react';
+import PostContext from '../PostState/postContext';
+import { Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+import { locations } from '../../placeholders';
 
 export const FiltreModal = () => {
   const [show, setShow] = useState(false);
   const postContext = useContext(PostContext);
-  const { posts, setFilters } = postContext;
+  const { setFilters } = postContext;
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [city, setCity] = useState(null);
@@ -20,25 +20,25 @@ export const FiltreModal = () => {
     let filters = [];
     if (city) {
       filters.push({
-        displayField: "City",
+        displayField: 'City',
         displayValue: city,
-        field: "workPlace",
+        field: 'workPlace',
         value: city,
       });
     }
 
-    if (type === "part-time") {
+    if (type === 'part-time') {
       filters.push({
-        displayField: "Type",
-        displayValue: "Part-Time",
-        field: "workHours[$lt]",
+        displayField: 'Type',
+        displayValue: 'Part-Time',
+        field: 'workHours[$lt]',
         value: 8,
       });
-    } else if (type === "full-time") {
+    } else if (type === 'full-time') {
       filters.push({
-        displayField: "Type",
-        displayValue: "Full-Time",
-        field: "workHours[$gte]",
+        displayField: 'Type',
+        displayValue: 'Full-Time',
+        field: 'workHours[$gte]',
         value: 8,
       });
     }
@@ -49,9 +49,7 @@ export const FiltreModal = () => {
   const workplaces = locations;
   return (
     <>
-      <div onClick={handleShow}>
-        Filters
-      </div>
+      <div onClick={handleShow}>Filters</div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -64,7 +62,7 @@ export const FiltreModal = () => {
                 <h1 className="text-center">City</h1>
                 <div className="anyClass">
                   {workplaces.map((workplace, key) => (
-                    <div className="form-check">
+                    <div key={`filtermodal-${key}`} className="form-check">
                       <input
                         className="form-check-input"
                         value={workplace}
@@ -75,7 +73,7 @@ export const FiltreModal = () => {
                       ></input>
                       <label
                         className="form-check-label"
-                        for={`workplace${key}`}
+                        htmlFor={`workplace${key}`}
                       >
                         {workplace}
                       </label>
@@ -95,7 +93,7 @@ export const FiltreModal = () => {
                     id="part-time"
                     name="job-type"
                   ></input>
-                  <label className="form-check-label" for="part-time">
+                  <label className="form-check-label" htmlFor="part-time">
                     Part-time
                   </label>
                 </div>
@@ -108,7 +106,7 @@ export const FiltreModal = () => {
                     id="full-time"
                     name="job-type"
                   ></input>
-                  <label className="form-check-label" for="full-time">
+                  <label className="form-check-label" htmlFor="full-time">
                     Full-time
                   </label>
                 </div>

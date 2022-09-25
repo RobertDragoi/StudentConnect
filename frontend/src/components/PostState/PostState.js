@@ -1,18 +1,19 @@
-import React, { useReducer, useEffect } from "react";
-import PostContext from "./postContext";
-import PostReducer from "./postReducer";
-import postService from "../../services/post";
+import React, { useReducer, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
+import PostContext from './postContext';
+import PostReducer from './postReducer';
+import postService from '../../services/post';
 import {
   POSTS_LOADED,
   SET_FILTERS,
   REMOVE_FILTER,
-  CLEAR_FILTERS,
   SET_SEARCH,
   DELETE_POST,
   ADD_POST,
   POST_ERROR,
   MODIFY_POST,
-} from "../../types";
+} from '../../types';
 const PostState = (props) => {
   const initialState = {
     currentPost: null,
@@ -24,7 +25,7 @@ const PostState = (props) => {
   };
   const [state, dispatch] = useReducer(PostReducer, initialState);
   const fetchData = async () => {
-    console.log("IN FETCH DATA");
+    console.log('IN FETCH DATA');
     try {
       const query = postService.makeQuery();
       if (state.search) {
@@ -38,12 +39,12 @@ const PostState = (props) => {
       console.log(posts);
       dispatch({ type: POSTS_LOADED, payload: posts });
     } catch (error) {
-      console.log("IT ERRORED>>>" + error);
+      console.log('IT ERRORED>>>' + error);
       dispatch({ type: POST_ERROR, payload: error.response.data.msg });
     }
   };
   useEffect(() => {
-    console.log("REFETCHING");
+    console.log('REFETCHING');
     fetchData();
   }, [state.search, state.filters]);
   const createPost = async (formData) => {
@@ -72,7 +73,7 @@ const PostState = (props) => {
   };
 
   const setSearch = async (searchText) => {
-    console.log("SETTING SEARCH FIELD! SHOULD TRIGGER RERENDER");
+    console.log('SETTING SEARCH FIELD! SHOULD TRIGGER RERENDER');
     dispatch({ type: SET_SEARCH, payload: searchText });
   };
   const setFilters = (filters) => {
@@ -101,3 +102,7 @@ const PostState = (props) => {
 };
 
 export default PostState;
+
+PostState.propTypes = {
+  children: PropTypes.element.isRequired,
+};

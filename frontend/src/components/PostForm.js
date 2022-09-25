@@ -1,15 +1,15 @@
-import React, { useState, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
-import PostContext from "./PostState/postContext";
-import { locations, languages } from "../placeholders";
+import React, { useState, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import PostContext from './PostState/postContext';
+import { locations, languages } from '../placeholders';
 const PostForm = () => {
   let history = useHistory();
   const postContext = useContext(PostContext);
   const { createPost } = postContext;
   const [post, setPost] = useState({
-    title: "",
-    description: "",
-    programmingLang: "C/C++",
+    title: '',
+    description: '',
+    programmingLang: 'C/C++',
     workHours: 8,
     workPlace: locations[0],
   });
@@ -19,7 +19,7 @@ const PostForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     createPost(post);
-    history.push("/");
+    history.push('/');
   };
   console.log(post);
   return (
@@ -46,7 +46,6 @@ const PostForm = () => {
                 type="text"
                 className="form-control"
                 name="description"
-                row="3"
                 required
                 placeholder="Description"
               />
@@ -74,8 +73,8 @@ const PostForm = () => {
                 onChange={onChange}
                 name="programmingLang"
               >
-                {languages.map((language) => (
-                  <option>{language}</option>
+                {languages.map((language, key) => (
+                  <option key={`language_${key}`}>{language}</option>
                 ))}
               </select>
             </div>
@@ -88,8 +87,10 @@ const PostForm = () => {
                 onChange={onChange}
                 name="workPlace"
               >
-                {locations.map((location) => (
-                  <option value={location}>{location}</option>
+                {locations.map((location, key) => (
+                  <option key={`location_${key}`} value={location}>
+                    {location}
+                  </option>
                 ))}
               </select>
             </div>

@@ -1,19 +1,19 @@
-import React, { useContext } from "react";
-import Job from "../Layout/Job";
-import { Fab } from "react-tiny-fab";
-import "react-tiny-fab/dist/styles.css";
-import PostContext from "../PostState/postContext";
-import UserContext from "../UserState/userContext";
-import Footer from "../Layout/Footer";
-import classes from "../Layout/footer.module.css";
-import CurrentFilters from "../Layout/CurrentFilters";
-import { BASE_URL } from "../../utils/config";
-import { Link } from "react-router-dom";
-import SearchBar from "../Layout/SearchBar";
+import React, { useContext } from 'react';
+import Job from '../Layout/Job';
+import { Fab } from 'react-tiny-fab';
+import 'react-tiny-fab/dist/styles.css';
+import PostContext from '../PostState/postContext';
+import UserContext from '../UserState/userContext';
+import Footer from '../Layout/Footer';
+import classes from '../Layout/footer.module.css';
+import CurrentFilters from '../Layout/CurrentFilters';
+import { BASE_URL } from '../../utils/config';
+import { Link } from 'react-router-dom';
+import SearchBar from '../Layout/SearchBar';
 const Home = () => {
   const postContext = useContext(PostContext);
   const userContext = useContext(UserContext);
-  const { posts, filteredPosts } = postContext;
+  const { posts } = postContext;
   const { isAuthenticated } = userContext;
 
   return (
@@ -42,10 +42,10 @@ const Home = () => {
         <Link to="/createpost">
           {isAuthenticated ? (
             <Fab
-              mainButtonStyles={{ backgroundColor: "#007bff" }}
+              mainButtonStyles={{ backgroundColor: '#007bff' }}
               alwaysShowTitle={true}
-              icon={"+"}
-              onClick={() => console.log("button")}
+              icon={'+'}
+              onClick={() => console.log('button')}
             ></Fab>
           ) : (
             <React.Fragment />

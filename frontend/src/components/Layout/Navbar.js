@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
-import UserContext from "../UserState/userContext";
-import { Navbar as BootstrapNavbar, NavItem } from "reactstrap";
+import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import UserContext from '../UserState/userContext';
+import { Navbar as BootstrapNavbar, NavItem } from 'reactstrap';
 
 export const Navbar = () => {
   const userContext = useContext(UserContext);

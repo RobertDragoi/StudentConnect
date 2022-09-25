@@ -1,25 +1,24 @@
-import React, { useContext } from "react";
-import ReactImageFallback from "react-image-fallback";
-import Logo from "../../visuals/welcome.png";
-import styles from "./Welcome.module.css";
-import { NavLink } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import UserContext from "../UserState/userContext";
+import React, { useContext } from 'react';
+import Logo from '../../visuals/welcome.png';
+import styles from './Welcome.module.css';
+import { NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import UserContext from '../UserState/userContext';
 
 export const Welcome = () => {
   let history = useHistory();
   const userContext = useContext(UserContext);
   const { user } = userContext;
   if (user) {
-    history.push("/jobs");
+    history.push('/jobs');
   }
   return (
-    <div class="container">
-      <div class="row">
-        <div class="col-lg">
+    <div className="container">
+      <div className="row">
+        <div className="col-lg">
           <img src={Logo} className={styles.rmSpinner} />
         </div>
-        <div class="col-lg">
+        <div className="col-lg">
           <div className={styles.textBox}>
             <h1>
               <b>Welcome to</b>
@@ -29,8 +28,8 @@ export const Welcome = () => {
             </h1>
             <p>A platform for connecting students with companies.</p>
 
-            <div class="row">
-              <div class="col-sm">
+            <div className="row">
+              <div className="col-sm">
                 <NavLink
                   className={styles.button1}
                   exact
@@ -40,7 +39,7 @@ export const Welcome = () => {
                   See Our Job Postings!
                 </NavLink>
               </div>
-              <div class="col-sm">
+              <div className="col-sm">
                 <NavLink
                   className={styles.button1}
                   exact

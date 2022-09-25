@@ -3,11 +3,21 @@
     "browser": true,
     "es2021": true
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "overrides": [],
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
+    "requireConfigFile": false,
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true
+    }
   },
   "plugins": ["react"],
   "rules": {

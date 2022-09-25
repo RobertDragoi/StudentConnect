@@ -3,12 +3,11 @@ import {
   SET_SEARCH,
   SET_FILTERS,
   REMOVE_FILTER,
-  CLEAR_FILTERS,
   ADD_POST,
   POST_ERROR,
   DELETE_POST,
   MODIFY_POST,
-} from "../../types";
+} from '../../types';
 export default function (state, action) {
   switch (action.type) {
     case ADD_POST:

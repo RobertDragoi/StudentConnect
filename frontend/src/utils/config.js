@@ -1,5 +1,5 @@
-const BASE_URL = "http://localhost:3003";
+const BASE_URL = 'http://localhost:3003';
 
 export {
-    BASE_URL,
+  BASE_URL,
 };

@@ -1,31 +1,31 @@
-import React, { Fragment, useEffect, useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Footer from "./Layout/Footer";
-import UserContext from "./UserState/userContext";
-import classes from "../components/Layout/footer.module.css";
+import React, { Fragment, useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Footer from './Layout/Footer';
+import UserContext from './UserState/userContext';
+import classes from '../components/Layout/footer.module.css';
 
-const RegisterForm = (props) => {
+const RegisterForm = () => {
   let history = useHistory();
-  const { isAuthenticated, register, error } = useContext(UserContext);
+  const { isAuthenticated, register } = useContext(UserContext);
 
   useEffect(() => {
     if (isAuthenticated === true) {
-      history.push("/");
+      history.push('/');
     }
   });
 
   const [user, setUser] = useState({
-    type: "",
-    name: "",
-    email: "",
-    password: "",
-    address: "",
-    description: "",
-    birthDate: "",
-    school: "",
-    activity: "",
-    creationDate: "",
+    type: '',
+    name: '',
+    email: '',
+    password: '',
+    address: '',
+    description: '',
+    birthDate: '',
+    school: '',
+    activity: '',
+    creationDate: '',
   });
 
   const {
@@ -49,7 +49,7 @@ const RegisterForm = (props) => {
     e.preventDefault();
 
     let newUser = { type, name, email, password, address, description };
-    if (type === "Student") {
+    if (type === 'Student') {
       newUser = {
         ...newUser,
         birthDate,
@@ -66,7 +66,7 @@ const RegisterForm = (props) => {
   };
   let extraField;
 
-  if (type === "Student") {
+  if (type === 'Student') {
     extraField = (
       <Fragment>
         <div className="form-group">
@@ -97,7 +97,7 @@ const RegisterForm = (props) => {
       </Fragment>
     );
   }
-  if (type === "Company") {
+  if (type === 'Company') {
     extraField = (
       <Fragment>
         <div className="form-group">
@@ -128,44 +128,44 @@ const RegisterForm = (props) => {
       </Fragment>
     );
   }
-  if (type === "") {
+  if (type === '') {
     extraField = <Fragment></Fragment>;
   }
   return (
     <Fragment>
       <div className={classes.body}>
         <div className="w-50 mx-auto my-4 p-4 card container">
-          <h1 class="mb-4 text-primary">Register now</h1>
+          <h1 className="mb-4 text-primary">Register now</h1>
           <form onSubmit={onSubmit}>
             <div className="form-group">
               <label className="control-label" htmlFor="type">
-                Type<span class="text-primary">*</span>:
+                Type<span className="text-primary">*</span>:
               </label>
-              <div class="ml-4">
+              <div className="ml-4">
                 <input
                   onChange={onChange}
-                  class="form-check-input"
+                  className="form-check-input"
                   type="radio"
                   name="type"
                   value="Student"
                   id="student-type"
                   required
                 />
-                <label class="radio-inline" htmlFor="student-type">
+                <label className="radio-inline" htmlFor="student-type">
                   Student
                 </label>
               </div>
-              <div class="ml-4">
+              <div className="ml-4">
                 <input
                   required
                   onChange={onChange}
-                  class="form-check-input"
+                  className="form-check-input"
                   type="radio"
                   name="type"
                   id="company-type"
                   value="Company"
                 />
-                <label class="radio-inline" htmlFor="company-type">
+                <label className="radio-inline" htmlFor="company-type">
                   Company
                 </label>
               </div>
@@ -173,7 +173,7 @@ const RegisterForm = (props) => {
             <div className="form-row">
               <div className="form-group col-md-6">
                 <label className="control-label" htmlFor="name">
-                  Full Name<span class="text-primary">*</span>:
+                  Full Name<span className="text-primary">*</span>:
                 </label>
                 <input
                   onChange={onChange}
@@ -187,7 +187,7 @@ const RegisterForm = (props) => {
               </div>
               <div className="form-group col-md-6">
                 <label className="control-label" htmlFor="email">
-                  Email<span class="text-primary">*</span>:
+                  Email<span className="text-primary">*</span>:
                 </label>
                 <input
                   onChange={onChange}
@@ -219,7 +219,7 @@ const RegisterForm = (props) => {
             </div>
             <div className="form-group">
               <label className="control-label">
-                Password<span class="text-primary">*</span>:
+                Password<span className="text-primary">*</span>:
               </label>
               <div>
                 <input
@@ -251,9 +251,9 @@ const RegisterForm = (props) => {
             </div>
             {extraField}
             <div>
-              <input type="submit" class="btn btn-primary" value="Submit" />
+              <input type="submit" className="btn btn-primary" value="Submit" />
             </div>
-            <p class="text-muted my-2">
+            <p className="text-muted my-2">
               You already have an account? <Link to="/login">Log In</Link>
             </p>
           </form>

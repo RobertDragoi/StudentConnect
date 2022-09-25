@@ -6,7 +6,7 @@ import {
   CLEAR_ERRORS,
   USER_LOADED,
   LOGOUT,
-} from "../../types";
+} from '../../types';
 
 export default function (state, action) {
   switch (action.type) {
@@ -40,7 +40,7 @@ export default function (state, action) {
       return {
         ...state,
         error: null,
-      }
+      };
 
     default:
       return state;

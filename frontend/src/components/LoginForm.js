@@ -1,21 +1,21 @@
-import React, { useEffect, useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import UserContext from "./UserState/userContext";
-import Footer1 from "./Layout/Footer";
-import classes from "../components/Layout/footer.module.css";
+import React, { useEffect, useContext, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import UserContext from './UserState/userContext';
+import Footer1 from './Layout/Footer';
+import classes from '../components/Layout/footer.module.css';
 
-const LoginForm = (props) => {
+const LoginForm = () => {
   let history = useHistory();
   const userContext = useContext(UserContext);
-  const { isAuthenticated, login, error } = userContext;
+  const { isAuthenticated, login } = userContext;
   useEffect(() => {
     if (isAuthenticated === true) {
-      history.push("/");
+      history.push('/');
     }
   });
   const [user, setUser] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const { email, password } = user;
 

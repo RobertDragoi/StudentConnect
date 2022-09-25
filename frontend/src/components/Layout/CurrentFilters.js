@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import PostContext from "../PostState/postContext";
+import React, { useContext } from 'react';
+import PostContext from '../PostState/postContext';
 
 const CurrentFilters = () => {
   const { filters, removeFilter } = useContext(PostContext);
@@ -7,13 +7,11 @@ const CurrentFilters = () => {
   return (
     <div className="form-inline align-self-center justify-content-center my-3">
       {filters.map((filter, key) => (
-        <div className="input-group m-2">
-          <div 
-            className="form-control"
-          >
-            {filter.displayField + ": " + filter.displayValue}
+        <div key={`filter-${key}`} className="input-group m-2">
+          <div className="form-control">
+            {filter.displayField + ': ' + filter.displayValue}
           </div>
-          <div class="input-group-append">
+          <div className="input-group-append">
             <button
               className="btn btn-danger"
               onClick={() => removeFilter(key)}

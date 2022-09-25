@@ -1,8 +1,9 @@
-import React, { useReducer, useEffect } from "react";
-import UserContext from "./userContext";
-import UserReducer from "./userReducer";
-import { useHistory } from "react-router-dom";
-import authService from "../../services/auth";
+import React, { useReducer, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import UserContext from './userContext';
+import UserReducer from './userReducer';
+import { useHistory } from 'react-router-dom';
+import authService from '../../services/auth';
 
 import {
   REGISTER_SUCCES,
@@ -12,8 +13,7 @@ import {
   CLEAR_ERRORS,
   USER_LOADED,
   LOGOUT,
-  USER_UPDATED,
-} from "../../types";
+} from '../../types';
 
 const UserState = (props) => {
   let history = useHistory();
@@ -30,7 +30,7 @@ const UserState = (props) => {
 
   useEffect(() => {
     if (localStorage.token) {
-      console.log("Reloading user!");
+      console.log('Reloading user!');
       authService.updateToken(localStorage.token);
       load();
     }
@@ -54,14 +54,14 @@ const UserState = (props) => {
       load();
     } catch (error) {
       dispatch({ type: LOGIN_FAIL, payload: error.message });
-      setTimeout(() => dispatch({ type: CLEAR_ERRORS }), 3000)
+      setTimeout(() => dispatch({ type: CLEAR_ERRORS }), 3000);
     }
   };
 
   const logout = async () => {
     await authService.logout();
     dispatch({ type: LOGOUT });
-    history.push("/");
+    history.push('/');
   };
 
   const update = async (formData) => {
@@ -99,3 +99,7 @@ const UserState = (props) => {
 };
 
 export default UserState;
+
+UserState.propTypes = {
+  children: PropTypes.array.isRequired,
+};

@@ -1,44 +1,44 @@
-import React, { useEffect, useState, useContext } from "react";
-import socketIOClient from "socket.io-client";
-import "./FullPost.css";
-import { faFacebookF, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import React, { useEffect, useState, useContext } from 'react';
+import socketIOClient from 'socket.io-client';
+import './FullPost.css';
+import { faFacebookF, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import {
   faPhone,
   faAddressCard,
   faTrash,
   faPencilAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useParams, Link } from "react-router-dom";
-import { BASE_URL } from "../../utils/config";
-import postService from "../../services/post";
-import UserContext from "../UserState/userContext";
-import PostContext from "../PostState/postContext";
-import ReactImageFallback from "react-image-fallback";
-const FullPost = (props) => {
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useParams, Link } from 'react-router-dom';
+import { BASE_URL } from '../../utils/config';
+import postService from '../../services/post';
+import UserContext from '../UserState/userContext';
+import PostContext from '../PostState/postContext';
+import ReactImageFallback from 'react-image-fallback';
+const FullPost = () => {
   const formatDate = (date) => {
     if (!date) {
-      return "Not set";
+      return 'Not set';
     }
     var d = new Date(date),
-      month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
       year = d.getFullYear(),
-      hours = "" + d.getHours(),
-      minutes = "" + d.getMinutes();
+      hours = '' + d.getHours(),
+      minutes = '' + d.getMinutes();
 
-    if (month.length < 2) month = "0" + month;
-    if (day.length < 2) day = "0" + day;
-    if (hours.length < 2) hours = "0" + hours;
-    if (minutes.length < 2) minutes = "0" + minutes;
-    return [day, month, year].join("-") + " " + [hours, minutes].join(":");
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    if (hours.length < 2) hours = '0' + hours;
+    if (minutes.length < 2) minutes = '0' + minutes;
+    return [day, month, year].join('-') + ' ' + [hours, minutes].join(':');
   };
 
   const userContext = useContext(UserContext);
   const postContext = useContext(PostContext);
   const { user, isAuthenticated } = userContext;
   const { manageComment } = postContext;
-  const [comment, setComment] = useState({ user: user?.id, body: "" });
+  const [comment, setComment] = useState({ user: user?.id, body: '' });
   const [updatedComment, setupdatedComment] = useState({ user: user?.id });
   const [post, setPost] = useState();
   const [edit, setEdit] = useState({ id: null, bool: false });
@@ -57,7 +57,7 @@ const FullPost = (props) => {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    await manageComment(id, comment, "add");
+    await manageComment(id, comment, 'add');
     fetchPost(id);
   };
   const onSubmit2 = async (e) => {
@@ -66,7 +66,7 @@ const FullPost = (props) => {
     await manageComment(
       id,
       { ...updatedComment, updated: formatDate(Date.now()), id: edit.id },
-      "modify"
+      'modify'
     );
     setEdit(false);
   };
@@ -80,8 +80,8 @@ const FullPost = (props) => {
     }
   };
   useEffect(() => {
-    const socket = socketIOClient("http://localhost:3005");
-    socket.on("RefreshPage", (msg) => {
+    const socket = socketIOClient('http://localhost:3005');
+    socket.on('RefreshPage', (msg) => {
       fetchPost(id);
       console.log(msg);
     });
@@ -102,19 +102,19 @@ const FullPost = (props) => {
             />
           </div>
           <div className="col-sm-8">
-            <h1>{post?.title ? post.title : ""}</h1>
+            <h1>{post?.title ? post.title : ''}</h1>
             <Link to={`/users/${post?.user?.id}`}>
-              <h3>{post?.user.name ? post.user.name : ""}</h3>
+              <h3>{post?.user.name ? post.user.name : ''}</h3>
             </Link>
-            <p>Location: {post?.workPlace ? post.workPlace : ""}</p>
+            <p>Location: {post?.workPlace ? post.workPlace : ''}</p>
             <p>Programming language: {post?.programmingLang}</p>
             <p>
-              Type:{" "}
-              {(post?.workHours === 8 ? "Full-Time" : "Part-Time") +
+              Type:{' '}
+              {(post?.workHours === 8 ? 'Full-Time' : 'Part-Time') +
                 ` (${post?.workHours} hours)`}
             </p>
             <p>
-              Created at: {post?.createdAt ? formatDate(post.createdAt) : ""}
+              Created at: {post?.createdAt ? formatDate(post.createdAt) : ''}
             </p>
           </div>
         </div>
@@ -125,7 +125,7 @@ const FullPost = (props) => {
           <div className="col-sm-6 justify-content-between align-self-left">
             <div className="item">
               <h3>Description</h3>
-              <p>{post?.description ? post.description : ""}</p>
+              <p>{post?.description ? post.description : ''}</p>
             </div>
           </div>
 
@@ -140,7 +140,7 @@ const FullPost = (props) => {
                 <div className="col-sm-10 py-1 text-secondary">
                   {post?.user?.contact?.facebook
                     ? post.user.contact.facebook
-                    : ""}
+                    : ''}
                 </div>
               </div>
 
@@ -151,7 +151,7 @@ const FullPost = (props) => {
                 <div className="col-sm-10 py-1 text-secondary">
                   {post?.user?.contact?.linkedin
                     ? post.user.contact.linkedin
-                    : ""}
+                    : ''}
                 </div>
               </div>
               <div className="row">
@@ -159,7 +159,7 @@ const FullPost = (props) => {
                   <FontAwesomeIcon icon={faPhone} />
                 </div>
                 <div className="col-sm-10 py-1 text-secondary">
-                  {post?.user?.contact?.phone ? post.user.contact.phone : ""}
+                  {post?.user?.contact?.phone ? post.user.contact.phone : ''}
                 </div>
               </div>
 
@@ -168,7 +168,7 @@ const FullPost = (props) => {
                   <FontAwesomeIcon icon={faAddressCard} />
                 </div>
                 <div className="col-sm-10 py-1 text-secondary">
-                  {post?.user?.contact?.others ? post.user.contact.others : ""}
+                  {post?.user?.contact?.others ? post.user.contact.others : ''}
                 </div>
               </div>
             </div>
@@ -184,7 +184,6 @@ const FullPost = (props) => {
                 type="text"
                 className="form-control"
                 required
-                row="4"
                 name="body"
                 value={body}
                 placeholder="Comment"
@@ -219,7 +218,7 @@ const FullPost = (props) => {
                 </Link>
                 <p className="d-inline">
                   {formatDate(comment?.createdAt)}
-                  {comment?.updated ? ` (changed at ${comment?.updated})` : ""}
+                  {comment?.updated ? ` (changed at ${comment?.updated})` : ''}
                 </p>
               </div>
             </div>
@@ -246,7 +245,7 @@ const FullPost = (props) => {
                 <span>
                   <button
                     onClick={async () => {
-                      await manageComment(id, { id: comment.id }, "delete");
+                      await manageComment(id, { id: comment.id }, 'delete');
                       fetchPost(id);
                     }}
                     type="button"
@@ -258,7 +257,7 @@ const FullPost = (props) => {
               </div>
             ) : null}
           </div>
-          <div className="row" style={{ backgroundColor: "#efeff0" }}>
+          <div className="row" style={{ backgroundColor: '#efeff0' }}>
             <div className="m-1">
               {edit.bool && edit.id === comment.id ? (
                 <form onSubmit={onSubmit2}>
@@ -266,7 +265,6 @@ const FullPost = (props) => {
                     <textarea
                       onChange={onChange2}
                       type="text"
-                      row="1"
                       cols="160"
                       className="form-control my-1"
                       name="body"

@@ -1,8 +1,8 @@
-import QueryBuilder from "./queryBuilder";
-import axios from "axios";
-import { BASE_URL } from "../utils/config";
+import QueryBuilder from './queryBuilder';
+import axios from 'axios';
+import { BASE_URL } from '../utils/config';
 
-const BASE_RESOURCE_ROUTE = "/api/posts";
+const BASE_RESOURCE_ROUTE = '/api/posts';
 
 class PostQueryBuilder extends QueryBuilder {
   constructor() {

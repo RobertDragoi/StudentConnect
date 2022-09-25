@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
-import ReactImageFallback from "react-image-fallback";
-import { BASE_URL } from "../../utils/config";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import UserContext from "../UserState/userContext";
-import PostContext from "../PostState/postContext";
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import ReactImageFallback from 'react-image-fallback';
+import { BASE_URL } from '../../utils/config';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import UserContext from '../UserState/userContext';
+import PostContext from '../PostState/postContext';
 const Job = (props) => {
   const userContext = useContext(UserContext);
   const postContext = useContext(PostContext);
@@ -14,20 +15,20 @@ const Job = (props) => {
 
   const formatDate = (date) => {
     if (!date) {
-      return "Not set";
+      return 'Not set';
     }
     var d = new Date(date),
-      month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
       year = d.getFullYear(),
-      hours = "" + d.getHours(),
-      minutes = "" + d.getMinutes();
+      hours = '' + d.getHours(),
+      minutes = '' + d.getMinutes();
 
-    if (month.length < 2) month = "0" + month;
-    if (day.length < 2) day = "0" + day;
-    if (hours.length < 2) hours = "0" + hours;
-    if (minutes.length < 2) minutes = "0" + minutes;
-    return [day, month, year].join("-") + " " + [hours, minutes].join(":");
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    if (hours.length < 2) hours = '0' + hours;
+    if (minutes.length < 2) minutes = '0' + minutes;
+    return [day, month, year].join('-') + ' ' + [hours, minutes].join(':');
   };
   return (
     <React.Fragment>
@@ -72,7 +73,10 @@ const Job = (props) => {
           </Link>
           <p className="card-text">{props.description}</p>
           <div>
-            <p className="card-subtitle text-muted mb-1">{(props.type === 8 ? "Full-Time" : "Part-Time") + ` (${props.type} hours)`}</p>
+            <p className="card-subtitle text-muted mb-1">
+              {(props.type === 8 ? 'Full-Time' : 'Part-Time') +
+                ` (${props.type} hours)`}
+            </p>
             <p className="card-subtitle text-muted">{props.location}</p>
           </div>
         </div>
@@ -82,3 +86,15 @@ const Job = (props) => {
 };
 
 export default Job;
+
+Job.propTypes = {
+  className: PropTypes.string,
+  companyPicture: PropTypes.string,
+  user: PropTypes.object,
+  when: PropTypes.string,
+  id: PropTypes.string,
+  type: PropTypes.number,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  location: PropTypes.string,
+};

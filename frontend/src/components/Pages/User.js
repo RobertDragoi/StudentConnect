@@ -1,21 +1,21 @@
-import React, { useContext } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useContext } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFacebookF,
   faGithub,
   faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
-import { faPhone, faAddressCard } from "@fortawesome/free-solid-svg-icons";
-import ReactImageFallback from "react-image-fallback";
-import { serialize } from "object-to-formdata";
-import { BASE_URL } from "../../utils/config";
-import useUser from "../../hooks/useUser";
-import Job from "../Layout/Job";
-import classes from "../Layout/footer.module.css";
-import PostContext from "../PostState/postContext";
-import "./User.css";
-import Footer from "../Layout/Footer";
-export const User = (props) => {
+} from '@fortawesome/free-brands-svg-icons';
+import { faPhone, faAddressCard } from '@fortawesome/free-solid-svg-icons';
+import ReactImageFallback from 'react-image-fallback';
+import { serialize } from 'object-to-formdata';
+import { BASE_URL } from '../../utils/config';
+import useUser from '../../hooks/useUser';
+import Job from '../Layout/Job';
+import classes from '../Layout/footer.module.css';
+import PostContext from '../PostState/postContext';
+import './User.css';
+import Footer from '../Layout/Footer';
+export const User = () => {
   const postContext = useContext(PostContext);
   const { posts } = postContext;
   const {
@@ -29,17 +29,17 @@ export const User = (props) => {
   } = useUser();
   const formatDate = (date) => {
     if (!date) {
-      return "Not set";
+      return 'Not set';
     }
     var d = new Date(date),
-      month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
       year = d.getFullYear();
 
-    if (month.length < 2) month = "0" + month;
-    if (day.length < 2) day = "0" + day;
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
 
-    return [day, month, year].join("-");
+    return [day, month, year].join('-');
   };
   const onEdit = () => {
     switch (edit) {
@@ -58,7 +58,7 @@ export const User = (props) => {
       if (key === e.target.name) {
         aux[key] = e.target.value;
       }
-      if (key === "profilePicture") {
+      if (key === 'profilePicture') {
         aux[key] = (e.target.files && e.target.files[0]) || aux[key];
       }
       Object.keys(aux[key]).forEach((key2) => {
@@ -69,9 +69,9 @@ export const User = (props) => {
     });
     setUpdatedUser(aux);
   };
-  const onSubmit = (e) => {
+  const onSubmit = () => {
     const formData = serialize(updatedUser);
-    console.log("Entering Update!");
+    console.log('Entering Update!');
     update(formData);
     setEdit(false);
   };
@@ -356,10 +356,10 @@ export const User = (props) => {
                     <div className="col-sm-3 py-1">
                       <h6 className="mb-0">
                         {user ? (
-                          user.type === "student" ? (
-                            "School"
+                          user.type === 'student' ? (
+                            'School'
                           ) : (
-                            "Activity"
+                            'Activity'
                           )
                         ) : (
                           <React.Fragment />
@@ -369,7 +369,7 @@ export const User = (props) => {
                     <div className="col-sm-9 py-1 text-secondary">
                       {user ? (
                         edit === true ? (
-                          user.type === "student" ? (
+                          user.type === 'student' ? (
                             <input
                               onChange={onChange}
                               className="form-control form-control-sm"
@@ -386,7 +386,7 @@ export const User = (props) => {
                               defaultValue={user.company.activity}
                             />
                           )
-                        ) : user.type === "student" ? (
+                        ) : user.type === 'student' ? (
                           user.student.school
                         ) : (
                           user.company.activity
@@ -399,15 +399,15 @@ export const User = (props) => {
                   <div className="row">
                     <div className="col-sm-3 py-1">
                       <h6 className="mb-0">
-                        {user && user.type === "student"
-                          ? "Date of birth"
-                          : "Creation Date"}
+                        {user && user.type === 'student'
+                          ? 'Date of birth'
+                          : 'Creation Date'}
                       </h6>
                     </div>
                     <div className="col-sm-9 py-1 text-secondary">
                       {user ? (
                         edit === true ? (
-                          user.type === "student" ? (
+                          user.type === 'student' ? (
                             <input
                               onChange={onChange}
                               className="form-control form-control-sm"
@@ -424,7 +424,7 @@ export const User = (props) => {
                               defaultValue={user.company.creationDate}
                             />
                           )
-                        ) : user.type === "student" ? (
+                        ) : user.type === 'student' ? (
                           formatDate(user.student.birthDate)
                         ) : (
                           formatDate(user.company.creationDate)
@@ -446,7 +446,6 @@ export const User = (props) => {
                             className="form-control form-control-sm"
                             type="text"
                             name="description"
-                            row="4"
                             defaultValue={user.description}
                           />
                         ) : (
