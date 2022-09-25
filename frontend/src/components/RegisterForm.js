@@ -1,9 +1,7 @@
 import React, { Fragment, useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import Footer from './Layout/Footer';
-import UserContext from './UserState/userContext';
-import classes from '../components/Layout/footer.module.css';
+import UserContext from '../state/UserState/userContext';
 
 const RegisterForm = () => {
   let history = useHistory();
@@ -133,7 +131,7 @@ const RegisterForm = () => {
   }
   return (
     <Fragment>
-      <div className={classes.body}>
+      <div className="d-flex flex-column justify-content-center py-5">
         <div className="w-50 mx-auto my-4 p-4 card container">
           <h1 className="mb-4 text-primary">Register now</h1>
           <form onSubmit={onSubmit}>
@@ -257,10 +255,6 @@ const RegisterForm = () => {
               You already have an account? <Link to="/login">Log In</Link>
             </p>
           </form>
-        </div>
-
-        <div className={classes.footer}>
-          <Footer />
         </div>
       </div>
     </Fragment>

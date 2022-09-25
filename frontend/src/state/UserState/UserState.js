@@ -11,6 +11,7 @@ import {
   LOGIN_SUCCES,
   LOGIN_FAIL,
   CLEAR_ERRORS,
+  LOAD_USER,
   USER_LOADED,
   LOGOUT,
 } from '../../types';
@@ -30,7 +31,6 @@ const UserState = (props) => {
 
   useEffect(() => {
     if (localStorage.token) {
-      console.log('Reloading user!');
       authService.updateToken(localStorage.token);
       load();
     }
@@ -74,6 +74,7 @@ const UserState = (props) => {
   };
   const load = async () => {
     try {
+      dispatch({ type: LOAD_USER });
       const loadedUser = await authService.load();
       dispatch({ type: USER_LOADED, payload: loadedUser });
     } catch (error) {

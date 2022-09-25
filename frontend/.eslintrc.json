@@ -23,7 +23,11 @@
       2,
       {
         "SwitchCase": 1,
-        "ignoredNodes": ["ConditionalExpression"]
+        "ignoredNodes": [
+          "ConditionalExpression",
+          "flatTernaryExpressions",
+          "offsetTernaryExpressions"
+        ]
       }
     ],
 

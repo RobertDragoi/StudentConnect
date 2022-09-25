@@ -5,6 +5,7 @@ import PostContext from './postContext';
 import PostReducer from './postReducer';
 import postService from '../../services/post';
 import {
+  LOAD_POSTS,
   POSTS_LOADED,
   SET_FILTERS,
   REMOVE_FILTER,
@@ -34,9 +35,8 @@ const PostState = (props) => {
       for (let filter of state.filters) {
         query.filter(filter.field, filter.value);
       }
-      console.log(query.baseUrl);
+      dispatch({ type: LOAD_POSTS });
       const posts = await query.exec();
-      console.log(posts);
       dispatch({ type: POSTS_LOADED, payload: posts });
     } catch (error) {
       console.log('IT ERRORED>>>' + error);

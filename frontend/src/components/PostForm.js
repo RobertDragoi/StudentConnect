@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import PostContext from './PostState/postContext';
+import PostContext from '../state/PostState/postContext';
 import { locations, languages } from '../placeholders';
+
 const PostForm = () => {
   let history = useHistory();
   const postContext = useContext(PostContext);

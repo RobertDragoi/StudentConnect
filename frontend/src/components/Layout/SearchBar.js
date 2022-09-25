@@ -3,7 +3,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useContext } from 'react';
 import FiltreModal from './FiltreModal';
-import PostContext from '../PostState/postContext';
+import PostContext from '../../state/PostState/postContext';
 
 export const SearchBar = () => {
   const [searchForm, setSearchForm] = useState('');
@@ -31,7 +31,7 @@ export const SearchBar = () => {
             <input
               value={searchForm}
               onChange={(e) => {
-                  e.target.value === '' ? clear() : setSearchForm(e.target.value);
+                e.target.value === '' ? clear() : setSearchForm(e.target.value);
               }}
               className="col-7 form-control"
               type="text"

@@ -1,26 +1,23 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import UserContext from '../UserState/userContext';
+import UserContext from '../../state/UserState/userContext';
+import CurrentFilters from './CurrentFilters';
+import SearchBar from './SearchBar';
 import { Navbar as BootstrapNavbar, NavItem } from 'reactstrap';
 
 export const Navbar = () => {
   const userContext = useContext(UserContext);
   const { user, logout } = userContext;
   return (
-    <BootstrapNavbar className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <BootstrapNavbar className="navbar sticky-top navbar-expand-lg navbar-dark bg-primary ">
       <div className="navbar-nav mr-auto">
-        {!user && 
+        {!user && (
           <NavItem className="nav-item">
-            <NavLink
-              className="nav-link"
-              exact
-              to="/"
-              activeClassName="active"
-            >
+            <NavLink className="nav-link" exact to="/" activeClassName="active">
               Home
             </NavLink>
           </NavItem>
-        }
+        )}
         <NavItem className="nav-item">
           <NavLink
             className="nav-link"
@@ -33,7 +30,7 @@ export const Navbar = () => {
         </NavItem>
         {user ? (
           <React.Fragment>
-            <NavItem>
+            <NavItem className="nav-item">
               <NavLink
                 className="nav-link"
                 exact
@@ -43,10 +40,18 @@ export const Navbar = () => {
                 Profile
               </NavLink>
             </NavItem>
+            <NavItem className="nav-item">
+              <button
+                className="btn btn-link nav-link border-0 text-white"
+                onClick={logout}
+              >
+                Log Out
+              </button>
+            </NavItem>
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <NavItem>
+            <NavItem className="nav-item">
               <NavLink
                 className="nav-link"
                 exact
@@ -56,7 +61,7 @@ export const Navbar = () => {
                 Register
               </NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem className="nav-item">
               <NavLink
                 className="nav-link"
                 exact
@@ -69,14 +74,12 @@ export const Navbar = () => {
           </React.Fragment>
         )}
       </div>
-      {user ? (
-        <button
-          className="btn btn-link nav-link border-0 text-white"
-          onClick={logout}
-        >
-          Log Out
-        </button>
-      ) : null}
+      <div className="navbar-nav ml-auto">
+        <NavItem className="nav-item">
+          <CurrentFilters />
+          <SearchBar />
+        </NavItem>
+      </div>
     </BootstrapNavbar>
   );
 };

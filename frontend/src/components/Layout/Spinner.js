@@ -1,11 +1,11 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import Logo from '../../visuals/Logo2.png';
-import Style from './info-pages.module.css';
+import Style from './Spinner.module.css';
 
 const Loading = () => {
   return (
-    <Col className="d-flex justify-content-center">
+    <Col className="d-flex justify-content-center ">
       <img
         src={Logo}
         className={Style.rmSpinner}

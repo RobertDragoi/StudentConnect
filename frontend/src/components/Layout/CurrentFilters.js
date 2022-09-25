@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import PostContext from '../PostState/postContext';
+import PostContext from '../../state/PostState/postContext';
 
 const CurrentFilters = () => {
   const { filters, removeFilter } = useContext(PostContext);
 
   return (
-    <div className="form-inline align-self-center justify-content-center my-3">
+    <div className="form-inline align-self-center justify-content-center ">
       {filters.map((filter, key) => (
         <div key={`filter-${key}`} className="input-group m-2">
           <div className="form-control">

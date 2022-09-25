@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import PostContext from '../PostState/postContext';
+import PostContext from '../../state/PostState/postContext';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 import { locations } from '../../placeholders';

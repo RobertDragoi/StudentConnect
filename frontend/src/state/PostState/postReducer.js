@@ -1,5 +1,6 @@
 import {
   POSTS_LOADED,
+  LOAD_POSTS,
   SET_SEARCH,
   SET_FILTERS,
   REMOVE_FILTER,
@@ -12,8 +13,10 @@ export default function (state, action) {
   switch (action.type) {
     case ADD_POST:
       return { ...state, posts: [action.payload, ...state.posts] };
+    case LOAD_POSTS:
+      return { ...state, loading: true };
     case POSTS_LOADED:
-      return { ...state, posts: action.payload.reverse() };
+      return { ...state, posts: action.payload.reverse(), loading: false };
     case POST_ERROR:
       return { ...state, error: action.payload };
     case DELETE_POST:

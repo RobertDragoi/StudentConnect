@@ -5,8 +5,8 @@ import { BASE_URL } from '../../utils/config';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import UserContext from '../UserState/userContext';
-import PostContext from '../PostState/postContext';
+import UserContext from '../../state/UserState/userContext';
+import PostContext from '../../state/PostState/postContext';
 import { formatDate } from '../../utils/functions';
 const Job = (props) => {
   const userContext = useContext(UserContext);

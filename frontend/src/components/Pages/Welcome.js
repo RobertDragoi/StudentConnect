@@ -3,7 +3,7 @@ import Logo from '../../visuals/welcome.png';
 import styles from './Welcome.module.css';
 import { NavLink } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import UserContext from '../UserState/userContext';
+import UserContext from '../../state/UserState/userContext';
 
 export const Welcome = () => {
   let history = useHistory();
@@ -13,7 +13,7 @@ export const Welcome = () => {
     history.push('/jobs');
   }
   return (
-    <div className="container">
+    <div className="container py-5">
       <div className="row">
         <div className="col-lg">
           <img src={Logo} className={styles.rmSpinner} />
