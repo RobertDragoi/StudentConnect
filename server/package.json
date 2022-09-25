@@ -6,7 +6,7 @@
   "scripts": {
     "server": "cross-env NODE_ENV=DEV nodemon server.js",
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "client": "npm start --prefix frontend",
+    "client": "npm start --prefix ../frontend",
     "packages": "npm install && cd ../frontend && npm install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint \"**/*.{js,jsx}\"",
