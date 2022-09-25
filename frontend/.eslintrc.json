@@ -14,10 +14,7 @@
   "parserOptions": {
     "requireConfigFile": false,
     "ecmaVersion": "latest",
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "modules": true
-    }
+    "sourceType": "module"
   },
   "plugins": ["react"],
   "rules": {
