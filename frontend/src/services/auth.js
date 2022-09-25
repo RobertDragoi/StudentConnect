@@ -1,46 +1,79 @@
 import { BASE_URL } from '../utils/config';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 
-const updateToken = async (token) => {
+const setAuthToken = async (token) => {
   if (token === null) {
     console.log('REMOVING TOKEN');
   }
   if (token) {
     axios.defaults.headers.common['Authorization'] = token;
-    localStorage.setItem('token', token);
+    Cookies.set('auth-token', token, {
+      expires: 1 / 1440,
+    });
   } else {
     delete axios.defaults.headers.common['Authorization'];
-    localStorage.removeItem('token');
+    Cookies.remove('auth-token');
+  }
+};
+const setRefreshToken = async (token) => {
+  if (token) {
+    Cookies.set('refresh-token', token, {
+      expires: 30,
+    });
+  } else {
+    Cookies.remove('refresh-token', token);
   }
 };
 
+const refreshToken = async () => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: Cookies.get('refresh-token'),
+    },
+  };
+  const res = await axios.post(`${BASE_URL}/api/auth/refresh`, {}, config);
+  setAuthToken(res.data.authToken);
+};
+
 const login = async (formData) => {
-  const res = await axios.post(`${BASE_URL}/api/login`, formData);
-  updateToken(res.data.token);
-  return res.data.token;
+  const res = await axios.post(`${BASE_URL}/api/auth/login`, formData);
+  setAuthToken(res.data.authToken);
+  setRefreshToken(res.data.refreshToken);
+  return res.data.authToken;
 };
 
 const logout = async () => {
-  updateToken();
+  setAuthToken();
+  setRefreshToken();
 };
 
 const register = async (formData) => {
-  const res = await axios.post(`${BASE_URL}/api/users`, formData);
+  const res = await axios.post(`${BASE_URL}/api/auth/register`, formData);
   console.log(res);
-  updateToken(res.data.token);
-  return res.data.token;
+  setAuthToken(res.data.authToken);
+  setRefreshToken(res.data.refreshToken);
+  return res.data.authToken;
 };
 
 const update = async (formData) => {
-  const res = await axios.put(`${BASE_URL}/api/login`, formData);
+  const res = await axios.put(`${BASE_URL}/api/users`, formData);
   return res.data;
 };
 
 const load = async () => {
-  const res = await axios.get(`${BASE_URL}/api/login`);
+  const res = await axios.get(`${BASE_URL}/api/auth/user`);
   return res.data;
 };
 
 export default {
-  updateToken, login, logout, register, update, load
+  setAuthToken,
+  setRefreshToken,
+  refreshToken,
+  login,
+  logout,
+  register,
+  update,
+  load,
 };

@@ -1,10 +1,10 @@
 import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import UserContext from './userContext';
 import UserReducer from './userReducer';
-import { useHistory } from 'react-router-dom';
 import authService from '../../services/auth';
-
 import {
   REGISTER_SUCCES,
   REGISTER_FAIL,
@@ -30,10 +30,17 @@ const UserState = (props) => {
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
   useEffect(() => {
-    if (localStorage.token) {
-      authService.updateToken(localStorage.token);
-      load();
-    }
+    const tokensRefresher = async () => {
+      if (Cookies.get('auth-token')) {
+        authService.setAuthToken(Cookies.get('auth-token'));
+        load();
+      }
+      if (Cookies.get('refresh-token') && !Cookies.get('auth-token')) {
+        await authService.refreshToken();
+        load();
+      }
+    };
+    tokensRefresher();
   }, []);
 
   const register = async (formData) => {

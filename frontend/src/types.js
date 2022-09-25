@@ -9,6 +9,7 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const USER_LOADED = 'USER_LOADED';
 export const LOAD_USER = 'LOAD_USER';
 export const LOGOUT = 'LOGOUT';
+export const REFRESH_TOKEN = 'REFRESH_TOKEN';
 
 export const SET_SEARCH = 'SET_SEARCH';
 export const POSTS_LOADED = 'POSTS_LOADED';
