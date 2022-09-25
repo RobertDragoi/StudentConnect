@@ -6,8 +6,8 @@
   "scripts": {
     "server": "cross-env NODE_ENV=DEV nodemon server.js",
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "client": "npm start --prefix ../frontend",
-    "packages": "npm install && cd ../frontend && npm install",
+    "client": "npm start --prefix ../client",
+    "packages": "npm install && cd ../client && npm install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --fix --ext .js,.jsx ."
   },
