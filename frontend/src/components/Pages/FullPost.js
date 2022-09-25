@@ -2,12 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import socketIOClient from 'socket.io-client';
 import './FullPost.css';
 import { faFacebookF, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import {
-  faPhone,
-  faAddressCard,
-  faTrash,
-  faPencilAlt,
-} from '@fortawesome/free-solid-svg-icons';
+import { faPhone, faAddressCard } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams, Link } from 'react-router-dom';
 import { BASE_URL } from '../../utils/config';
@@ -15,25 +10,10 @@ import postService from '../../services/post';
 import UserContext from '../UserState/userContext';
 import PostContext from '../PostState/postContext';
 import ReactImageFallback from 'react-image-fallback';
+import { formatDate } from '../../utils/functions';
+import Comment from './Comment';
+
 const FullPost = () => {
-  const formatDate = (date) => {
-    if (!date) {
-      return 'Not set';
-    }
-    var d = new Date(date),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear(),
-      hours = '' + d.getHours(),
-      minutes = '' + d.getMinutes();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-    if (hours.length < 2) hours = '0' + hours;
-    if (minutes.length < 2) minutes = '0' + minutes;
-    return [day, month, year].join('-') + ' ' + [hours, minutes].join(':');
-  };
-
   const userContext = useContext(UserContext);
   const postContext = useContext(PostContext);
   const { user, isAuthenticated } = userContext;
@@ -197,92 +177,21 @@ const FullPost = () => {
       ) : (
         <React.Fragment />
       )}
-      {post?.comments?.map((comment) => (
-        <div
-          key={comment.id}
-          className="container shadow p-4 my-3 bg-white text-black rounded-lg shadow-sm p-3"
-        >
-          <div className="row">
-            <div className="d-flex flex-row p-1">
-              <ReactImageFallback
-                className="d-inline"
-                src={`${BASE_URL}/${comment?.user?.profilePicture}`}
-                fallbackImage={`${BASE_URL}/public/img/default.jpg`}
-                alt="profile"
-                width="50"
-                height="50"
-              />
-              <div className="d-flex flex-column mx-2">
-                <Link to={`/users/${comment?.user?.id}`}>
-                  <h5 className="d-inline">{comment?.user?.name}</h5>
-                </Link>
-                <p className="d-inline">
-                  {formatDate(comment?.createdAt)}
-                  {comment?.updated ? ` (changed at ${comment?.updated})` : ''}
-                </p>
-              </div>
-            </div>
-            {comment?.user?.id === user?.id ? (
-              <div className="ml-auto p-1">
-                <span>
-                  <button
-                    onClick={() => {
-                      setEdit({
-                        id: comment?.id,
-                        bool: edit.bool ? false : true,
-                      });
-                      setupdatedComment({
-                        user: user?.id,
-                        body: comment?.body,
-                      });
-                    }}
-                    type="button"
-                    className="btn btn-outline-primary mx-1"
-                  >
-                    <FontAwesomeIcon icon={faPencilAlt} />
-                  </button>
-                </span>
-                <span>
-                  <button
-                    onClick={async () => {
-                      await manageComment(id, { id: comment.id }, 'delete');
-                      fetchPost(id);
-                    }}
-                    type="button"
-                    className="btn btn-outline-danger mx-1"
-                  >
-                    <FontAwesomeIcon icon={faTrash} />
-                  </button>
-                </span>
-              </div>
-            ) : null}
-          </div>
-          <div className="row" style={{ backgroundColor: '#efeff0' }}>
-            <div className="m-1">
-              {edit.bool && edit.id === comment.id ? (
-                <form onSubmit={onSubmit2}>
-                  <div className="form-group">
-                    <textarea
-                      onChange={onChange2}
-                      type="text"
-                      cols="160"
-                      className="form-control my-1"
-                      name="body"
-                      defaultValue={comment.body}
-                    ></textarea>
-                    <input
-                      type="submit"
-                      className="btn btn-primary my-1"
-                      value="Modify"
-                    />
-                  </div>
-                </form>
-              ) : (
-                <p>{comment?.body}</p>
-              )}
-            </div>
-          </div>
-        </div>
+      {post?.comments?.map((comment, key) => (
+        <Comment
+          key={`comment-${key}`}
+          comment={comment}
+          formatDate={formatDate}
+          user={user}
+          setEdit={setEdit}
+          edit={edit}
+          setupdatedComment={setupdatedComment}
+          manageComment={manageComment}
+          id={id}
+          fetchPost={fetchPost}
+          onSubmit2={onSubmit2}
+          onChange2={onChange2}
+        />
       ))}
     </React.Fragment>
   );

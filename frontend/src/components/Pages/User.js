@@ -1,20 +1,22 @@
 import React, { useContext } from 'react';
+import Job from '../Layout/Job';
+import PostContext from '../PostState/postContext';
+import Footer from '../Layout/Footer';
+import ReactImageFallback from 'react-image-fallback';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhone, faAddressCard } from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebookF,
   faGithub,
   faLinkedin,
 } from '@fortawesome/free-brands-svg-icons';
-import { faPhone, faAddressCard } from '@fortawesome/free-solid-svg-icons';
-import ReactImageFallback from 'react-image-fallback';
 import { serialize } from 'object-to-formdata';
 import { BASE_URL } from '../../utils/config';
 import useUser from '../../hooks/useUser';
-import Job from '../Layout/Job';
 import classes from '../Layout/footer.module.css';
-import PostContext from '../PostState/postContext';
+import { formatDate } from '../../utils/functions';
 import './User.css';
-import Footer from '../Layout/Footer';
+
 export const User = () => {
   const postContext = useContext(PostContext);
   const { posts } = postContext;
@@ -27,20 +29,6 @@ export const User = () => {
     edit,
     setEdit,
   } = useUser();
-  const formatDate = (date) => {
-    if (!date) {
-      return 'Not set';
-    }
-    var d = new Date(date),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [day, month, year].join('-');
-  };
   const onEdit = () => {
     switch (edit) {
       case true:
