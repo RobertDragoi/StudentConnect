@@ -5,7 +5,6 @@ import { faFacebookF, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faPhone, faAddressCard } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams, Link } from 'react-router-dom';
-import { BASE_URL } from '../../utils/config';
 import postService from '../../services/post';
 import UserContext from '../../state/UserState/userContext';
 import PostContext from '../../state/PostState/postContext';
@@ -74,8 +73,8 @@ const FullPost = () => {
           <div className="col-sm-4 border-right">
             <ReactImageFallback
               className="d-inline"
-              src={`${BASE_URL}/${post?.user?.profilePicture}`}
-              fallbackImage={`${BASE_URL}/public/img/default.jpg`}
+              src={`/${post?.user?.profilePicture}`}
+              fallbackImage={'/img/default.jpg'}
               alt="profile"
               width="200"
               height="200"

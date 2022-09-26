@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { BASE_URL } from '../../utils/config';
 import ReactImageFallback from 'react-image-fallback';
 const Comment = ({
   comment,
@@ -27,8 +26,8 @@ const Comment = ({
         <div className="d-flex flex-row p-1">
           <ReactImageFallback
             className="d-inline"
-            src={`${BASE_URL}/${comment?.user?.profilePicture}`}
-            fallbackImage={`${BASE_URL}/public/img/default.jpg`}
+            src={`/${comment?.user?.profilePicture}`}
+            fallbackImage={'/img/default.jpg'}
             alt="profile"
             width="50"
             height="50"

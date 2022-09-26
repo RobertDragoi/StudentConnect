@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Job from '../Layout/Job';
+import Post from '../Layout/Post';
 import Spinner from '../Layout/Spinner';
 import { Fab } from 'react-tiny-fab';
 import 'react-tiny-fab/dist/styles.css';
@@ -20,7 +20,7 @@ const Home = () => {
         {!loading ? (
           posts.map((post) => {
             return (
-              <Job
+              <Post
                 key={post.id}
                 id={post.id}
                 className="mx-auto col-6"

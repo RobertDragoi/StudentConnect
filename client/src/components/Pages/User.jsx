@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Job from '../Layout/Job';
+import Post from '../Layout/Post';
 import PostContext from '../../state/PostState/postContext';
 import ReactImageFallback from 'react-image-fallback';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -83,7 +83,7 @@ export const User = () => {
                                 Date.now() /* Hack to rerender image after submit */
                               }`
                             }
-                            fallbackImage="http://localhost:3003/public/img/default.jpg"
+                            fallbackImage={'/img/default.jpg'}
                             alt="Profile Picture"
                             width="100"
                             height="100"
@@ -453,7 +453,7 @@ export const User = () => {
                   {posts.map((post) => {
                     if (post?.user?.id === user?.id) {
                       return (
-                        <Job
+                        <Post
                           key={post.id}
                           id={post.id}
                           title={post.title}
