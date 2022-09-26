@@ -6,7 +6,7 @@ const studentSchema = new mongoose.Schema({
     birthDate: {
       type: Date,
     },
-    school: {
+    education: {
       type: String,
       //required: true,
       default: '', // TODO: REMOVE DEFAULT

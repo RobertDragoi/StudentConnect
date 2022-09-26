@@ -18,7 +18,7 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  programmingLang: {
+  domain: {
     type: String,
     default: '',
   },
@@ -47,7 +47,7 @@ postSchema.set('toJSON', {
 });
 
 postSchema.plugin(mongooseFuzzySearching, {
-  fields: ['programmingLang', 'description', 'title', 'workPlace'],
+  fields: ['domain', 'description', 'title', 'workPlace'],
 });
 
 const Post = mongoose.model('Post', postSchema);

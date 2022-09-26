@@ -92,19 +92,19 @@ const userUpdater = async (request, response, next) => {
         student?.birthDate === undefined
           ? searchedUser.student?.birthDate
           : student?.birthDate;
-      searchedUser.student.school =
-        student?.school === undefined
-          ? searchedUser.student?.school
-          : student?.school;
+      searchedUser.student.education =
+        student?.education === undefined
+          ? searchedUser.student?.education
+          : student?.education;
     } else if (company && searchedUser.company) {
       searchedUser.company.creationDate =
         company?.creationDate === undefined
           ? searchedUser.company?.creationDate
           : company?.creationDate;
-      searchedUser.company.activity =
-        company?.activity === undefined
-          ? searchedUser.company?.activity
-          : company?.activity;
+      searchedUser.company.activityDomain =
+        company?.activityDomain === undefined
+          ? searchedUser.company?.activityDomain
+          : company?.activityDomain;
     }
 
     await searchedUser.save();

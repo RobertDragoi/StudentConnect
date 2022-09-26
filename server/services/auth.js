@@ -55,7 +55,7 @@ const registerUser = async (req, res) => {
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const { birthDate, school, creationDate, activity } = req.body;
+    const { birthDate, education, creationDate, activityDomain } = req.body;
     let user;
     switch (type) {
       case 'student':
@@ -65,7 +65,7 @@ const registerUser = async (req, res) => {
           password: hashedPassword,
           address,
           description,
-          student: { birthDate, school },
+          student: { birthDate, education },
         });
         await user.save();
         break;
@@ -76,7 +76,7 @@ const registerUser = async (req, res) => {
           password: hashedPassword,
           address,
           description,
-          company: { creationDate, activity },
+          company: { creationDate, activityDomain },
         });
         await user.save();
         break;

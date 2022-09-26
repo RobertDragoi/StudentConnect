@@ -6,7 +6,7 @@ const companySchema = new mongoose.Schema({
     creationDate: {
       type: Date,
     },
-    activity: {
+    activityDomain: {
       type: String,
       //required: true,
       default: '',

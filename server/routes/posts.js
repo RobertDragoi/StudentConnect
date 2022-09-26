@@ -12,7 +12,7 @@ postsRouter.post(
   '/',
   middleware.tokenExtractor,
   check('title').not().isEmpty(),
-  check('programmingLang').not().isEmpty(),
+  check('domain').not().isEmpty(),
   check('workPlace').not().isEmpty(),
   createPost
 );
