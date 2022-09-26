@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import PostContext from '../state/PostState/postContext';
-import { locations, languages } from '../placeholders';
+import { locations, domains } from '../placeholders';
 
 const PostForm = () => {
   let history = useHistory();
@@ -10,7 +10,7 @@ const PostForm = () => {
   const [post, setPost] = useState({
     title: '',
     description: '',
-    programmingLang: 'C/C++',
+    domain: '',
     workHours: 8,
     workPlace: locations[0],
   });
@@ -72,10 +72,12 @@ const PostForm = () => {
               <select
                 className="form-control"
                 onChange={onChange}
-                name="programmingLang"
+                name="domain"
               >
-                {languages.map((language, key) => (
-                  <option key={`language_${key}`}>{language}</option>
+                {domains.map((domain, key) => (
+                  <option key={`domain_${key}`} value={domain}>
+                    {domain}
+                  </option>
                 ))}
               </select>
             </div>
