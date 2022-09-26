@@ -22,7 +22,7 @@ export const User = () => {
   const { posts } = postContext;
   const {
     user,
-    update,
+    updateUser,
     loading,
     updatedUser,
     setUpdatedUser,
@@ -61,7 +61,7 @@ export const User = () => {
   const onSubmit = () => {
     const formData = serialize(updatedUser);
     console.log('Entering Update!');
-    update(formData);
+    updateUser(formData);
     setEdit(false);
   };
   return (

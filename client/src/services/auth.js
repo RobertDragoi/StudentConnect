@@ -57,12 +57,7 @@ const register = async (formData) => {
   return res.data.authToken;
 };
 
-const update = async (formData) => {
-  const res = await axios.put(`${BASE_URL}/api/users`, formData);
-  return res.data;
-};
-
-const load = async () => {
+const loadUser = async () => {
   const res = await axios.get(`${BASE_URL}/api/auth/user`);
   return res.data;
 };
@@ -74,6 +69,5 @@ export default {
   login,
   logout,
   register,
-  update,
-  load,
+  loadUser,
 };

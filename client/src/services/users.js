@@ -11,7 +11,13 @@ const getUser = async (id) => {
   return res;
 };
 
+const updateUser = async (formData) => {
+  const res = await axios.put(`${BASE_URL}/api/users`, formData);
+  return res.data;
+};
+
 export default {
+  updateUser,
   getAllUsers,
   getUser,
 };

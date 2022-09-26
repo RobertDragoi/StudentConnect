@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import UserContext from './userContext';
 import UserReducer from './userReducer';
 import authService from '../../services/auth';
+import usersService from '../../services/users';
 import {
   REGISTER_SUCCES,
   REGISTER_FAIL,
@@ -33,11 +34,11 @@ const UserState = (props) => {
     const tokensRefresher = async () => {
       if (Cookies.get('auth-token')) {
         authService.setAuthToken(Cookies.get('auth-token'));
-        load();
+        loadUser();
       }
       if (Cookies.get('refresh-token') && !Cookies.get('auth-token')) {
         await authService.refreshToken();
-        load();
+        loadUser();
       }
     };
     tokensRefresher();
@@ -47,7 +48,7 @@ const UserState = (props) => {
     try {
       const token = await authService.register(formData);
       dispatch({ type: REGISTER_SUCCES, payload: token });
-      load();
+      loadUser();
     } catch (error) {
       dispatch({ type: REGISTER_FAIL, payload: error.message });
       setTimeout(() => dispatch({ type: CLEAR_ERRORS }), 3000);
@@ -58,7 +59,7 @@ const UserState = (props) => {
     try {
       const token = await authService.login(formData);
       dispatch({ type: LOGIN_SUCCES, payload: token });
-      load();
+      loadUser();
     } catch (error) {
       dispatch({ type: LOGIN_FAIL, payload: error.message });
       setTimeout(() => dispatch({ type: CLEAR_ERRORS }), 3000);
@@ -71,18 +72,18 @@ const UserState = (props) => {
     history.push('/');
   };
 
-  const update = async (formData) => {
+  const updateUser = async (formData) => {
     try {
-      const updatedUser = await authService.update(formData);
+      const updatedUser = await usersService.updateUser(formData);
       dispatch({ type: USER_LOADED, payload: updatedUser });
     } catch (error) {
       dispatch({ type: LOGIN_FAIL, payload: error.response.data.msg });
     }
   };
-  const load = async () => {
+  const loadUser = async () => {
     try {
       dispatch({ type: LOAD_USER });
-      const loadedUser = await authService.load();
+      const loadedUser = await authService.loadUser();
       dispatch({ type: USER_LOADED, payload: loadedUser });
     } catch (error) {
       console.log(error);
@@ -98,7 +99,7 @@ const UserState = (props) => {
         register,
         login,
         logout,
-        update,
+        updateUser,
       }}
     >
       {props.children}

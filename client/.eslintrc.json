@@ -10,8 +10,8 @@
   },
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "overrides": [],
-  "parser": "@babel/eslint-parser",
   "parserOptions": {
+    "parser": "@babel/eslint-parser",
     "requireConfigFile": false,
     "ecmaVersion": "latest",
     "sourceType": "module"

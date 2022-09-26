@@ -2,11 +2,11 @@
 import { useParams } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import UserContext from '../state/UserState/userContext';
-import userService from '../services/users';
+import usersService from '../services/users';
 
 export default function useUser() {
   const { id } = useParams();
-  const { user: authUser, update, loading } = useContext(UserContext);
+  const { user: authUser, updateUser, loading } = useContext(UserContext);
   const [user, setUser] = useState(null);
   const [isCurrentUser, setIsCurrentUser] = useState(false);
   const [updatedUser, setUpdatedUser] = useState(user);
@@ -16,7 +16,7 @@ export default function useUser() {
     const fetchUser = async () => {
       console.log('Fetching user for ' + user?.email);
       try {
-        const response = await userService.getUser(id);
+        const response = await usersService.getUser(id);
         setUser(response.data);
         setUpdatedUser(response.data);
       } catch (e) {
@@ -35,7 +35,7 @@ export default function useUser() {
   }, [authUser, user]);
 
   return {
-    update,
+    updateUser,
     loading,
     user,
     isCurrentUser,
