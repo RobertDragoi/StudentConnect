@@ -29,10 +29,9 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "lint": "eslint --fix --ext .js,.jsx ."
   },
   "eslintConfig": {
@@ -56,6 +55,8 @@
   "proxy": "http://localhost:3003",
   "devDependencies": {
     "@babel/preset-react": "^7.18.6",
-    "eslint-plugin-react": "^7.31.8"
+    "@vitejs/plugin-react": "^2.1.0",
+    "eslint-plugin-react": "^7.31.8",
+    "vite": "^3.1.3"
   }
 }

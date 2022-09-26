@@ -2,7 +2,7 @@ import React from 'react';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useContext } from 'react';
-import FiltreModal from './FiltreModal';
+import ModalFilters from './ModalFilters';
 import PostContext from '../../state/PostState/postContext';
 
 export const SearchBar = () => {
@@ -25,7 +25,7 @@ export const SearchBar = () => {
           <div className="input-group row justify-content-md-center">
             <div className="input-group-prepend">
               <button className="btn btn-primary" type="button">
-                <FiltreModal />
+                <ModalFilters />
               </button>
             </div>
             <input

@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 import { locations } from '../../placeholders';
 
-export const FiltreModal = () => {
+export const ModalFilters = () => {
   const [show, setShow] = useState(false);
   const postContext = useContext(PostContext);
   const { setFilters } = postContext;
@@ -127,4 +127,4 @@ export const FiltreModal = () => {
   );
 };
 
-export default FiltreModal;
+export default ModalFilters;
