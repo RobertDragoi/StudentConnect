@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import UserContext from '../state/UserState/userContext';
-
+import { studies, domains } from '../placeholders';
 const RegisterForm = () => {
   let history = useHistory();
   const { isAuthenticated, register } = useContext(UserContext);
@@ -21,8 +21,8 @@ const RegisterForm = () => {
     address: '',
     description: '',
     birthDate: '',
-    school: '',
-    activity: '',
+    education: '',
+    activityDomain: '',
     creationDate: '',
   });
 
@@ -34,8 +34,8 @@ const RegisterForm = () => {
     password,
     description,
     birthDate,
-    school,
-    activity,
+    education,
+    activityDomain,
     creationDate,
   } = user;
 
@@ -51,19 +51,19 @@ const RegisterForm = () => {
       newUser = {
         ...newUser,
         birthDate,
-        school,
+        education,
       };
     } else {
       newUser = {
         ...newUser,
         creationDate,
-        activity,
+        activityDomain,
       };
     }
     register(newUser);
   };
   let extraField;
-
+  console.log(education);
   if (type === 'Student') {
     extraField = (
       <Fragment>
@@ -80,16 +80,19 @@ const RegisterForm = () => {
           </div>
         </div>
         <div className="form-group">
-          <label className="control-label">School:</label>
+          <label className="control-label">Studies:</label>
           <div>
-            <input
-              onChange={onChange}
-              type="text"
+            <select
               className="form-control"
-              name="school"
-              value={school}
-              placeholder="School"
-            />
+              onChange={onChange}
+              name="education"
+            >
+              {studies.map((study, key) => (
+                <option key={`studies-${key}`} value={study}>
+                  {study}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
       </Fragment>
@@ -113,14 +116,17 @@ const RegisterForm = () => {
         <div className="form-group">
           <label className="control-label">Activity:</label>
           <div>
-            <input
-              onChange={onChange}
-              type="text"
+            <select
               className="form-control"
-              name="activity"
-              value={activity}
-              placeholder="Activity"
-            />
+              onChange={onChange}
+              name="activityDomain"
+            >
+              {domains.map((domain, key) => (
+                <option key={`activityDomain-${key}`} value={domain}>
+                  {domain}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
       </Fragment>
