@@ -90,7 +90,6 @@ const registerUser = async (req, res) => {
     );
     res.json({ authToken, refreshToken });
   } catch (error) {
-    console.log(error.message);
     res.status(400).json({ msg: 'An account with this email already exists' });
   }
 };
@@ -109,7 +108,6 @@ const refreshToken = async (req, res) => {
     });
     res.json({ authToken });
   } catch (error) {
-    console.error(error.message);
     res.status(400).json({ msg: 'Cannot refresh auth-token' });
   }
 };

@@ -51,7 +51,6 @@ const logout = async () => {
 
 const register = async (formData) => {
   const res = await axios.post(`${BASE_URL}/api/auth/register`, formData);
-  console.log(res);
   setAuthToken(res.data.authToken);
   setRefreshToken(res.data.refreshToken);
   return res.data.authToken;

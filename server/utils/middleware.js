@@ -1,11 +1,9 @@
 const sharp = require('sharp');
 const mkdirp = require('mkdirp');
 const fs = require('fs');
-
 const config = require('../utils/config');
 const logger = require('../utils/logger');
 const jwt = require('jsonwebtoken');
-
 const User = require('../models/user');
 
 const tokenExtractor = (req, res, next) => {
@@ -121,7 +119,7 @@ const userUpdater = async (request, response, next) => {
  * Adds a request.limit that specifies the limit of elements on a given page (default 100)
  */
 const limitExtractor = async (req, res, next) => {
-  console.log(req.query);
+  logger.info(req.query);
   if (req.query.limit) req.limit = parseInt(req.query.limit);
   else req.limit = 100; // set a default limit if none provided
   next();
@@ -182,7 +180,6 @@ const modelResolver = async (req, res) => {
     const requestedData = await query.exec();
     res.json(requestedData);
   } catch (e) {
-    console.log(e);
     res.status(400).send({
       error: 'bad request',
     });
