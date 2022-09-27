@@ -15,6 +15,7 @@ import classes from '../Layout/Body.module.css';
 import Spinner from '../Layout/Spinner';
 import { BASE_URL } from '../../utils/config';
 import { formatDate } from '../../utils/functions';
+import { studies, domains } from '../../placeholders';
 import './User.css';
 
 export const User = () => {
@@ -347,7 +348,7 @@ export const User = () => {
                         <h6 className="mb-0">
                           {user ? (
                             user.type === 'student' ? (
-                              'School'
+                              'Education'
                             ) : (
                               'Activity'
                             )
@@ -360,26 +361,37 @@ export const User = () => {
                         {user ? (
                           edit === true ? (
                             user.type === 'student' ? (
-                              <input
+                              <select
+                                className="form-control"
                                 onChange={onChange}
-                                className="form-control form-control-sm"
-                                type="text"
-                                name="school"
-                                defaultValue={user.student.school}
-                              />
+                                name="education"
+                              >
+                                {studies.map((study, key) => (
+                                  <option key={`studies-${key}`} value={study}>
+                                    {study}
+                                  </option>
+                                ))}
+                              </select>
                             ) : (
-                              <input
+                              <select
+                                className="form-control"
                                 onChange={onChange}
-                                className="form-control form-control-sm"
-                                type="text"
-                                name="activity"
-                                defaultValue={user.company.activity}
-                              />
+                                name="activityDomain"
+                              >
+                                {domains.map((domain, key) => (
+                                  <option
+                                    key={`activityDomain-${key}`}
+                                    value={domain}
+                                  >
+                                    {domain}
+                                  </option>
+                                ))}
+                              </select>
                             )
                           ) : user.type === 'student' ? (
-                            user.student.school
+                            user.student.education
                           ) : (
-                            user.company.activity
+                            user.company.activityDomain
                           )
                         ) : (
                           <React.Fragment />
