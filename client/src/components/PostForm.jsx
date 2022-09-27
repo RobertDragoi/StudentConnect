@@ -67,7 +67,7 @@ const PostForm = () => {
             </div>
           </div>
           <div className="form-group">
-            <label className="control-label">Programming languages</label>
+            <label className="control-label">Activity domain</label>
             <div>
               <select
                 className="form-control"

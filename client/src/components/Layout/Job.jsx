@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import ReactImageFallback from 'react-image-fallback';
-import { BASE_URL } from '../../utils/config';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +21,7 @@ const Job = (props) => {
             <div className="p-1">
               <ReactImageFallback
                 src={props.companyPicture}
-                fallbackImage={`${BASE_URL}/public/img/default.jpg`}
+                fallbackImage={'/img/default.jpg'}
                 alt="profile"
                 width="50"
                 height="50"

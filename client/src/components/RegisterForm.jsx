@@ -68,7 +68,7 @@ const RegisterForm = () => {
     extraField = (
       <Fragment>
         <div className="form-group">
-          <label className="control-label">Birth Date:</label>
+          <label className="control-label">Birth Date</label>
           <div className="">
             <input
               className="form-control"
@@ -80,7 +80,7 @@ const RegisterForm = () => {
           </div>
         </div>
         <div className="form-group">
-          <label className="control-label">Studies:</label>
+          <label className="control-label">Studies</label>
           <div>
             <select
               className="form-control"
@@ -102,7 +102,7 @@ const RegisterForm = () => {
     extraField = (
       <Fragment>
         <div className="form-group">
-          <label className="control-label">Creation Date:</label>
+          <label className="control-label">Creation Date</label>
           <div>
             <input
               className="form-control"
@@ -114,7 +114,7 @@ const RegisterForm = () => {
           </div>
         </div>
         <div className="form-group">
-          <label className="control-label">Activity:</label>
+          <label className="control-label">Activity</label>
           <div>
             <select
               className="form-control"
@@ -177,7 +177,7 @@ const RegisterForm = () => {
             <div className="form-row">
               <div className="form-group col-md-6">
                 <label className="control-label" htmlFor="name">
-                  Full Name<span className="text-primary">*</span>:
+                  Full Name<span className="text-primary">*</span>
                 </label>
                 <input
                   onChange={onChange}
@@ -191,7 +191,7 @@ const RegisterForm = () => {
               </div>
               <div className="form-group col-md-6">
                 <label className="control-label" htmlFor="email">
-                  Email<span className="text-primary">*</span>:
+                  Email<span className="text-primary">*</span>
                 </label>
                 <input
                   onChange={onChange}
@@ -223,7 +223,7 @@ const RegisterForm = () => {
             </div>
             <div className="form-group">
               <label className="control-label">
-                Password<span className="text-primary">*</span>:
+                Password<span className="text-primary">*</span>
               </label>
               <div>
                 <input
@@ -239,7 +239,7 @@ const RegisterForm = () => {
             </div>
             <div className="form-group">
               <label className="control-label" htmlFor="password">
-                Description:
+                Description
               </label>
               <div>
                 <textarea

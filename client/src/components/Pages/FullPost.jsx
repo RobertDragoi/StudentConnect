@@ -86,7 +86,7 @@ const FullPost = () => {
               <h3>{post?.user.name ? post.user.name : ''}</h3>
             </Link>
             <p>Location: {post?.workPlace ? post.workPlace : ''}</p>
-            <p>Programming language: {post?.programmingLang}</p>
+            <p>Domain: {post?.domain}</p>
             <p>
               Type:{' '}
               {(post?.workHours === 8 ? 'Full-Time' : 'Part-Time') +
