@@ -10,7 +10,7 @@ import UserContext from '../../state/UserState/userContext';
 import PostContext from '../../state/PostState/postContext';
 import ReactImageFallback from 'react-image-fallback';
 import { formatDate } from '../../utils/functions';
-import Comment from './Comment';
+import Comment from '../Layout/Comment';
 
 const FullPost = () => {
   const userContext = useContext(UserContext);
