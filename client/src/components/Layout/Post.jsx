@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactImageFallback from 'react-image-fallback';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faUser, faBuilding } from '@fortawesome/free-solid-svg-icons';
 import UserContext from '../../state/UserState/userContext';
 import PostContext from '../../state/PostState/postContext';
 import { formatDate } from '../../utils/functions';
@@ -30,7 +30,12 @@ const Post = (props) => {
             <div className="p-1">
               <p className="card-text m-0 ml-3 d-flex flex-column">
                 <span>
-                  <Link to={`/users/${props.user.id}`}>{props.user.name}</Link>
+                  <Link to={`/users/${props.user.id}`}>{props.user.name}</Link>{' '}
+                  {props.user.type === 'student' ? (
+                    <FontAwesomeIcon icon={faUser} />
+                  ) : (
+                    <FontAwesomeIcon icon={faBuilding} />
+                  )}
                 </span>
                 <span className="text-muted">{formatDate(props.when)}</span>
               </p>
