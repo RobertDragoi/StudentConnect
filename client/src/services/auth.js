@@ -9,7 +9,7 @@ const setAuthToken = async (token) => {
   if (token) {
     axios.defaults.headers.common['Authorization'] = token;
     Cookies.set('auth-token', token, {
-      expires: 1 / 1440,
+      expires: 1 / 24,
     });
   } else {
     delete axios.defaults.headers.common['Authorization'];

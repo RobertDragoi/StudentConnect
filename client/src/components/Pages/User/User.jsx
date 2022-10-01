@@ -11,7 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebookF,
-  faGithub,
+  faInstagram,
   faLinkedin,
 } from '@fortawesome/free-brands-svg-icons';
 import { serialize } from 'object-to-formdata';
@@ -148,12 +148,12 @@ export const User = () => {
               <h4 className="text-center">
                 {user?.type === 'student' ? (
                   <span>
-                    This is a person{' '}
+                    {userTags.personLabel}{' '}
                     <FontAwesomeIcon icon={faUser} color="green" />
                   </span>
                 ) : (
                   <span>
-                    This is a company{' '}
+                    {userTags.companyLabel}{' '}
                     <FontAwesomeIcon icon={faBuilding} color="blue" />
                   </span>
                 )}
@@ -186,7 +186,7 @@ export const User = () => {
                   </div>
                   <div className="row">
                     <div className="col-sm-3 py-1 d-flex justify-content-center align-items-center">
-                      <FontAwesomeIcon icon={faGithub} />
+                      <FontAwesomeIcon icon={faInstagram} color="purple" />
                     </div>
                     <div className="col-sm-9 py-1 text-secondary border-bottom">
                       {edit === true ? (
@@ -194,12 +194,12 @@ export const User = () => {
                           onChange={onChange}
                           className="form-control form-control-sm"
                           type="text"
-                          name="github"
-                          defaultValue={user?.contact?.github}
+                          name="instagram"
+                          defaultValue={user?.contact?.instagram}
                         />
-                      ) : user?.contact?.github ? (
+                      ) : user?.contact?.instagram ? (
                         <p className="text-muted font-size-sm m-0">
-                          {user?.contact?.github}
+                          {user?.contact?.instagram}
                         </p>
                       ) : (
                         <p className="text-muted font-size-sm m-0">
