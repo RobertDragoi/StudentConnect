@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import PostContext from '../../state/PostState/postContext';
+import PostContext from '../../../state/PostState/postContext';
 
 const CurrentFilters = () => {
   const { filters, removeFilter } = useContext(PostContext);

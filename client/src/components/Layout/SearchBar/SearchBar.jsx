@@ -2,8 +2,8 @@ import React from 'react';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useContext } from 'react';
-import ModalFilters from './ModalFilters';
-import PostContext from '../../state/PostState/postContext';
+import ModalFilters from '../ModalFilters/ModalFilters';
+import PostContext from '../../../state/PostState/postContext';
 
 export const SearchBar = () => {
   const [searchForm, setSearchForm] = useState('');

@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 import socketIOClient from 'socket.io-client';
-import './FullPost.css';
 import { faFacebookF, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faPhone, faAddressCard } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams, Link } from 'react-router-dom';
-import postService from '../../services/post';
-import UserContext from '../../state/UserState/userContext';
-import PostContext from '../../state/PostState/postContext';
+import postService from '../../../services/post';
+import UserContext from '../../../state/UserState/userContext';
+import PostContext from '../../../state/PostState/postContext';
 import ReactImageFallback from 'react-image-fallback';
-import { formatDate } from '../../utils/functions';
-import Comment from '../Layout/Comment';
+import Comment from '../../Layout/Comment/Comment';
+import { formatDate } from '../../../utils/functions';
+import './FullPost.css';
 
 const FullPost = () => {
   const userContext = useContext(UserContext);

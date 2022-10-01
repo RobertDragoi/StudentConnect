@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Post from '../../Layout/Post';
+import Post from '../../Layout/Post/Post';
 import PostContext from '../../../state/PostState/postContext';
 import ReactImageFallback from 'react-image-fallback';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,7 +16,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { serialize } from 'object-to-formdata';
 import useUser from '../../../hooks/useUser';
-import Spinner from '../../Layout/Spinner';
+import Spinner from '../../Layout/Spinner/Spinner';
 import { BASE_URL } from '../../../utils/config';
 import { formatDate } from '../../../utils/functions';
 import { studies, domains } from '../../../placeholders';

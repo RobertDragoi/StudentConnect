@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
-import PostContext from '../../state/PostState/postContext';
+import PostContext from '../../../state/PostState/postContext';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
-import { locations } from '../../placeholders';
+import { locations } from '../../../placeholders';
 
 export const ModalFilters = () => {
   const [show, setShow] = useState(false);

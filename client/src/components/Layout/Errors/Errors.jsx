@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import UserContext from '../../state/UserState/userContext';
-import PostContext from '../../state/PostState/postContext';
+import UserContext from '../../../state/UserState/userContext';
+import PostContext from '../../../state/PostState/postContext';
 
 const Errors = () => {
   const { error: userError } = useContext(UserContext);

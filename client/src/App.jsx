@@ -1,18 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import PostForm from './components/PostForm';
-import Home from './components/Pages/Home';
-import NavBar from './components/Layout/Navbar';
-import Footer from './components/Layout/Footer';
-import User from './components/Pages/User';
+import Home from './components/Pages/Home/Home';
+import NavBar from './components/Layout/Navbar/Navbar';
+import Footer from './components/Layout/Footer/Footer';
+import User from './components/Pages/User/User';
+import FullPost from './components/Pages/FullPost/FullPost';
+import Welcome from './components/Pages/Welcome/Welcome';
+import Errors from './components/Layout/Errors/Errors';
 import PostState from './state/PostState/PostState';
 import UserState from './state/UserState/UserState';
-import FullPost from './components/Pages/FullPost';
-import Welcome from './components/Pages/Welcome';
-import Errors from './components/Layout/Errors';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {

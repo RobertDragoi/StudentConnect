@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
-import Logo from '../../visuals/Logo2.png';
+import Logo from '../../../visuals/Logo2.png';
 import Style from './Spinner.module.css';
 
 const Loading = () => {

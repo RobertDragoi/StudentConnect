@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import UserContext from '../../state/UserState/userContext';
-import CurrentFilters from './CurrentFilters';
-import SearchBar from './SearchBar';
+import UserContext from '../../../state/UserState/userContext';
+import CurrentFilters from '../CurrentFilters/CurrentFilters';
+import SearchBar from '../SearchBar/SearchBar';
 import { Navbar as BootstrapNavbar, NavItem } from 'reactstrap';
 
 export const Navbar = () => {

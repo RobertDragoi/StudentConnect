@@ -11,22 +11,24 @@
   text-align: justify;
 }
 
-.button1 {
+.button {
+  text-decoration: none;
   display: inline-block;
   padding: 0.35em 1.2em;
-  border: 0.1em solid blue;
+  border: 0.1em solid #007bff;
   margin: 0 0.3em 0.3em 0;
   border-radius: 0.12em;
   box-sizing: border-box;
   text-decoration: none;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  color: blue;
+  color: #007bff;
   text-align: center;
   transition: all 0.2s;
 }
 
-.button11:hover{
+.button:hover {
+  text-decoration: none;
   color: white;
-  background-color: blue;
+  background-color: #007bff;
 }

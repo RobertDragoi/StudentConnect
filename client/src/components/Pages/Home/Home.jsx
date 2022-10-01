@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import Post from '../Layout/Post';
-import Spinner from '../Layout/Spinner';
+import { Link } from 'react-router-dom';
 import { Fab } from 'react-tiny-fab';
 import 'react-tiny-fab/dist/styles.css';
-import UserContext from '../../state/UserState/userContext';
-import PostContext from '../../state/PostState/postContext';
-import { BASE_URL } from '../../utils/config';
-import { Link } from 'react-router-dom';
+import Post from '../../Layout/Post/Post';
+import Spinner from '../../Layout/Spinner/Spinner';
+import UserContext from '../../../state/UserState/userContext';
+import PostContext from '../../../state/PostState/postContext';
+import { BASE_URL } from '../../../utils/config';
+import './Home.css';
 
 const Home = () => {
   const postContext = useContext(PostContext);
@@ -15,8 +16,8 @@ const Home = () => {
   const { isAuthenticated } = userContext;
 
   return (
-    <React.Fragment>
-      <div className="container py-5">
+    <div className="container py-5">
+      <div className="main-body">
         {!loading ? (
           posts.map((post) => {
             return (
@@ -48,7 +49,7 @@ const Home = () => {
           ) : null}
         </Link>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 
