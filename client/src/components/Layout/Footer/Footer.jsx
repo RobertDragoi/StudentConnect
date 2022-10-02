@@ -1,36 +1,35 @@
 import React from 'react';
-
+import { footerTags } from './tags';
 export const Footer = () => {
   return (
     <div className="footer-clean bg-primary">
       <div className="container text-white">
         <div className="row justify-content-center">
           <div className="col-sm-4 col-md-3 item">
-            <h3>Services</h3>
+            <h3>{footerTags.services}</h3>
             <ul>
-              <li>Web design</li>
-              <li>Development</li>
-              <li>Hosting</li>
+              <li>{footerTags.webdesign}</li>
+              <li>{footerTags.oportunities}</li>
             </ul>
           </div>
           <div className="col-sm-4 col-md-3 item">
-            <h3>About</h3>
+            <h3>{footerTags.about}</h3>
             <ul>
-              <li>Company</li>
-              <li>Team</li>
-              <li>Legacy</li>
+              <li>{footerTags.company}</li>
+              <li>{footerTags.team}</li>
+              <li>{footerTags.history}</li>
             </ul>
           </div>
           <div className="col-sm-4 col-md-3 item">
-            <h3>Careers</h3>
+            <h3>{footerTags.careers}</h3>
             <ul>
-              <li>Job openings</li>
-              <li>Employee success</li>
-              <li>Benefits</li>
+              <li>{footerTags.jobs}</li>
+              <li>{footerTags.employers}</li>
+              <li>{footerTags.employees}</li>
             </ul>
           </div>
           <div className="col-lg-3 item social">
-            <p className="copyright">Student Connect © 2021</p>
+            <p className="copyright">{footerTags.name}</p>
           </div>
         </div>
       </div>
