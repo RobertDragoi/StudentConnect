@@ -10,7 +10,17 @@
   margin-top: 10em;
   text-align: justify;
 }
-
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 10px;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.3rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
 .button {
   text-decoration: none;
   display: inline-block;
@@ -22,6 +32,7 @@
   text-decoration: none;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+  background-color: white;
   color: #007bff;
   text-align: center;
   transition: all 0.2s;

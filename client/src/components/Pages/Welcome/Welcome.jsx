@@ -21,12 +21,10 @@ export const Welcome = () => {
         </div>
         <div className="col-lg">
           <div className="textBox">
-            <h1>
+            <h1 className="title">
               <b>{welcomeTags.title1}</b>
             </h1>
-            <h1>
-              <b>{welcomeTags.title2}</b>
-            </h1>
+            <h1 className="title">{welcomeTags.title2}</h1>
             <p>{welcomeTags.subTitle}</p>
 
             <div className="row">

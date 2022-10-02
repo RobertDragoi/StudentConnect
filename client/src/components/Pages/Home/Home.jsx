@@ -42,9 +42,9 @@ const Home = () => {
         <CurrentFilters />
         <div className="d-flex flex-row justify-content-center">
           {type === 'persons' ? (
-            <h3>{homeTags.studentTitle}</h3>
+            <h3 className="title">{homeTags.studentTitle}</h3>
           ) : (
-            <h3>{homeTags.companyTitle}</h3>
+            <h3 className="title">{homeTags.companyTitle}</h3>
           )}
         </div>
         {!loading ? (

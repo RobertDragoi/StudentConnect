@@ -4,7 +4,17 @@
   display: flex;
   flex-direction: column;
 }
-
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.3rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
 .button {
   text-decoration: none;
   display: inline-block;
@@ -17,6 +27,7 @@
   font-family: 'Roboto', sans-serif;
   font-weight: 800;
   font-size: 20px;
+  background-color: white;
   color: #007bff;
   text-align: center;
   transition: all 0.2s;
