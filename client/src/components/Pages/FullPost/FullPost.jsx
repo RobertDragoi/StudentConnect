@@ -10,6 +10,7 @@ import PostContext from '../../../state/PostState/postContext';
 import ReactImageFallback from 'react-image-fallback';
 import Comment from '../../Layout/Comment/Comment';
 import { formatDate } from '../../../utils/functions';
+import { postTags } from './tags';
 import './FullPost.css';
 
 const FullPost = () => {
@@ -85,15 +86,20 @@ const FullPost = () => {
             <Link to={`/users/${post?.user?.id}`}>
               <h3>{post?.user.name ? post.user.name : ''}</h3>
             </Link>
-            <p>Location: {post?.workPlace ? post.workPlace : ''}</p>
-            <p>Domain: {post?.domain}</p>
             <p>
-              Type:{' '}
+              {postTags.location}: {post?.workPlace ? post.workPlace : ''}
+            </p>
+            <p>
+              {postTags.domain}: {post?.domain}
+            </p>
+            <p>
+              {postTags.type}:{' '}
               {(post?.workHours === 8 ? 'Full-Time' : 'Part-Time') +
                 ` (${post?.workHours} hours)`}
             </p>
             <p>
-              Created at: {post?.createdAt ? formatDate(post.createdAt) : ''}
+              {postTags.creationDate}:{' '}
+              {post?.createdAt ? formatDate(post.createdAt) : ''}
             </p>
           </div>
         </div>
@@ -103,15 +109,15 @@ const FullPost = () => {
         <div className="row justify-content-space-around ">
           <div className="col-sm-6 justify-content-between align-self-left">
             <div className="item">
-              <h3>Description</h3>
+              <h3>{postTags.description}</h3>
               <p>{post?.description ? post.description : ''}</p>
             </div>
           </div>
 
           <div className="col-md-4 offset-1 a border-left ">
             <div className="item">
-              <h3>Apply now</h3>
-              <p>Contact</p>
+              <h3>{postTags.apply}</h3>
+              <p>{postTags.contact}</p>
               <div className="row">
                 <div className="col-sm-2 py-1 d-flex justify-content-center align-items-center">
                   <FontAwesomeIcon icon={faFacebookF} />
@@ -165,10 +171,14 @@ const FullPost = () => {
                 required
                 name="body"
                 value={body}
-                placeholder="Comment"
+                placeholder="Scrie un comentariu"
               ></textarea>
-              <div>
-                <input type="submit" className="btn btn-primary" value="Send" />
+              <div className="mt-2">
+                <input
+                  type="submit"
+                  className="btn btn-primary"
+                  value="Trimite"
+                />
               </div>
             </div>
           </form>
