@@ -32,9 +32,8 @@ class QueryBuilder {
   }
 
   async exec() {
-        
     const response = await axios.get(this.baseUrl);
-        
+
     return response.data;
   }
 }

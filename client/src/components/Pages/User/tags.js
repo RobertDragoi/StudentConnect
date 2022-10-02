@@ -13,7 +13,7 @@ const userTags = {
   creationDate: 'Data înfințării',
   description: 'Descriere',
   posts: 'Anunțuri',
-  personLabel: 'Persoana fizică',
+  personLabel: 'Student',
   companyLabel: 'Companie',
 };
 export { userTags };
