@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
-import PostForm from './components/PostForm';
+import LoginForm from './components/Pages/LoginForm/LoginForm';
+import RegisterForm from './components/Pages/RegisterForm/RegisterForm';
+import PostForm from './components/Pages/PostForm/PostForm';
 import Home from './components/Pages/Home/Home';
 import NavBar from './components/Layout/Navbar/Navbar';
 import Footer from './components/Layout/Footer/Footer';
