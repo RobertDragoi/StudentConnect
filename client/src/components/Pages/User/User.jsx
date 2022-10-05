@@ -145,7 +145,7 @@ export const User = () => {
                   </div>
                 </div>
               </div>
-              <h4 className="title">
+              <h4 className="usertitle">
                 {user?.type === 'student' ? (
                   <span>
                     {userTags.personLabel}{' '}
@@ -442,7 +442,7 @@ export const User = () => {
                   </div>
                 </div>
               </div>
-              <h4 className="title">{userTags.posts}</h4>
+              <h4 className="usertitle">{userTags.posts}</h4>
               <div>
                 {posts.map((post) => {
                   if (post?.user?.id === user?.id) {

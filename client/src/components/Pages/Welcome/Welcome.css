@@ -10,7 +10,7 @@
   margin-top: 10em;
   text-align: justify;
 }
-.title {
+.welcometitle {
   display: flex;
   flex-direction: row;
   justify-content: start;
