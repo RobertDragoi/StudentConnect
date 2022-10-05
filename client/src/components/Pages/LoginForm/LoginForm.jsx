@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import UserContext from '../../../state/UserState/userContext';
-
+import { loginTags } from './tags';
 const LoginForm = () => {
   let history = useHistory();
   const userContext = useContext(UserContext);
@@ -30,11 +30,11 @@ const LoginForm = () => {
         <div className="col-1 col-md-3 " />
         <div className="col-10 col-md-6">
           <div className="mx-auto my-4 p-4 card container">
-            <h1 className="text-primary ">Log In</h1>
+            <h1 className="text-primary ">{loginTags.title}</h1>
             <form onSubmit={onSubmit}>
               <div className="form-group">
                 <label className="control-label" htmlFor="email">
-                  Email
+                  {loginTags.email}
                 </label>
                 <input
                   onChange={onChange}
@@ -48,7 +48,7 @@ const LoginForm = () => {
               </div>
               <div className="form-group">
                 <label className="control-label" htmlFor="password">
-                  Password
+                  {loginTags.password}
                 </label>
                 <div>
                   <input
@@ -66,11 +66,12 @@ const LoginForm = () => {
                 <input
                   type="submit"
                   className="btn btn-primary"
-                  value="Submit"
+                  value="Continuă"
                 />
               </div>
               <p className="mt-2 text-muted">
-                Need an account? <Link to="/register">Register</Link>
+                {loginTags.bottomText}{' '}
+                <Link to="/register">{loginTags.register}</Link>
               </p>
             </form>
           </div>

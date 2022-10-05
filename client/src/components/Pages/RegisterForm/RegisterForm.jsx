@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import UserContext from '../../../state/UserState/userContext';
 import { studies, domains } from '../../../placeholders';
+import { registerTags } from './tags';
 const RegisterForm = () => {
   let history = useHistory();
   const { isAuthenticated, register } = useContext(UserContext);
@@ -68,7 +69,7 @@ const RegisterForm = () => {
     extraField = (
       <Fragment>
         <div className="form-group">
-          <label className="control-label">Birth Date</label>
+          <label className="control-label">{registerTags.birthDate}</label>
           <div className="">
             <input
               className="form-control"
@@ -80,7 +81,7 @@ const RegisterForm = () => {
           </div>
         </div>
         <div className="form-group">
-          <label className="control-label">Studies</label>
+          <label className="control-label">{registerTags.studies}</label>
           <div>
             <select
               className="form-control"
@@ -102,7 +103,7 @@ const RegisterForm = () => {
     extraField = (
       <Fragment>
         <div className="form-group">
-          <label className="control-label">Creation Date</label>
+          <label className="control-label">{registerTags.creationDate}</label>
           <div>
             <input
               className="form-control"
@@ -114,7 +115,7 @@ const RegisterForm = () => {
           </div>
         </div>
         <div className="form-group">
-          <label className="control-label">Activity</label>
+          <label className="control-label">{registerTags.activity}</label>
           <div>
             <select
               className="form-control"
@@ -141,11 +142,12 @@ const RegisterForm = () => {
         <div className="col-sm-1 " />
         <div className="col-sm-10 ">
           <div className="mx-auto my-4 p-4 card container">
-            <h1 className="mb-4 text-primary">Register now</h1>
+            <h1 className="mb-4 text-primary">{registerTags.title}</h1>
             <form onSubmit={onSubmit}>
               <div className="form-group">
                 <label className="control-label" htmlFor="type">
-                  Type<span className="text-primary">*</span>:
+                  {registerTags.type}
+                  <span className="text-primary">*</span>:
                 </label>
                 <div className="ml-4">
                   <input
@@ -158,7 +160,7 @@ const RegisterForm = () => {
                     required
                   />
                   <label className="radio-inline" htmlFor="student-type">
-                    Student
+                    {registerTags.student}
                   </label>
                 </div>
                 <div className="ml-4">
@@ -172,14 +174,15 @@ const RegisterForm = () => {
                     value="Company"
                   />
                   <label className="radio-inline" htmlFor="company-type">
-                    Company
+                    {registerTags.company}
                   </label>
                 </div>
               </div>
               <div className="form-row">
                 <div className="form-group col-md-6">
                   <label className="control-label" htmlFor="name">
-                    Full Name<span className="text-primary">*</span>
+                    {registerTags.fullname}
+                    <span className="text-primary">*</span>
                   </label>
                   <input
                     onChange={onChange}
@@ -193,7 +196,8 @@ const RegisterForm = () => {
                 </div>
                 <div className="form-group col-md-6">
                   <label className="control-label" htmlFor="email">
-                    Email<span className="text-primary">*</span>
+                    {registerTags.email}
+                    <span className="text-primary">*</span>
                   </label>
                   <input
                     onChange={onChange}
@@ -209,7 +213,7 @@ const RegisterForm = () => {
 
               <div className="form-group">
                 <label className="control-label" htmlFor="Address">
-                  Address:
+                  {registerTags.address}
                 </label>
                 <div>
                   <input
@@ -225,7 +229,8 @@ const RegisterForm = () => {
               </div>
               <div className="form-group">
                 <label className="control-label">
-                  Password<span className="text-primary">*</span>
+                  {registerTags.password}
+                  <span className="text-primary">*</span>
                 </label>
                 <div>
                   <input
@@ -241,7 +246,7 @@ const RegisterForm = () => {
               </div>
               <div className="form-group">
                 <label className="control-label" htmlFor="password">
-                  Description
+                  {registerTags.description}
                 </label>
                 <div>
                   <textarea
@@ -260,11 +265,12 @@ const RegisterForm = () => {
                 <input
                   type="submit"
                   className="btn btn-primary"
-                  value="Submit"
+                  value="Continuă"
                 />
               </div>
               <p className="text-muted my-2">
-                You already have an account? <Link to="/login">Log In</Link>
+                {registerTags.bottomText}{' '}
+                <Link to="/login">{registerTags.login}</Link>
               </p>
             </form>
           </div>
