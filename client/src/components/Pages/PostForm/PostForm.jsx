@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import PostContext from '../../../state/PostState/postContext';
 import { locations, domains } from '../../../placeholders';
-
+import { postTags } from './tags';
 const PostForm = () => {
   let history = useHistory();
   const postContext = useContext(PostContext);
@@ -29,10 +29,10 @@ const PostForm = () => {
         <div className="col-sm-1 " />
         <div className="col-sm-10 ">
           <div className="my-4 p-4 card container">
-            <h1 className="text-primary ">Create a post</h1>
+            <h1 className="text-primary ">{postTags.title}</h1>
             <form onSubmit={onSubmit}>
               <div className="form-group">
-                <label className="control-label">Title</label>
+                <label className="control-label">{postTags.postTitle}</label>
                 <input
                   onChange={onChange}
                   type="text"
@@ -43,7 +43,7 @@ const PostForm = () => {
                 />
               </div>
               <div className="form-group">
-                <label className="control-label">Description</label>
+                <label className="control-label">{postTags.description}</label>
                 <div>
                   <textarea
                     onChange={onChange}
@@ -56,21 +56,21 @@ const PostForm = () => {
                 </div>
               </div>
               <div className="form-group">
-                <label className="control-label">Work time</label>
+                <label className="control-label">{postTags.workTime}</label>
                 <div>
                   <select
                     className="form-control "
                     onChange={onChange}
                     name="workHours"
                   >
-                    <option value={8}>Full-Time(8 hours)</option>
-                    <option value={4}>Part-Time(4 hours)</option>
-                    <option value={6}>Part-Time(6 hours)</option>
+                    <option value={8}>{postTags.fullTime}</option>
+                    <option value={6}>{postTags.partTime1}</option>
+                    <option value={4}>{postTags.partTime2}</option>
                   </select>
                 </div>
               </div>
               <div className="form-group">
-                <label className="control-label">Activity domain</label>
+                <label className="control-label">{postTags.activity}</label>
                 <div>
                   <select
                     className="form-control"
@@ -86,7 +86,7 @@ const PostForm = () => {
                 </div>
               </div>
               <div className="form-group">
-                <label className="control-label">Work place</label>
+                <label className="control-label">{postTags.workPlace}</label>
                 <div>
                   <select
                     className="form-control"
@@ -105,11 +105,11 @@ const PostForm = () => {
                 <input
                   type="submit"
                   className="btn btn-primary"
-                  value="Submit"
+                  value="Continuă"
                 />
               </div>
               <p className="mt-2 text-muted">
-                You want to go back searching? <Link to="/">Home</Link>
+                {postTags.bottomText} <Link to="/">{postTags.home}</Link>
               </p>
             </form>
           </div>

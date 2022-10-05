@@ -17,7 +17,7 @@ const Home = () => {
   const userContext = useContext(UserContext);
   const { posts, loading } = postContext;
   const { isAuthenticated } = userContext;
-  const personsPosts = posts.filter((post) => post.user.type === 'student');
+  const studentsPosts = posts.filter((post) => post.user.type === 'student');
   const companiesPosts = posts.filter((post) => post.user.type === 'company');
 
   return (
@@ -33,23 +33,23 @@ const Home = () => {
           </button>
           <button
             type="button"
-            className={type === 'persons' ? 'selectedbutton' : 'button'}
-            onClick={() => setType('persons')}
+            className={type === 'students' ? 'selectedbutton' : 'button'}
+            onClick={() => setType('students')}
           >
             {homeTags.studentButton}
           </button>
         </div>
         <CurrentFilters />
         <div className="d-flex flex-row justify-content-center">
-          {type === 'persons' ? (
+          {type === 'students' ? (
             <h3 className="hometitle">{homeTags.studentTitle}</h3>
           ) : (
             <h3 className="hometitle">{homeTags.companyTitle}</h3>
           )}
         </div>
         {!loading ? (
-          type === 'persons' ? (
-            personsPosts.map((post) => {
+          type === 'students' ? (
+            studentsPosts.map((post) => {
               return (
                 <Post
                   key={post.id}
