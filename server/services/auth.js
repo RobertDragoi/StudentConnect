@@ -2,14 +2,13 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const config = require('../utils/config');
-const logger = require('../utils/logger');
 const User = require('../models/user');
 const Student = require('../models/student');
 const Company = require('../models/company');
-const getUser = async (req, res) => {
+
+const loadUser = async (req, res) => {
   try {
     let user = await User.findById(req.user.id);
-    logger.info(user);
     res.json(user);
   } catch {
     res.status(500).json({ msg: 'Cannot find user' });
@@ -112,4 +111,4 @@ const refreshToken = async (req, res) => {
   }
 };
 
-module.exports = { getUser, loginUser, registerUser, refreshToken };
+module.exports = { loadUser, loginUser, registerUser, refreshToken };
