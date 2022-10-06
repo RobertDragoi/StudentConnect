@@ -56,8 +56,9 @@ const Home = () => {
                   id={post.id}
                   className="mx-auto col-6"
                   title={post.title}
+                  domain={post.domain}
                   when={post.createdAt}
-                  companyPicture={`${BASE_URL}/${post.user.profilePicture}`}
+                  picture={`${BASE_URL}/${post.user.profilePicture}`}
                   description={post.description}
                   type={post.workHours}
                   location={post.workPlace}
@@ -73,8 +74,9 @@ const Home = () => {
                   id={post.id}
                   className="mx-auto col-6"
                   title={post.title}
+                  domain={post.domain}
                   when={post.createdAt}
-                  companyPicture={`${BASE_URL}/${post.user.profilePicture}`}
+                  picture={`${BASE_URL}/${post.user.profilePicture}`}
                   description={post.description}
                   type={post.workHours}
                   location={post.workPlace}

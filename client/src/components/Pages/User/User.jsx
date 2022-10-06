@@ -451,8 +451,9 @@ export const User = () => {
                         key={post.id}
                         id={post.id}
                         title={post.title}
+                        domain={post.domain}
                         when={post.createdAt}
-                        companyPicture={`${BASE_URL}/${post.user.profilePicture}`}
+                        picture={`${BASE_URL}/${post.user.profilePicture}`}
                         description={post.description}
                         type={post.workHours}
                         location={post.workPlace}
