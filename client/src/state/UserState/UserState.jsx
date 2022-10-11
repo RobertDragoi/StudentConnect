@@ -1,7 +1,7 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import Cookies from 'js-cookie';
+
 import UserContext from './userContext';
 import UserReducer from './userReducer';
 import authService from '../../services/auth';
@@ -30,19 +30,13 @@ const UserState = (props) => {
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
-  useEffect(() => {
-    const tokensRefresher = async () => {
-      if (Cookies.get('auth-token')) {
-        authService.setAuthToken(Cookies.get('auth-token'));
-        loadUser();
-      }
-      if (Cookies.get('refresh-token') && !Cookies.get('auth-token')) {
-        await authService.refreshToken();
-        loadUser();
-      }
-    };
-    tokensRefresher();
-  }, []);
+  const refreshToken = async () => {
+    try {
+      await authService.refreshToken();
+    } catch (error) {
+      dispatch({ type: LOGIN_FAIL, payload: error.response.data.msg });
+    }
+  };
 
   const register = async (formData) => {
     try {
@@ -80,13 +74,13 @@ const UserState = (props) => {
       dispatch({ type: LOGIN_FAIL, payload: error.response.data.msg });
     }
   };
+
   const loadUser = async () => {
     try {
       dispatch({ type: LOAD_USER });
       const loadedUser = await authService.loadUser();
       dispatch({ type: USER_LOADED, payload: loadedUser });
     } catch (error) {
-      console.log(error);
       logout();
       dispatch({ type: LOGIN_FAIL, payload: error.response.data.msg });
     }
@@ -96,10 +90,12 @@ const UserState = (props) => {
     <UserContext.Provider
       value={{
         ...state,
+        refreshToken,
         register,
         login,
         logout,
         updateUser,
+        loadUser,
       }}
     >
       {props.children}

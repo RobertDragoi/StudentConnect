@@ -3,9 +3,6 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 
 const setAuthToken = async (token) => {
-  if (token === null) {
-    console.log('REMOVING TOKEN');
-  }
   if (token) {
     axios.defaults.headers.common['Authorization'] = token;
     Cookies.set('auth-token', token, {
@@ -37,6 +34,13 @@ const refreshToken = async () => {
   setAuthToken(res.data.authToken);
 };
 
+const register = async (formData) => {
+  const res = await axios.post(`${BASE_URL}/api/auth/register`, formData);
+  setAuthToken(res.data.authToken);
+  setRefreshToken(res.data.refreshToken);
+  return res.data.authToken;
+};
+
 const login = async (formData) => {
   const res = await axios.post(`${BASE_URL}/api/auth/login`, formData);
   setAuthToken(res.data.authToken);
@@ -49,15 +53,14 @@ const logout = async () => {
   setRefreshToken();
 };
 
-const register = async (formData) => {
-  const res = await axios.post(`${BASE_URL}/api/auth/register`, formData);
-  setAuthToken(res.data.authToken);
-  setRefreshToken(res.data.refreshToken);
-  return res.data.authToken;
-};
-
 const loadUser = async () => {
-  const res = await axios.get(`${BASE_URL}/api/auth/user`);
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: Cookies.get('auth-token'),
+    },
+  };
+  const res = await axios.get(`${BASE_URL}/api/auth/user`, config);
   return res.data;
 };
 
