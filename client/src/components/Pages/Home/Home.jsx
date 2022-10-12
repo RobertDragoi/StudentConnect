@@ -22,88 +22,90 @@ const Home = () => {
 
   return (
     <div className="container py-5">
-      <div className="row">
-        <div className="col-sm-1 " />
-        <div className="col-sm-10">
-          <div className="d-flex flex-column align-items-center">
-            <div className="d-flex flex-row justify-content-center">
-              <button
-                type="button"
-                className={type === 'companies' ? 'selectedbutton' : 'button'}
-                onClick={() => setType('companies')}
-              >
-                {homeTags.companyButton}
-              </button>
-              <button
-                type="button"
-                className={type === 'students' ? 'selectedbutton' : 'button'}
-                onClick={() => setType('students')}
-              >
-                {homeTags.studentButton}
-              </button>
+      <div className="main-body">
+        <div className="row">
+          <div className="col-sm-1 " />
+          <div className="col-sm-10">
+            <div className="d-flex flex-column align-items-center">
+              <div className="d-flex flex-row justify-content-center">
+                <button
+                  type="button"
+                  className={type === 'companies' ? 'selectedbutton' : 'button'}
+                  onClick={() => setType('companies')}
+                >
+                  {homeTags.companyButton}
+                </button>
+                <button
+                  type="button"
+                  className={type === 'students' ? 'selectedbutton' : 'button'}
+                  onClick={() => setType('students')}
+                >
+                  {homeTags.studentButton}
+                </button>
+              </div>
+              <CurrentFilters />
+              <div className="d-flex flex-row justify-content-center">
+                {type === 'students' ? (
+                  <h3 className="hometitle">{homeTags.studentTitle}</h3>
+                ) : (
+                  <h3 className="hometitle">{homeTags.companyTitle}</h3>
+                )}
+              </div>
             </div>
-            <CurrentFilters />
-            <div className="d-flex flex-row justify-content-center">
-              {type === 'students' ? (
-                <h3 className="hometitle">{homeTags.studentTitle}</h3>
+            {!loading ? (
+              type === 'students' ? (
+                studentsPosts.map((post) => {
+                  return (
+                    <Post
+                      key={post.id}
+                      id={post.id}
+                      className="col-8"
+                      title={post.title}
+                      domain={post.domain}
+                      when={post.createdAt}
+                      picture={`${BASE_URL}/${post.user.profilePicture}`}
+                      description={post.description}
+                      type={post.workHours}
+                      location={post.workPlace}
+                      user={post.user}
+                    />
+                  );
+                })
               ) : (
-                <h3 className="hometitle">{homeTags.companyTitle}</h3>
-              )}
-            </div>
-          </div>
-          {!loading ? (
-            type === 'students' ? (
-              studentsPosts.map((post) => {
-                return (
-                  <Post
-                    key={post.id}
-                    id={post.id}
-                    className="col-8"
-                    title={post.title}
-                    domain={post.domain}
-                    when={post.createdAt}
-                    picture={`${BASE_URL}/${post.user.profilePicture}`}
-                    description={post.description}
-                    type={post.workHours}
-                    location={post.workPlace}
-                    user={post.user}
-                  />
-                );
-              })
+                companiesPosts.map((post) => {
+                  return (
+                    <Post
+                      key={post.id}
+                      id={post.id}
+                      className="col sm-8"
+                      title={post.title}
+                      domain={post.domain}
+                      when={post.createdAt}
+                      picture={`${BASE_URL}/${post.user.profilePicture}`}
+                      description={post.description}
+                      type={post.workHours}
+                      location={post.workPlace}
+                      user={post.user}
+                    />
+                  );
+                })
+              )
             ) : (
-              companiesPosts.map((post) => {
-                return (
-                  <Post
-                    key={post.id}
-                    id={post.id}
-                    className="col sm-8"
-                    title={post.title}
-                    domain={post.domain}
-                    when={post.createdAt}
-                    picture={`${BASE_URL}/${post.user.profilePicture}`}
-                    description={post.description}
-                    type={post.workHours}
-                    location={post.workPlace}
-                    user={post.user}
-                  />
-                );
-              })
-            )
-          ) : (
-            <Spinner />
-          )}
-          <Link to="/createpost">
-            {isAuthenticated ? (
-              <Fab
-                mainButtonStyles={{ backgroundColor: '#007bff' }}
-                alwaysShowTitle={true}
-                icon={'+'}
-                onClick={() => console.log('button')}
-              ></Fab>
-            ) : null}
-          </Link>
+              <Spinner />
+            )}
+            <Link to="/createpost">
+              {isAuthenticated ? (
+                <Fab
+                  mainButtonStyles={{ backgroundColor: '#007bff' }}
+                  alwaysShowTitle={true}
+                  icon={'+'}
+                  onClick={() => console.log('button')}
+                ></Fab>
+              ) : null}
+            </Link>
+          </div>
+          <div className="col-sm-1 " />
         </div>
-        <div className="col-sm-1 " />
       </div>
     </div>
   );

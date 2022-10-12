@@ -25,58 +25,60 @@ const LoginForm = () => {
     login({ email, password });
   };
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-1 col-md-3 " />
-        <div className="col-10 col-md-6">
-          <div className="mx-auto my-4 p-4 card container">
-            <h1 className="text-primary ">{loginTags.title}</h1>
-            <form onSubmit={onSubmit}>
-              <div className="form-group">
-                <label className="control-label" htmlFor="email">
-                  {loginTags.email}
-                </label>
-                <input
-                  onChange={onChange}
-                  type="email"
-                  className="form-control"
-                  name="email"
-                  value={email}
-                  required
-                  placeholder="Email"
-                />
-              </div>
-              <div className="form-group">
-                <label className="control-label" htmlFor="password">
-                  {loginTags.password}
-                </label>
-                <div>
+    <div className="main-body">
+      <div className="container">
+        <div className="row">
+          <div className="col-1 col-md-3 " />
+          <div className="col-10 col-md-6">
+            <div className="mx-auto my-4 p-4 card container">
+              <h1 className="text-primary ">{loginTags.title}</h1>
+              <form onSubmit={onSubmit}>
+                <div className="form-group">
+                  <label className="control-label" htmlFor="email">
+                    {loginTags.email}
+                  </label>
                   <input
                     onChange={onChange}
-                    type="password"
+                    type="email"
                     className="form-control"
-                    name="password"
-                    value={password}
+                    name="email"
+                    value={email}
                     required
-                    placeholder="Password"
+                    placeholder="Email"
                   />
                 </div>
-              </div>
-              <div>
-                <input
-                  type="submit"
-                  className="btn btn-primary"
-                  value="Continuă"
-                />
-              </div>
-              <p className="mt-2 text-muted">
-                {loginTags.bottomText}{' '}
-                <Link to="/register">{loginTags.register}</Link>
-              </p>
-            </form>
+                <div className="form-group">
+                  <label className="control-label" htmlFor="password">
+                    {loginTags.password}
+                  </label>
+                  <div>
+                    <input
+                      onChange={onChange}
+                      type="password"
+                      className="form-control"
+                      name="password"
+                      value={password}
+                      required
+                      placeholder="Password"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <input
+                    type="submit"
+                    className="btn btn-primary"
+                    value="Continuă"
+                  />
+                </div>
+                <p className="mt-2 text-muted">
+                  {loginTags.bottomText}{' '}
+                  <Link to="/register">{loginTags.register}</Link>
+                </p>
+              </form>
+            </div>
           </div>
+          <div className="col-1 col-md-3" />
         </div>
-        <div className="col-1 col-md-3" />
       </div>
     </div>
   );

@@ -137,145 +137,147 @@ const RegisterForm = () => {
     extraField = <Fragment></Fragment>;
   }
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-sm-1 " />
-        <div className="col-sm-10 ">
-          <div className="mx-auto my-4 p-4 card container">
-            <h1 className="mb-4 text-primary">{registerTags.title}</h1>
-            <form onSubmit={onSubmit}>
-              <div className="form-group">
-                <label className="control-label" htmlFor="type">
-                  {registerTags.type}
-                  <span className="text-primary">*</span>:
-                </label>
-                <div className="ml-4">
-                  <input
-                    onChange={onChange}
-                    className="form-check-input"
-                    type="radio"
-                    name="type"
-                    value="Student"
-                    id="student-type"
-                    required
-                  />
-                  <label className="radio-inline" htmlFor="student-type">
-                    {registerTags.student}
+    <div className="main-body">
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-1 " />
+          <div className="col-sm-10 ">
+            <div className="mx-auto my-4 p-4 card container">
+              <h1 className="mb-4 text-primary">{registerTags.title}</h1>
+              <form onSubmit={onSubmit}>
+                <div className="form-group">
+                  <label className="control-label" htmlFor="type">
+                    {registerTags.type}
+                    <span className="text-primary">*</span>:
                   </label>
+                  <div className="ml-4">
+                    <input
+                      onChange={onChange}
+                      className="form-check-input"
+                      type="radio"
+                      name="type"
+                      value="Student"
+                      id="student-type"
+                      required
+                    />
+                    <label className="radio-inline" htmlFor="student-type">
+                      {registerTags.student}
+                    </label>
+                  </div>
+                  <div className="ml-4">
+                    <input
+                      required
+                      onChange={onChange}
+                      className="form-check-input"
+                      type="radio"
+                      name="type"
+                      id="company-type"
+                      value="Company"
+                    />
+                    <label className="radio-inline" htmlFor="company-type">
+                      {registerTags.company}
+                    </label>
+                  </div>
                 </div>
-                <div className="ml-4">
-                  <input
-                    required
-                    onChange={onChange}
-                    className="form-check-input"
-                    type="radio"
-                    name="type"
-                    id="company-type"
-                    value="Company"
-                  />
-                  <label className="radio-inline" htmlFor="company-type">
-                    {registerTags.company}
-                  </label>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label className="control-label" htmlFor="name">
+                      {registerTags.fullname}
+                      <span className="text-primary">*</span>
+                    </label>
+                    <input
+                      onChange={onChange}
+                      type="text"
+                      className="form-control"
+                      name="name"
+                      value={name}
+                      required
+                      placeholder="Full name"
+                    />
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label className="control-label" htmlFor="email">
+                      {registerTags.email}
+                      <span className="text-primary">*</span>
+                    </label>
+                    <input
+                      onChange={onChange}
+                      type="email"
+                      className="form-control"
+                      name="email"
+                      value={email}
+                      required
+                      placeholder="Email"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="form-row">
-                <div className="form-group col-md-6">
-                  <label className="control-label" htmlFor="name">
-                    {registerTags.fullname}
-                    <span className="text-primary">*</span>
-                  </label>
-                  <input
-                    onChange={onChange}
-                    type="text"
-                    className="form-control"
-                    name="name"
-                    value={name}
-                    required
-                    placeholder="Full name"
-                  />
-                </div>
-                <div className="form-group col-md-6">
-                  <label className="control-label" htmlFor="email">
-                    {registerTags.email}
-                    <span className="text-primary">*</span>
-                  </label>
-                  <input
-                    onChange={onChange}
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    value={email}
-                    required
-                    placeholder="Email"
-                  />
-                </div>
-              </div>
 
-              <div className="form-group">
-                <label className="control-label" htmlFor="Address">
-                  {registerTags.address}
-                </label>
+                <div className="form-group">
+                  <label className="control-label" htmlFor="Address">
+                    {registerTags.address}
+                  </label>
+                  <div>
+                    <input
+                      onChange={onChange}
+                      type="text"
+                      className="form-control"
+                      name="address"
+                      value={address}
+                      placeholder="Address"
+                      autoComplete="street-address"
+                    />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="control-label">
+                    {registerTags.password}
+                    <span className="text-primary">*</span>
+                  </label>
+                  <div>
+                    <input
+                      onChange={onChange}
+                      type="password"
+                      className="form-control"
+                      name="password"
+                      value={password}
+                      required
+                      placeholder="Password"
+                    />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="control-label" htmlFor="password">
+                    {registerTags.description}
+                  </label>
+                  <div>
+                    <textarea
+                      onChange={onChange}
+                      type="text"
+                      className="form-control"
+                      name="description"
+                      placeholder="Description"
+                      value={description}
+                      rows="2"
+                    />
+                  </div>
+                </div>
+                {extraField}
                 <div>
                   <input
-                    onChange={onChange}
-                    type="text"
-                    className="form-control"
-                    name="address"
-                    value={address}
-                    placeholder="Address"
-                    autoComplete="street-address"
+                    type="submit"
+                    className="btn btn-primary"
+                    value="Continuă"
                   />
                 </div>
-              </div>
-              <div className="form-group">
-                <label className="control-label">
-                  {registerTags.password}
-                  <span className="text-primary">*</span>
-                </label>
-                <div>
-                  <input
-                    onChange={onChange}
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    value={password}
-                    required
-                    placeholder="Password"
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label className="control-label" htmlFor="password">
-                  {registerTags.description}
-                </label>
-                <div>
-                  <textarea
-                    onChange={onChange}
-                    type="text"
-                    className="form-control"
-                    name="description"
-                    placeholder="Description"
-                    value={description}
-                    rows="2"
-                  />
-                </div>
-              </div>
-              {extraField}
-              <div>
-                <input
-                  type="submit"
-                  className="btn btn-primary"
-                  value="Continuă"
-                />
-              </div>
-              <p className="text-muted my-2">
-                {registerTags.bottomText}{' '}
-                <Link to="/login">{registerTags.login}</Link>
-              </p>
-            </form>
+                <p className="text-muted my-2">
+                  {registerTags.bottomText}{' '}
+                  <Link to="/login">{registerTags.login}</Link>
+                </p>
+              </form>
+            </div>
           </div>
+          <div className="col-sm-1" />
         </div>
-        <div className="col-sm-1" />
       </div>
     </div>
   );
