@@ -34,7 +34,7 @@ export const Navbar = () => {
         {!user && (
           <NavItem className="nav-item">
             <NavLink className="nav-link" exact to="/" activeClassName="active">
-              Home
+              Welcome
             </NavLink>
           </NavItem>
         )}
@@ -42,10 +42,10 @@ export const Navbar = () => {
           <NavLink
             className="nav-link"
             exact
-            to="/jobs"
+            to="/home"
             activeClassName="active"
           >
-            Jobs
+            Home
           </NavLink>
         </NavItem>
         {!loading ? (

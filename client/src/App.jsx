@@ -29,7 +29,7 @@ const App = () => {
               <Route exact path="/register">
                 <RegisterForm />
               </Route>
-              <Route exact path="/jobs">
+              <Route exact path="/home">
                 <Home />
               </Route>
               <Route exact path="/users/:id">

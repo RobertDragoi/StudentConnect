@@ -11,7 +11,7 @@ export const Welcome = () => {
   const userContext = useContext(UserContext);
   const { user } = userContext;
   if (user) {
-    history.push('/jobs');
+    history.push('/home');
   }
   return (
     <div className="container py-5">
@@ -32,7 +32,7 @@ export const Welcome = () => {
                 <NavLink
                   className="button"
                   exact
-                  to="/jobs"
+                  to="/home"
                   activeClassName="active"
                 >
                   {welcomeTags.homeButton}
