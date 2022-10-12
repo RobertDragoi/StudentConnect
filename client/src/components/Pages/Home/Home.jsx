@@ -62,7 +62,7 @@ const Home = () => {
                       className="col-8"
                       title={post.title}
                       domain={post.domain}
-                      when={post.createdAt}
+                      createdAt={post.createdAt}
                       picture={`${BASE_URL}/${post.user.profilePicture}`}
                       description={post.description}
                       type={post.workHours}
