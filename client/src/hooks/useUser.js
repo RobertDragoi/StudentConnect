@@ -6,7 +6,8 @@ import usersService from '../services/users';
 
 export default function useUser() {
   const { id } = useParams();
-  const { user: authUser, updateUser, loading } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
+  const { user: authUser, updateUser } = useContext(UserContext);
   const [user, setUser] = useState(null);
   const [isCurrentUser, setIsCurrentUser] = useState(false);
   const [updatedUser, setUpdatedUser] = useState(user);
@@ -14,11 +15,19 @@ export default function useUser() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      console.log('Fetching user for ' + user?.email);
       try {
-        const response = await usersService.getUser(id);
-        setUser(response.data);
-        setUpdatedUser(response.data);
+        setLoading(true);
+        if (authUser?.id !== id) {
+          console.log('Fetching user for ' + user?.email);
+          const response = await usersService.getUser(id);
+          setUser(response.data);
+          setUpdatedUser(response.data);
+        } else {
+          setIsCurrentUser(true);
+          setUser(authUser);
+          setUpdatedUser(authUser);
+        }
+        setLoading(false);
       } catch (e) {
         setUser(null);
       }
@@ -26,13 +35,6 @@ export default function useUser() {
     setUser(null);
     fetchUser();
   }, [id, authUser]);
-
-  // set state if edit is possible
-  useEffect(() => {
-    if (authUser && user && authUser?.id === user?.id) {
-      setIsCurrentUser(true);
-    }
-  }, [authUser, user]);
 
   return {
     updateUser,

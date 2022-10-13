@@ -21,8 +21,8 @@ const Home = () => {
   const companiesPosts = posts.filter((post) => post.user.type === 'company');
 
   return (
-    <div className="container py-5">
-      <div className="main-body">
+    <div className="main-body">
+      <div className="container py-5">
         <div className="row">
           <div className="col-sm-1 " />
           <div className="col-sm-10">

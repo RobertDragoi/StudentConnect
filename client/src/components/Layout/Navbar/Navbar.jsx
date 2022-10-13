@@ -24,7 +24,7 @@ export const Navbar = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       tokensRefresher();
-    }, 2000);
+    }, 250);
     return () => clearInterval(interval);
   }, [user]);
 

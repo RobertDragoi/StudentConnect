@@ -71,8 +71,8 @@ export const User = () => {
     setEdit(false);
   };
   return (
-    <div className="container">
-      <div className="main-body">
+    <div className="main-body">
+      <div className="container">
         {!loading ? (
           <div className="row gutters-sm">
             <div className="col-md-4 mb-3">
