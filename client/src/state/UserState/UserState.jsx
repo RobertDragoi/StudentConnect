@@ -13,7 +13,7 @@ import {
   LOGIN_FAIL,
   CLEAR_ERRORS,
   LOAD_USER,
-  USER_LOADED,
+  LOADING,
   LOGOUT,
 } from '../../types';
 
@@ -69,7 +69,7 @@ const UserState = (props) => {
   const updateUser = async (formData) => {
     try {
       const updatedUser = await usersService.updateUser(formData);
-      dispatch({ type: USER_LOADED, payload: updatedUser });
+      dispatch({ type: LOAD_USER, payload: updatedUser });
     } catch (error) {
       dispatch({ type: LOGIN_FAIL, payload: error.response.data.msg });
     }
@@ -77,9 +77,9 @@ const UserState = (props) => {
 
   const loadUser = async () => {
     try {
-      dispatch({ type: LOAD_USER });
+      dispatch({ type: LOADING });
       const loadedUser = await authService.loadUser();
-      dispatch({ type: USER_LOADED, payload: loadedUser });
+      dispatch({ type: LOAD_USER, payload: loadedUser });
     } catch (error) {
       logout();
       dispatch({ type: LOGIN_FAIL, payload: error.response.data.msg });

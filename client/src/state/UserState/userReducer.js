@@ -5,7 +5,7 @@ import {
   LOGIN_FAIL,
   CLEAR_ERRORS,
   LOAD_USER,
-  USER_LOADED,
+  LOADING,
   LOGOUT,
 } from '../../types';
 
@@ -30,9 +30,9 @@ export default function (state, action) {
 
     case LOGIN_FAIL:
       return { ...state, error: action.payload };
-    case LOAD_USER:
+    case LOADING:
       return { ...state, loading: true };
-    case USER_LOADED:
+    case LOAD_USER:
       return {
         ...state,
         isAuthenticated: true,
