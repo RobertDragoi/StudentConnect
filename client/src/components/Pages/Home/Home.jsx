@@ -24,8 +24,8 @@ const Home = () => {
     <div className="main-body">
       <div className="container py-5">
         <div className="row">
-          <div className="col-sm-1 " />
-          <div className="col-sm-10">
+          <div className="col-md-2 " />
+          <div className="col-md-8">
             <div className="d-flex flex-column align-items-center">
               <div className="d-flex flex-row justify-content-center">
                 <button
@@ -104,7 +104,7 @@ const Home = () => {
               ) : null}
             </Link>
           </div>
-          <div className="col-sm-1 " />
+          <div className="col-md-2 " />
         </div>
       </div>
     </div>
