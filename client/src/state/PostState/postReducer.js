@@ -5,6 +5,7 @@ import {
   SET_FILTERS,
   REMOVE_FILTER,
   ADD_POST,
+  GET_POST,
   POST_ERROR,
   DELETE_POST,
   MODIFY_POST,
@@ -13,6 +14,8 @@ export default function (state, action) {
   switch (action.type) {
     case ADD_POST:
       return { ...state, posts: [action.payload, ...state.posts] };
+    case GET_POST:
+      return { ...state, currentPost: action.payload };
     case LOAD_POSTS:
       return { ...state, loading: true };
     case POSTS_LOADED:

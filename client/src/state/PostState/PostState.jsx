@@ -12,6 +12,7 @@ import {
   SET_SEARCH,
   DELETE_POST,
   ADD_POST,
+  GET_POST,
   POST_ERROR,
   MODIFY_POST,
 } from '../../types';
@@ -55,6 +56,14 @@ const PostState = (props) => {
       dispatch({ type: POST_ERROR, payload: error.response.data.msg });
     }
   };
+  const getPost = async (id) => {
+    try {
+      const post = await postService.getPost(id);
+      dispatch({ type: GET_POST, payload: post });
+    } catch (error) {
+      dispatch({ type: POST_ERROR, payload: error.response.data.msg });
+    }
+  };
   const deletePost = async (id) => {
     try {
       await postService.deletePost(id);
@@ -89,6 +98,7 @@ const PostState = (props) => {
       value={{
         ...state,
         createPost,
+        getPost,
         deletePost,
         manageComment,
         setSearch,
