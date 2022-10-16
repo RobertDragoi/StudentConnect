@@ -54,6 +54,7 @@ const logout = async () => {
 };
 
 const loadUser = async () => {
+  axios.defaults.headers.common['Authorization'] = Cookies.get('auth-token');
   const config = {
     headers: {
       'Content-Type': 'application/json',

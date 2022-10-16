@@ -16,18 +16,18 @@ export default function useUser() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        setLoading(true);
         if (authUser?.id !== id) {
-          console.log('Fetching user for ' + user?.email);
+          setLoading(true);
           const response = await usersService.getUser(id);
           setUser(response.data);
           setUpdatedUser(response.data);
+          setLoading(false);
+          console.log('Fetching user for ' + user?.email);
         } else {
           setIsCurrentUser(true);
           setUser(authUser);
           setUpdatedUser(authUser);
         }
-        setLoading(false);
       } catch (e) {
         setUser(null);
       }
