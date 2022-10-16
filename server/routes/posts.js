@@ -29,7 +29,7 @@ postsRouter.get(
 );
 
 postsRouter.get('/:id', getPost);
-postsRouter.put('/:id/comment', manageComment);
-postsRouter.delete('/:id', deletePost);
+postsRouter.put('/:id/comment', middleware.tokenExtractor, manageComment);
+postsRouter.delete('/:id', middleware.tokenExtractor, deletePost);
 
 module.exports = postsRouter;
