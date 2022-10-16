@@ -14,8 +14,8 @@ const Comment = ({
   manageComment,
   id,
   fetchPost,
-  onSubmit2,
-  onChange2,
+  onSubmitUpdated,
+  onChangeUpdated,
 }) => {
   return (
     <div
@@ -80,10 +80,10 @@ const Comment = ({
       <div className="row" style={{ backgroundColor: '#efeff0' }}>
         <div className="m-1">
           {edit.bool && edit.id === comment.id ? (
-            <form onSubmit={onSubmit2}>
+            <form onSubmit={onSubmitUpdated}>
               <div className="form-group">
                 <textarea
-                  onChange={onChange2}
+                  onChange={onChangeUpdated}
                   type="text"
                   cols="160"
                   className="form-control my-1"
@@ -114,8 +114,8 @@ Comment.propTypes = {
   formatDate: PropTypes.func,
   setEdit: PropTypes.func,
   setupdatedComment: PropTypes.func,
-  onSubmit2: PropTypes.func,
-  onChange2: PropTypes.func,
+  onSubmitUpdated: PropTypes.func,
+  onChangeUpdated: PropTypes.func,
   manageComment: PropTypes.func,
   fetchPost: PropTypes.func,
 };
