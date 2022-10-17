@@ -145,7 +145,7 @@ export const User = () => {
                   </div>
                 </div>
               </div>
-              <h4 className="usertitle">
+              <h4 className="user-title">
                 {user?.type === 'student' ? (
                   <span>
                     {userTags.personLabel}{' '}
@@ -164,7 +164,7 @@ export const User = () => {
                     <div className="col-sm-3 py-1 d-flex justify-content-center align-items-center">
                       <FontAwesomeIcon icon={faFacebookF} color="blue" />
                     </div>
-                    <div className="col-sm-9 py-1 text-secondary border-bottom">
+                    <div className="col-sm-9 py-1   border-bottom">
                       {edit === true ? (
                         <input
                           onChange={onChange}
@@ -174,9 +174,14 @@ export const User = () => {
                           defaultValue={user?.contact?.facebook}
                         />
                       ) : user?.contact?.facebook ? (
-                        <p className="text-muted font-size-sm m-0">
-                          {user?.contact?.facebook}
-                        </p>
+                        <a
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          href={user?.contact?.facebook}
+                          className="font-size-sm m-0"
+                        >
+                          {user?.contact?.facebook.split('/')[3]}
+                        </a>
                       ) : (
                         <p className="text-muted font-size-sm m-0">
                           {userTags.notSet}
@@ -188,7 +193,7 @@ export const User = () => {
                     <div className="col-sm-3 py-1 d-flex justify-content-center align-items-center">
                       <FontAwesomeIcon icon={faInstagram} color="purple" />
                     </div>
-                    <div className="col-sm-9 py-1 text-secondary border-bottom">
+                    <div className="col-sm-9 py-1   border-bottom">
                       {edit === true ? (
                         <input
                           onChange={onChange}
@@ -212,7 +217,7 @@ export const User = () => {
                     <div className="col-sm-3 py-1 d-flex justify-content-center align-items-center">
                       <FontAwesomeIcon icon={faLinkedin} color="blue" />
                     </div>
-                    <div className="col-sm-9 py-1 text-secondary border-bottom">
+                    <div className="col-sm-9 py-1   border-bottom">
                       {edit === true ? (
                         <input
                           className="form-control form-control-sm"
@@ -222,9 +227,14 @@ export const User = () => {
                           defaultValue={user?.contact?.linkedin}
                         />
                       ) : user?.contact?.linkedin ? (
-                        <p className="text-muted font-size-sm m-0 m-0">
-                          {user?.contact?.linkedin}
-                        </p>
+                        <a
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          href={user?.contact?.linkedin}
+                          className="font-size-sm m-0 m-0"
+                        >
+                          {user?.contact?.linkedin.split('/')[4]}
+                        </a>
                       ) : (
                         <p className="text-muted font-size-sm m-0 m-0">
                           {userTags.notSet}
@@ -236,7 +246,7 @@ export const User = () => {
                     <div className="col-sm-3 py-1 d-flex justify-content-center align-items-center">
                       <FontAwesomeIcon icon={faPhone} color="green" />
                     </div>
-                    <div className="col-sm-9 py-1 text-secondary border-bottom">
+                    <div className="col-sm-9 py-1   border-bottom">
                       {edit === true ? (
                         <input
                           className="form-control form-control-sm"
@@ -260,7 +270,7 @@ export const User = () => {
                     <div className="col-sm-3 py-1 d-flex justify-content-center align-items-center">
                       <FontAwesomeIcon icon={faAddressCard} color="orange" />
                     </div>
-                    <div className="col-sm-9 py-1 text-secondary ">
+                    <div className="col-sm-9 py-1   ">
                       {edit === true ? (
                         <input
                           onChange={onChange}
@@ -288,10 +298,10 @@ export const User = () => {
                 <div className="card-body">
                   <div className="row">
                     <div className="col-sm-3 py-1 border-bottom">
-                      <h6 className="mb-0">{userTags.email}</h6>
+                      <p className="tag-text">{userTags.email}</p>
                     </div>
 
-                    <div className="col-sm-9 py-1 text-secondary border-bottom">
+                    <div className="col-sm-9 py-1   border-bottom">
                       {edit === true ? (
                         <>
                           {user?.email}
@@ -304,13 +314,13 @@ export const User = () => {
                   </div>
                   <div className="row">
                     <div className="col-sm-3 py-1 border-bottom">
-                      <h6 className="mb-0">
+                      <p className="tag-text">
                         {user?.type === 'student'
                           ? userTags.fullName
                           : userTags.companyName}
-                      </h6>
+                      </p>
                     </div>
-                    <div className="col-sm-9 py-1 text-secondary border-bottom">
+                    <div className="col-sm-9 py-1   border-bottom">
                       {edit === true ? (
                         <input
                           onChange={onChange}
@@ -327,9 +337,9 @@ export const User = () => {
 
                   <div className="row">
                     <div className="col-sm-3 py-1 border-bottom">
-                      <h6 className="mb-0">{userTags.address}</h6>
+                      <p className="text">{userTags.address}</p>
                     </div>
-                    <div className="col-sm-9 py-1 text-secondary border-bottom">
+                    <div className="col-sm-9 py-1   border-bottom">
                       {edit === true ? (
                         <input
                           onChange={onChange}
@@ -345,13 +355,13 @@ export const User = () => {
                   </div>
                   <div className="row">
                     <div className="col-sm-3 py-1 border-bottom">
-                      <h6 className="mb-0">
+                      <p className="tag-text">
                         {user?.type === 'student'
                           ? userTags.education
                           : userTags.activity}
-                      </h6>
+                      </p>
                     </div>
-                    <div className="col-sm-9 py-1 text-secondary border-bottom">
+                    <div className="col-sm-9 py-1   border-bottom">
                       {edit === true ? (
                         user?.type === 'student' ? (
                           <select
@@ -390,13 +400,13 @@ export const User = () => {
                   </div>
                   <div className="row">
                     <div className="col-sm-3 py-1 border-bottom">
-                      <h6 className="mb-0">
+                      <p className="tag-text">
                         {user?.type === 'student'
                           ? userTags.birthDate
                           : userTags.creationDate}
-                      </h6>
+                      </p>
                     </div>
-                    <div className="col-sm-9 py-1 text-secondary border-bottom">
+                    <div className="col-sm-9 py-1   border-bottom">
                       {edit === true ? (
                         user?.type === 'student' ? (
                           <input
@@ -424,9 +434,9 @@ export const User = () => {
                   </div>
                   <div className="row">
                     <div className="col-sm-3 py-1">
-                      <h6 className="mb-0">{userTags.description}</h6>
+                      <p className="tag-text">{userTags.description}</p>
                     </div>
-                    <div className="col-sm-9 py-1 text-secondary">
+                    <div className="col-sm-9 py-1  ">
                       {edit === true ? (
                         <textarea
                           onChange={onChange}
@@ -442,7 +452,7 @@ export const User = () => {
                   </div>
                 </div>
               </div>
-              <h4 className="usertitle">{userTags.posts}</h4>
+              <h4 className="user-title">{userTags.posts}</h4>
               <div>
                 {posts.map((post) => {
                   if (post?.user?.id === user?.id) {

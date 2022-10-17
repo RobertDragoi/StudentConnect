@@ -1,4 +1,4 @@
-.usertitle {
+.user-title {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -8,6 +8,11 @@
   padding-top: 10px;
   padding-bottom: 10px;
   text-transform: uppercase;
+}
+.tag-text {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 .card {
   position: relative;

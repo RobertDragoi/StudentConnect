@@ -28,7 +28,11 @@ const MiddleSection = ({ currentPost }) => {
               </div>
               <div className="col-sm-10 py-1 text-secondary">
                 {currentPost?.user?.contact?.facebook ? (
-                  <a href={currentPost?.user?.contact?.facebook}>
+                  <a
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    href={currentPost?.user?.contact?.facebook}
+                  >
                     {currentPost.user.contact.facebook.split('/')[3]}
                   </a>
                 ) : (
@@ -43,7 +47,11 @@ const MiddleSection = ({ currentPost }) => {
               </div>
               <div className="col-sm-10 py-1 text-secondary">
                 {currentPost?.user?.contact?.linkedin ? (
-                  <a href={currentPost?.user?.contact?.linkedin}>
+                  <a
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    href={currentPost?.user?.contact?.linkedin}
+                  >
                     {currentPost.user.contact.linkedin.split('/')[4]}
                   </a>
                 ) : (
