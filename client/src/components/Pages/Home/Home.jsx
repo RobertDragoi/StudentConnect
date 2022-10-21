@@ -46,9 +46,9 @@ const Home = () => {
               <CurrentFilters />
               <div className="d-flex flex-row justify-content-center">
                 {type === 'students' ? (
-                  <h3 className="hometitle">{homeTags.studentTitle}</h3>
+                  <h3 className="home-title">{homeTags.studentTitle}</h3>
                 ) : (
-                  <h3 className="hometitle">{homeTags.companyTitle}</h3>
+                  <h3 className="home-title">{homeTags.companyTitle}</h3>
                 )}
               </div>
             </div>
