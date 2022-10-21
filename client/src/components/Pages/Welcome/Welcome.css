@@ -10,13 +10,13 @@
   margin-top: 10em;
   text-align: justify;
 }
-.welcometitle {
+.welcome-title {
   display: flex;
   flex-direction: row;
   justify-content: start;
   gap: 10px;
   font-family: 'Oswald', sans-serif;
-  letter-spacing: 0.3rem;
+  letter-spacing: 0.1rem;
   padding-top: 10px;
   padding-bottom: 10px;
   text-transform: uppercase;
