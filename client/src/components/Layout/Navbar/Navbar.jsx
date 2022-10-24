@@ -4,8 +4,9 @@ import Cookies from 'js-cookie';
 import UserContext from '../../../state/UserState/userContext';
 import SearchBar from '../SearchBar/SearchBar';
 import { Navbar as BootstrapNavbar, NavItem } from 'reactstrap';
+import './Navbar.css';
 
-export const Navbar = () => {
+const Navbar = () => {
   const userContext = useContext(UserContext);
   const { user, loading, logout, loadUser, refreshToken } = userContext;
 
@@ -34,7 +35,7 @@ export const Navbar = () => {
         {!user && (
           <NavItem className="nav-item">
             <NavLink className="nav-link" exact to="/" activeClassName="active">
-              Welcome
+              <p className="navbar-title"> Welcome </p>
             </NavLink>
           </NavItem>
         )}
@@ -45,7 +46,7 @@ export const Navbar = () => {
             to="/home"
             activeClassName="active"
           >
-            Home
+            <p className="navbar-title"> Home</p>
           </NavLink>
         </NavItem>
         {!loading ? (
@@ -58,7 +59,7 @@ export const Navbar = () => {
                   to={`/users/${user.id}`}
                   activeClassName="active"
                 >
-                  Profile
+                  <p className="navbar-title"> Profile</p>
                 </NavLink>
               </NavItem>
               <NavItem className="nav-item">
@@ -66,7 +67,7 @@ export const Navbar = () => {
                   className="btn btn-link nav-link border-0 text-white"
                   onClick={logout}
                 >
-                  Log Out
+                  <p className="navbar-title">Log Out</p>
                 </button>
               </NavItem>
             </React.Fragment>
@@ -79,7 +80,7 @@ export const Navbar = () => {
                   to="/register"
                   activeClassName="active"
                 >
-                  Register
+                  <p className="navbar-title">Register</p>
                 </NavLink>
               </NavItem>
               <NavItem className="nav-item">
@@ -89,7 +90,7 @@ export const Navbar = () => {
                   to="/login"
                   activeClassName="active"
                 >
-                  Log In
+                  <p className="navbar-title"> Log In</p>
                 </NavLink>
               </NavItem>
             </React.Fragment>
@@ -97,7 +98,7 @@ export const Navbar = () => {
         ) : (
           <NavItem className="nav-item">
             <NavLink className="nav-link" exact to="/" activeClassName="active">
-              Loading...
+              <p className="navbar-title">Loading..</p>
             </NavLink>
           </NavItem>
         )}
