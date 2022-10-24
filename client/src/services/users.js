@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { BASE_URL } from '../utils/config';
 
-const getAllUsers = async () => {
+const getUsers = async () => {
   const res = await axios.get(`${BASE_URL}/api/users`);
   return res;
 };
@@ -18,6 +18,6 @@ const updateUser = async (formData) => {
 
 export default {
   updateUser,
-  getAllUsers,
+  getUsers,
   getUser,
 };

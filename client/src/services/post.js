@@ -4,15 +4,8 @@ import { BASE_URL } from '../utils/config';
 
 const BASE_RESOURCE_ROUTE = '/api/posts';
 
-class PostQueryBuilder extends QueryBuilder {
-  constructor() {
-    super(BASE_RESOURCE_ROUTE);
-    return this;
-  }
-}
-
 const makeQuery = () => {
-  return new PostQueryBuilder();
+  return new QueryBuilder(BASE_RESOURCE_ROUTE);
 };
 
 const createPost = async (formData) => {

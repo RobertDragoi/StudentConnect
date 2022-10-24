@@ -51,7 +51,7 @@ const FullPost = () => {
     const fetchPost = async (id) => {
       await getPost(id);
     };
-    const socket = socketIOClient('http://localhost:3005');
+    const socket = socketIOClient('http://localhost:4007');
     socket.on('RefreshPage', (msg) => {
       fetchPost(id);
       console.log(msg);

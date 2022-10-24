@@ -26,7 +26,7 @@ const PostState = (props) => {
     error: null,
   };
   const [state, dispatch] = useReducer(PostReducer, initialState);
-  const fetchData = async () => {
+  const getPosts = async () => {
     console.log('IN FETCH DATA');
     try {
       const query = postService.makeQuery();
@@ -36,6 +36,7 @@ const PostState = (props) => {
       for (let filter of state.filters) {
         query.filter(filter.field, filter.value);
       }
+      console.log('-----', query);
       dispatch({ type: LOAD_POSTS });
       const posts = await query.exec();
       dispatch({ type: POSTS_LOADED, payload: posts });
@@ -46,7 +47,7 @@ const PostState = (props) => {
   };
   useEffect(() => {
     console.log('REFETCHING');
-    fetchData();
+    getPosts();
   }, [state.search, state.filters]);
   const createPost = async (formData) => {
     try {
