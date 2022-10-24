@@ -2,17 +2,19 @@ import React, { useContext, useState } from 'react';
 import PostContext from '../../../state/PostState/postContext';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
-import { locations } from '../../../placeholders';
+import { locations, domains } from '../../../placeholders';
+import { modalTags } from './tags';
+import './ModalFilters.css';
 
-export const ModalFilters = () => {
+const ModalFilters = () => {
   const [show, setShow] = useState(false);
   const postContext = useContext(PostContext);
   const { setFilters } = postContext;
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [city, setCity] = useState(null);
-  const [type, setType] = useState(null);
-
+  const [city, setCity] = useState('');
+  const [domain, setDomain] = useState('');
+  const [type, setType] = useState('');
   const submitFilters = (e) => {
     e.preventDefault();
 
@@ -26,7 +28,13 @@ export const ModalFilters = () => {
         value: city,
       });
     }
-
+    if (domain)
+      filters.push({
+        displayField: 'Domain',
+        displayValue: domain,
+        field: 'domain',
+        value: domain,
+      });
     if (type === 'part-time') {
       filters.push({
         displayField: 'Type',
@@ -46,44 +54,50 @@ export const ModalFilters = () => {
     setFilters(filters);
   };
 
-  const workplaces = locations;
   return (
     <>
-      <div onClick={handleShow}>Filters</div>
-
+      <div onClick={handleShow}>{modalTags.mainTitle}</div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Filters</Modal.Title>
+          <Modal.Title>{modalTags.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="container">
             <div className="row">
               <div className="col">
-                <h1 className="text-center">City</h1>
+                <h1 className="modal-title">{modalTags.location}</h1>
                 <div className="anyClass">
-                  {workplaces.map((workplace, key) => (
-                    <div key={`filtermodal-${key}`} className="form-check">
-                      <input
-                        className="form-check-input"
-                        value={workplace}
-                        onChange={(e) => setCity(e.target.value)}
-                        type="radio"
-                        id={`workplace${key}`}
-                        name="radio-group"
-                      ></input>
-                      <label
-                        className="form-check-label"
-                        htmlFor={`workplace${key}`}
-                      >
-                        {workplace}
-                      </label>
-                    </div>
-                  ))}
+                  <select
+                    className="form-control"
+                    onChange={(e) => setCity(e.target.value)}
+                    name="city"
+                  >
+                    {locations.map((location, key) => (
+                      <option key={`location${key}`} value={location}>
+                        {location}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
-
               <div className="col">
-                <h1 className="text-center">Type</h1>
+                <h1 className="modal-title">{modalTags.domain}</h1>
+                <div className="anyClass">
+                  <select
+                    className="form-control"
+                    onChange={(e) => setDomain(e.target.value)}
+                    name="domain"
+                  >
+                    {domains.map((domain, key) => (
+                      <option key={`domain_${key}`} value={domain}>
+                        {domain}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="col">
+                <h1 className="modal-title">{modalTags.type}</h1>
                 <div className="form-check">
                   <input
                     className="form-check-input"
@@ -94,7 +108,7 @@ export const ModalFilters = () => {
                     name="job-type"
                   ></input>
                   <label className="form-check-label" htmlFor="part-time">
-                    Part-time
+                    {modalTags.partTime}
                   </label>
                 </div>
                 <div className="form-check">
@@ -107,7 +121,7 @@ export const ModalFilters = () => {
                     name="job-type"
                   ></input>
                   <label className="form-check-label" htmlFor="full-time">
-                    Full-time
+                    {modalTags.fullTime}
                   </label>
                 </div>
               </div>
@@ -116,10 +130,10 @@ export const ModalFilters = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose}>
-            Close
+            {modalTags.close}
           </Button>
           <Button variant="primary" onClick={submitFilters}>
-            Apply Filters
+            {modalTags.apply}
           </Button>
         </Modal.Footer>
       </Modal>
