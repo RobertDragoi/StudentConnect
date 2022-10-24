@@ -143,7 +143,7 @@ const RegisterForm = () => {
           <div className="col-sm-1 " />
           <div className="col-sm-10 ">
             <div className="mx-auto my-4 p-4 card container">
-              <h1 className="mb-4 text-primary">{registerTags.title}</h1>
+              <h1 style={{ color: 'orangered' }}>{registerTags.title}</h1>
               <form onSubmit={onSubmit}>
                 <div className="form-group">
                   <label className="control-label" htmlFor="type">
@@ -262,16 +262,19 @@ const RegisterForm = () => {
                   </div>
                 </div>
                 {extraField}
-                <div>
+                <div className="mt-2">
                   <input
                     type="submit"
-                    className="btn btn-primary"
+                    className="btn"
+                    style={{ backgroundColor: 'orangered', color: 'white' }}
                     value="Continuă"
                   />
                 </div>
                 <p className="text-muted my-2">
                   {registerTags.bottomText}{' '}
-                  <Link to="/login">{registerTags.login}</Link>
+                  <Link style={{ textDecoration: 'none' }} to="/login">
+                    {registerTags.login}
+                  </Link>
                 </p>
               </form>
             </div>

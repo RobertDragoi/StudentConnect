@@ -30,14 +30,20 @@ const Home = () => {
               <div className="d-flex flex-row justify-content-center">
                 <button
                   type="button"
-                  className={type === 'companies' ? 'selectedbutton' : 'button'}
+                  className={
+                    type === 'companies'
+                      ? 'selected-home-button'
+                      : 'home-button'
+                  }
                   onClick={() => setType('companies')}
                 >
                   {homeTags.companyButton}
                 </button>
                 <button
                   type="button"
-                  className={type === 'students' ? 'selectedbutton' : 'button'}
+                  className={
+                    type === 'students' ? 'selected-home-button' : 'home-button'
+                  }
                   onClick={() => setType('students')}
                 >
                   {homeTags.studentButton}
@@ -96,7 +102,7 @@ const Home = () => {
             <Link to="/createpost">
               {isAuthenticated ? (
                 <Fab
-                  mainButtonStyles={{ backgroundColor: '#007bff' }}
+                  mainButtonStyles={{ backgroundColor: 'orangered' }}
                   alwaysShowTitle={true}
                   icon={'+'}
                   onClick={() => console.log('button')}

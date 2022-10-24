@@ -25,7 +25,7 @@
   text-decoration: none;
   display: inline-block;
   padding: 0.35em 1.2em;
-  border: 0.1em solid #007bff;
+  border: 0.1em solid orangered;
   margin: 0 0.3em 0.3em 0;
   border-radius: 0.12em;
   box-sizing: border-box;
@@ -33,7 +33,7 @@
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
   background-color: white;
-  color: #007bff;
+  color: orangered;
   text-align: center;
   transition: all 0.2s;
 }
@@ -41,5 +41,5 @@
 .button:hover {
   text-decoration: none;
   color: white;
-  background-color: #007bff;
+  background-color: orangered;
 }

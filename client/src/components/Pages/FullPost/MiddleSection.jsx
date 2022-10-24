@@ -29,6 +29,7 @@ const MiddleSection = ({ currentPost }) => {
               <div className="col-sm-10 py-1 text-secondary">
                 {currentPost?.user?.contact?.facebook ? (
                   <a
+                    style={{ textDecoration: 'none' }}
                     target="_blank"
                     rel="noreferrer noopener"
                     href={currentPost?.user?.contact?.facebook}
@@ -48,6 +49,7 @@ const MiddleSection = ({ currentPost }) => {
               <div className="col-sm-10 py-1 text-secondary">
                 {currentPost?.user?.contact?.linkedin ? (
                   <a
+                    style={{ textDecoration: 'none' }}
                     target="_blank"
                     rel="noreferrer noopener"
                     href={currentPost?.user?.contact?.linkedin}

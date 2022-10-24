@@ -17,7 +17,10 @@ const UpperSection = ({ currentPost, formatDate }) => {
         </div>
         <div className="col-md-8">
           <h2>{currentPost?.title ? currentPost.title : ''}</h2>
-          <Link to={`/users/${currentPost?.user?.id}`}>
+          <Link
+            style={{ textDecoration: 'none' }}
+            to={`/users/${currentPost?.user?.id}`}
+          >
             <h3>{currentPost?.user.name ? currentPost.user.name : ''}</h3>
           </Link>
           <p className="text">

@@ -114,7 +114,11 @@ export const User = () => {
                         <button
                           onClick={onEdit}
                           type="button"
-                          className="btn btn-primary"
+                          className="btn"
+                          style={{
+                            backgroundColor: 'orangered',
+                            color: 'white',
+                          }}
                         >
                           {userTags.edit}
                         </button>
@@ -175,6 +179,7 @@ export const User = () => {
                         />
                       ) : user?.contact?.facebook ? (
                         <a
+                          style={{ textDecoration: 'none' }}
                           target="_blank"
                           rel="noreferrer noopener"
                           href={user?.contact?.facebook}
@@ -228,6 +233,7 @@ export const User = () => {
                         />
                       ) : user?.contact?.linkedin ? (
                         <a
+                          style={{ textDecoration: 'none' }}
                           target="_blank"
                           rel="noreferrer noopener"
                           href={user?.contact?.linkedin}

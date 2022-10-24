@@ -29,7 +29,7 @@ const PostForm = () => {
         <div className="col-sm-1 " />
         <div className="col-sm-10 ">
           <div className="my-4 p-4 card container">
-            <h1 className="text-primary ">{postTags.title}</h1>
+            <h1 style={{ color: 'orangered' }}>{postTags.title}</h1>
             <form onSubmit={onSubmit}>
               <div className="form-group">
                 <label className="control-label">{postTags.postTitle}</label>
@@ -101,15 +101,19 @@ const PostForm = () => {
                   </select>
                 </div>
               </div>
-              <div>
+              <div className="mt-2">
                 <input
                   type="submit"
-                  className="btn btn-primary"
+                  className="btn "
+                  style={{ backgroundColor: 'orangered', color: 'white' }}
                   value="Continuă"
                 />
               </div>
               <p className="mt-2 text-muted">
-                {postTags.bottomText} <Link to="/">{postTags.home}</Link>
+                {postTags.bottomText}{' '}
+                <Link style={{ textDecoration: 'none' }} to="/">
+                  {postTags.home}
+                </Link>
               </p>
             </form>
           </div>

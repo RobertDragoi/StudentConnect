@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Logo from '../../../visuals/welcome.png';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../../state/UserState/userContext';
 import { welcomeTags } from './tags';
@@ -29,24 +29,14 @@ export const Welcome = () => {
 
             <div className="row">
               <div className="col-sm">
-                <NavLink
-                  className="button"
-                  exact
-                  to="/home"
-                  activeClassName="active"
-                >
+                <Link className="button" exact to="/home">
                   {welcomeTags.homeButton}
-                </NavLink>
+                </Link>
               </div>
               <div className="col-sm">
-                <NavLink
-                  className="button"
-                  exact
-                  to="/register"
-                  activeClassName="active"
-                >
+                <Link className="button" exact to="/register">
                   {welcomeTags.join}
-                </NavLink>
+                </Link>
               </div>
             </div>
           </div>

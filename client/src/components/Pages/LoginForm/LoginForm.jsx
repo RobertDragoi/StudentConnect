@@ -31,7 +31,7 @@ const LoginForm = () => {
           <div className="col-1 col-md-3 " />
           <div className="col-10 col-md-6">
             <div className="mx-auto my-4 p-4 card container">
-              <h1 className="text-primary ">{loginTags.title}</h1>
+              <h1 style={{ color: 'orangered' }}>{loginTags.title}</h1>
               <form onSubmit={onSubmit}>
                 <div className="form-group">
                   <label className="control-label" htmlFor="email">
@@ -63,16 +63,19 @@ const LoginForm = () => {
                     />
                   </div>
                 </div>
-                <div>
+                <div className="mt-2">
                   <input
                     type="submit"
-                    className="btn btn-primary"
+                    className="btn"
+                    style={{ backgroundColor: 'orangered', color: 'white' }}
                     value="Continuă"
                   />
                 </div>
                 <p className="mt-2 text-muted">
                   {loginTags.bottomText}{' '}
-                  <Link to="/register">{loginTags.register}</Link>
+                  <Link style={{ textDecoration: 'none' }} to="/register">
+                    {loginTags.register}
+                  </Link>
                 </p>
               </form>
             </div>

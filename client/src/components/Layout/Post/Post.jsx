@@ -73,11 +73,7 @@ const Post = (props) => {
           <div className="mb-3 border-bottom">
             <p className="card-text m-0 mb-1">
               <span>
-                <NavLink
-                  className="link"
-                  to={`/post/${id}`}
-                  activeClassName="active"
-                >
+                <NavLink className="link" to={`/post/${id}`}>
                   <b>{title}</b>
                 </NavLink>
               </span>

@@ -1,9 +1,10 @@
 .link {
+  color: black;
   display: inline-block;
   text-decoration: none;
 }
 .link:hover {
   text-decoration: none;
   color: white;
-  background-color: #007bff;
+  background-color: orangered;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { footerTags } from './tags';
 export const Footer = () => {
   return (
-    <div className="footer-clean bg-primary">
+    <div className="footer-clean" style={{ backgroundColor: 'orangered' }}>
       <div className="container text-white">
         <div className="row justify-content-center">
           <div className="col-sm-4 col-md-3 item">
