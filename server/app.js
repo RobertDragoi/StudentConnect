@@ -22,7 +22,7 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(3005);
+server.listen(4007);
 mongoose
   .connect(config.MONGODB_URI, {
     useNewUrlParser: true,
