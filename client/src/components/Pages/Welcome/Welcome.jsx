@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 import Logo from '../../../visuals/welcome.png';
 import { NavLink } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import UserContext from '../../../state/UserState/userContext';
 import { welcomeTags } from './tags';
 import './Welcome.css';
 
 export const Welcome = () => {
-  let history = useHistory();
+  let navigate = useNavigate();
   const userContext = useContext(UserContext);
   const { user } = userContext;
   if (user) {
-    history.push('/home');
+    navigate('/home');
   }
   return (
     <div className="container py-5">

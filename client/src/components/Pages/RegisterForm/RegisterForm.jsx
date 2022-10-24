@@ -1,16 +1,16 @@
 import React, { Fragment, useEffect, useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import UserContext from '../../../state/UserState/userContext';
 import { studies, domains } from '../../../placeholders';
 import { registerTags } from './tags';
 const RegisterForm = () => {
-  let history = useHistory();
+  let navigate = useNavigate();
   const { isAuthenticated, register } = useContext(UserContext);
 
   useEffect(() => {
     if (isAuthenticated === true) {
-      history.push('/');
+      navigate('/');
     }
   });
 

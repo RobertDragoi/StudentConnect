@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PostContext from '../../../state/PostState/postContext';
 import { locations, domains } from '../../../placeholders';
 import { postTags } from './tags';
 const PostForm = () => {
-  let history = useHistory();
+  let navigate = useNavigate();
   const postContext = useContext(PostContext);
   const { createPost } = postContext;
   const [post, setPost] = useState({
@@ -20,7 +20,7 @@ const PostForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     createPost(post);
-    history.push('/');
+    navigate('/home');
   };
   console.log(post);
   return (

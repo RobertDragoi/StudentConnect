@@ -1,14 +1,14 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UserContext from '../../../state/UserState/userContext';
 import { loginTags } from './tags';
 const LoginForm = () => {
-  let history = useHistory();
+  let navigate = useNavigate();
   const userContext = useContext(UserContext);
   const { isAuthenticated, login } = userContext;
   useEffect(() => {
     if (isAuthenticated === true) {
-      history.push('/');
+      navigate('/');
     }
   });
   const [user, setUser] = useState({

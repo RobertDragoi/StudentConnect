@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import UserContext from './userContext';
 import UserReducer from './userReducer';
@@ -18,7 +18,7 @@ import {
 } from '../../types';
 
 const UserState = (props) => {
-  let history = useHistory();
+  let navigate = useNavigate();
 
   const initialState = {
     token: localStorage.token,
@@ -63,7 +63,7 @@ const UserState = (props) => {
   const logout = async () => {
     await authService.logout();
     dispatch({ type: LOGOUT });
-    history.push('/');
+    navigate('/');
   };
 
   const updateUser = async (formData) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginForm from './components/Pages/LoginForm/LoginForm';
 import RegisterForm from './components/Pages/RegisterForm/RegisterForm';
 import PostForm from './components/Pages/PostForm/PostForm';
@@ -22,29 +22,15 @@ const App = () => {
           <UserState>
             <NavBar />
             <Errors />
-            <Switch>
-              <Route exact path="/login">
-                <LoginForm />
-              </Route>
-              <Route exact path="/register">
-                <RegisterForm />
-              </Route>
-              <Route exact path="/home">
-                <Home />
-              </Route>
-              <Route exact path="/users/:id">
-                <User />
-              </Route>
-              <Route exact path="/post/:id">
-                <FullPost />
-              </Route>
-              <Route exact path="/createpost">
-                <PostForm />
-              </Route>
-              <Route exact path="/">
-                <Welcome />
-              </Route>
-            </Switch>
+            <Routes>
+              <Route exact path="/login" element={<LoginForm />} />
+              <Route exact path="/register" element={<RegisterForm />} />
+              <Route exact path="/home" element={<Home />} />
+              <Route exact path="/users/:id" element={<User />} />
+              <Route exact path="/post/:id" element={<FullPost />} />
+              <Route exact path="/createpost" element={<PostForm />} />
+              <Route exact path="/" element={<Welcome />} />
+            </Routes>
             <Footer />
           </UserState>
         </PostState>
