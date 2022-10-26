@@ -20,8 +20,12 @@ const MiddleSection = ({ currentPost }) => {
 
         <div className="col-md-4  border-left ">
           <div className="item">
-            <h3>{postTags.apply}</h3>
-            <p className="text">{postTags.contact}</p>
+            {currentPost?.user?.type === 'company' ? (
+              <h3>{postTags.apply}</h3>
+            ) : (
+              <h3>{postTags.contact}</h3>
+            )}
+
             <div className="row">
               <div className="col-2 py-1 d-flex justify-content-center align-items-center">
                 <FontAwesomeIcon icon={faFacebookF} color="blue" />

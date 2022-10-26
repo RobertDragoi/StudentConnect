@@ -65,7 +65,7 @@ const Home = () => {
                     <Post
                       key={post.id}
                       id={post.id}
-                      className="col-8"
+                      className="col sm-8"
                       title={post.title}
                       domain={post.domain}
                       createdAt={post.createdAt}

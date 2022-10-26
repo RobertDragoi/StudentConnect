@@ -75,4 +75,5 @@ const studies = [
   'Studii universitare',
   'Studii postuniversitare',
 ];
-export { locations, domains, studies };
+const experience = ['Stagiar', 'începător', 'Mediu', 'Experimentat'];
+export { experience, locations, domains, studies };

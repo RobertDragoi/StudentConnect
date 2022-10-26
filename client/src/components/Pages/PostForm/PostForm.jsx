@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import PostContext from '../../../state/PostState/postContext';
-import { locations, domains } from '../../../placeholders';
+import { locations, domains, experience } from '../../../placeholders';
 import { postTags } from './tags';
 const PostForm = () => {
   let navigate = useNavigate();
@@ -11,6 +11,7 @@ const PostForm = () => {
     title: '',
     description: '',
     domain: '',
+    experience: '',
     workHours: 8,
     workPlace: locations[0],
   });
@@ -80,6 +81,22 @@ const PostForm = () => {
                     {domains.map((domain, key) => (
                       <option key={`domain_${key}`} value={domain}>
                         {domain}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="form-group">
+                <label className="control-label">{postTags.activity}</label>
+                <div>
+                  <select
+                    className="form-control"
+                    onChange={onChange}
+                    name="experience"
+                  >
+                    {experience.map((exp, key) => (
+                      <option key={`experience${key}`} value={exp}>
+                        {exp}
                       </option>
                     ))}
                   </select>

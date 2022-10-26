@@ -25,6 +25,9 @@ const postSchema = new mongoose.Schema({
   workHours: {
     type: Number,
   },
+  experience: {
+    type: String,
+  },
   workPlace: {
     type: String,
     required: true,
@@ -47,7 +50,7 @@ postSchema.set('toJSON', {
 });
 
 postSchema.plugin(mongooseFuzzySearching, {
-  fields: ['domain', 'description', 'title', 'workPlace'],
+  fields: ['experience', 'domain', 'description', 'title', 'workPlace'],
 });
 
 const Post = mongoose.model('Post', postSchema);

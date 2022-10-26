@@ -36,6 +36,9 @@ const UpperSection = ({ currentPost, formatDate }) => {
               ` (${currentPost?.workHours} hours)`}
           </p>
           <p className="text">
+            {postTags.experience}: {currentPost?.experience}
+          </p>
+          <p className="text">
             {postTags.creationDate}:{' '}
             {currentPost?.createdAt ? formatDate(currentPost.createdAt) : ''}
           </p>

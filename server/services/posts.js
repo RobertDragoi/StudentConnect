@@ -3,7 +3,8 @@ const Post = require('../models/post');
 const Comment = require('../models/comment');
 
 const createPost = async (req, res) => {
-  const { title, description, domain, workHours, workPlace } = req.body;
+  const { title, experience, description, domain, workHours, workPlace } =
+    req.body;
   const validationErrors = validationResult(req);
   if (!validationErrors.isEmpty()) {
     res.status(400).send({ errors: validationErrors.array() });
@@ -15,6 +16,7 @@ const createPost = async (req, res) => {
       description,
       domain,
       workHours,
+      experience,
       workPlace,
     });
     await post.save();
