@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import UserContext from '../../../state/UserState/userContext';
 import SearchBar from '../SearchBar/SearchBar';
-import { Navbar as BootstrapNavbar, NavItem } from 'reactstrap';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -30,85 +29,58 @@ const Navbar = () => {
   }, [user]);
 
   return (
-    <BootstrapNavbar className="navbar sticky-top navbar-expand-lg navbar-dark bg-primary ">
-      <div className="navbar-nav mr-auto">
-        {!user && (
-          <NavItem className="nav-item">
-            <NavLink className="nav-link" exact to="/" activeClassName="active">
-              <p className="navbar-title"> Welcome </p>
-            </NavLink>
-          </NavItem>
-        )}
-        <NavItem className="nav-item">
-          <NavLink
-            className="nav-link"
-            exact
-            to="/home"
-            activeClassName="active"
-          >
+    <div className="navbar-container">
+      <div className="navbar-container-left">
+        <div className="navbar-item">
+          <NavLink className="nav-link" exact to="/home">
             <p className="navbar-title"> Home</p>
           </NavLink>
-        </NavItem>
+        </div>
         {!loading ? (
           user ? (
             <React.Fragment>
-              <NavItem className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  exact
-                  to={`/users/${user.id}`}
-                  activeClassName="active"
-                >
+              <div className="navbar-item">
+                <NavLink className="nav-link" exact to={`/users/${user.id}`}>
                   <p className="navbar-title"> Profile</p>
                 </NavLink>
-              </NavItem>
-              <NavItem className="nav-item">
+              </div>
+              <div className="navbar-item">
                 <button
                   className="btn btn-link nav-link border-0 text-white"
                   onClick={logout}
                 >
                   <p className="navbar-title">Log Out</p>
                 </button>
-              </NavItem>
+              </div>
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <NavItem className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  exact
-                  to="/register"
-                  activeClassName="active"
-                >
+              <div className="navbar-item">
+                <NavLink className="nav-link" exact to="/register">
                   <p className="navbar-title">Register</p>
                 </NavLink>
-              </NavItem>
-              <NavItem className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  exact
-                  to="/login"
-                  activeClassName="active"
-                >
+              </div>
+              <div className="navbar-item">
+                <NavLink className="nav-link" exact to="/login">
                   <p className="navbar-title"> Log In</p>
                 </NavLink>
-              </NavItem>
+              </div>
             </React.Fragment>
           )
         ) : (
-          <NavItem className="nav-item">
-            <NavLink className="nav-link" exact to="/" activeClassName="active">
+          <div className="navbar-item">
+            <NavLink className="nav-link" exact to="/">
               <p className="navbar-title">Loading..</p>
             </NavLink>
-          </NavItem>
+          </div>
         )}
       </div>
-      <div className="navbar-nav ml-auto">
-        <NavItem className="nav-item">
+      <div className="navbar-container-right">
+        <div className="navbar-item">
           <SearchBar />
-        </NavItem>
+        </div>
       </div>
-    </BootstrapNavbar>
+    </div>
   );
 };
 export default Navbar;
