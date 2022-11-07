@@ -76,7 +76,7 @@ const Navbar = () => {
         )}
       </div>
       <div className="navbar-container-right">
-        <div className="navbar-item">
+        <div className="navbar-filter">
           <SearchBar />
         </div>
       </div>
