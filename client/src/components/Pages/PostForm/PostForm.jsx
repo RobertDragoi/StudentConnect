@@ -10,8 +10,8 @@ const PostForm = () => {
   const [post, setPost] = useState({
     title: '',
     description: '',
-    domain: '',
-    experience: '',
+    domain: domains[0],
+    experience: experience[0],
     workHours: 8,
     workPlace: locations[0],
   });
