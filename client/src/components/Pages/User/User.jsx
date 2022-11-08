@@ -21,6 +21,7 @@ import { BASE_URL } from '../../../utils/config';
 import { formatDate } from '../../../utils/functions';
 import { studies, domains } from '../../../placeholders';
 import { userTags } from './tags';
+import Skills from './Skills';
 import './User.css';
 
 export const User = () => {
@@ -33,16 +34,18 @@ export const User = () => {
     updatedUser,
     setUpdatedUser,
     isCurrentUser,
-    edit,
-    setEdit,
+    dataEdit,
+    setDataEdit,
+    skillsEdit,
+    setSkillsEdit,
   } = useUser();
   const onEdit = () => {
-    switch (edit) {
+    switch (dataEdit) {
       case true:
-        setEdit(false);
+        setDataEdit(false);
         break;
       case false:
-        setEdit(true);
+        setDataEdit(true);
         break;
       default:
     }
@@ -68,7 +71,7 @@ export const User = () => {
     const formData = serialize(updatedUser);
     console.log('Entering Update!');
     updateUser(formData);
-    setEdit(false);
+    setDataEdit(false);
   };
   return (
     <div className="main-body">
@@ -94,7 +97,7 @@ export const User = () => {
                           height="100"
                         />
                       </div>
-                      {edit === true ? (
+                      {dataEdit === true ? (
                         <React.Fragment>
                           <label
                             className="form-label"
@@ -110,7 +113,7 @@ export const User = () => {
                         </React.Fragment>
                       ) : null}
                       <h4>{user?.name}</h4>
-                      {edit === false && isCurrentUser && (
+                      {dataEdit === false && isCurrentUser && (
                         <button
                           onClick={onEdit}
                           type="button"
@@ -123,7 +126,7 @@ export const User = () => {
                           {userTags.edit}
                         </button>
                       )}
-                      {edit === true && isCurrentUser && (
+                      {dataEdit === true && isCurrentUser && (
                         <div className="row">
                           <div className="col-sm-6 py-1 d-flex justify-content-center">
                             <button
@@ -136,7 +139,7 @@ export const User = () => {
                           </div>
                           <div className="col-sm-6 py-1 d-flex justify-content-center">
                             <button
-                              onClick={() => setEdit(false)}
+                              onClick={() => setDataEdit(false)}
                               type="button"
                               className="btn btn-danger"
                             >
@@ -169,7 +172,7 @@ export const User = () => {
                       <FontAwesomeIcon icon={faFacebookF} color="blue" />
                     </div>
                     <div className="col-sm-9 py-1   border-bottom">
-                      {edit === true ? (
+                      {dataEdit === true ? (
                         <input
                           onChange={onChange}
                           className="form-control form-control-sm"
@@ -199,7 +202,7 @@ export const User = () => {
                       <FontAwesomeIcon icon={faInstagram} color="purple" />
                     </div>
                     <div className="col-sm-9 py-1   border-bottom">
-                      {edit === true ? (
+                      {dataEdit === true ? (
                         <input
                           onChange={onChange}
                           className="form-control form-control-sm"
@@ -223,7 +226,7 @@ export const User = () => {
                       <FontAwesomeIcon icon={faLinkedin} color="blue" />
                     </div>
                     <div className="col-sm-9 py-1   border-bottom">
-                      {edit === true ? (
+                      {dataEdit === true ? (
                         <input
                           className="form-control form-control-sm"
                           onChange={onChange}
@@ -253,7 +256,7 @@ export const User = () => {
                       <FontAwesomeIcon icon={faPhone} color="green" />
                     </div>
                     <div className="col-sm-9 py-1   border-bottom">
-                      {edit === true ? (
+                      {dataEdit === true ? (
                         <input
                           className="form-control form-control-sm"
                           onChange={onChange}
@@ -277,7 +280,7 @@ export const User = () => {
                       <FontAwesomeIcon icon={faAddressCard} color="orange" />
                     </div>
                     <div className="col-sm-9 py-1   ">
-                      {edit === true ? (
+                      {dataEdit === true ? (
                         <input
                           onChange={onChange}
                           className="form-control form-control-sm-sm form-control form-control-sm"
@@ -308,7 +311,7 @@ export const User = () => {
                     </div>
 
                     <div className="col-sm-9 py-1   border-bottom">
-                      {edit === true ? (
+                      {dataEdit === true ? (
                         <>
                           {user?.email}
                           <span className="text-danger">*</span>
@@ -327,7 +330,7 @@ export const User = () => {
                       </p>
                     </div>
                     <div className="col-sm-9 py-1   border-bottom">
-                      {edit === true ? (
+                      {dataEdit === true ? (
                         <input
                           onChange={onChange}
                           className="form-control form-control-sm"
@@ -346,7 +349,7 @@ export const User = () => {
                       <p className="text">{userTags.address}</p>
                     </div>
                     <div className="col-sm-9 py-1   border-bottom">
-                      {edit === true ? (
+                      {dataEdit === true ? (
                         <input
                           onChange={onChange}
                           className="form-control form-control-sm"
@@ -368,7 +371,7 @@ export const User = () => {
                       </p>
                     </div>
                     <div className="col-sm-9 py-1   border-bottom">
-                      {edit === true ? (
+                      {dataEdit === true ? (
                         user?.type === 'student' ? (
                           <select
                             className="form-control"
@@ -413,7 +416,7 @@ export const User = () => {
                       </p>
                     </div>
                     <div className="col-sm-9 py-1   border-bottom">
-                      {edit === true ? (
+                      {dataEdit === true ? (
                         user?.type === 'student' ? (
                           <input
                             onChange={onChange}
@@ -443,7 +446,7 @@ export const User = () => {
                       <p className="tag-text">{userTags.description}</p>
                     </div>
                     <div className="col-sm-9 py-1  ">
-                      {edit === true ? (
+                      {dataEdit === true ? (
                         <textarea
                           onChange={onChange}
                           className="form-control form-control-sm"
@@ -458,6 +461,7 @@ export const User = () => {
                   </div>
                 </div>
               </div>
+              <Skills skillsEdit={skillsEdit} setSkillsEdit={setSkillsEdit} />
               <h4 className="user-title">{userTags.posts}</h4>
               <div>
                 {posts.map((post) => {

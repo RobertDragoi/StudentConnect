@@ -27,82 +27,81 @@ const Post = (props) => {
   } = props;
   return (
     <React.Fragment>
-      <Link className="post-container" to={`/post/${id}`}>
-        <div className="post-container">
-          <div className={`card m-3 mx-auto ${className}`}>
-            <div className="card-body d-flex flex-column justify-content-between">
-              <div className="card-title d-flex align-items-center justify-content-between border-bottom">
-                <div className="d-flex align-items-center">
-                  <div className="p-1">
-                    <ReactImageFallback
-                      src={picture}
-                      fallbackImage={'/img/default.jpg'}
-                      alt="profile"
-                      width="50"
-                      height="50"
-                    />
-                  </div>
-                  <div className="p-1">
-                    <p className="card-text m-0 ml-3 d-flex flex-column">
-                      <span>
-                        <Link
-                          className="post-link"
-                          to={`/users/${postUser.id}`}
-                        >
-                          {postUser.name}
-                        </Link>{' '}
-                        {postUser.type === 'student' ? (
-                          <FontAwesomeIcon icon={faUser} color="green" />
-                        ) : (
-                          <FontAwesomeIcon icon={faBuilding} color="blue" />
-                        )}
-                      </span>
-                      <span className="text-muted">
-                        {formatDate(createdAt)}
-                      </span>
-                    </p>
-                  </div>
+      <div className="post-container">
+        <div className={`card m-3 mx-auto ${className}`}>
+          <div className="card-body d-flex flex-column justify-content-between">
+            <div className="card-title d-flex align-items-center justify-content-between border-bottom">
+              <div className="d-flex align-items-center">
+                <div className="p-1">
+                  <ReactImageFallback
+                    src={picture}
+                    fallbackImage={'/img/default.jpg'}
+                    alt="profile"
+                    width="50"
+                    height="50"
+                  />
                 </div>
-                <div className="ml-auto p-1">
-                  {user?.id === postUser.id ? (
+                <div className="p-1">
+                  <p className="card-text m-0 ml-3 d-flex flex-column">
                     <span>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          deletePost(id);
-                        }}
-                        type="button"
-                        className="btn btn-outline-danger"
+                      <Link
+                        className="post-link"
+                        to={`/users/${postUser.id}/?isCurrentUser=${
+                          postUser.id === user?.id ? 'true' : 'false'
+                        }`}
                       >
-                        <FontAwesomeIcon icon={faTrash} />
-                      </button>
+                        {postUser.name}
+                      </Link>{' '}
+                      {postUser.type === 'student' ? (
+                        <FontAwesomeIcon icon={faUser} color="green" />
+                      ) : (
+                        <FontAwesomeIcon icon={faBuilding} color="blue" />
+                      )}
                     </span>
-                  ) : (
-                    <React.Fragment />
-                  )}
+                    <span className="text-muted">{formatDate(createdAt)}</span>
+                  </p>
                 </div>
               </div>
-              <div className="mb-3 border-bottom">
-                <p className="card-text m-0 mb-1">
+              <div className="ml-auto p-1">
+                {user?.id === postUser.id ? (
                   <span>
-                    <b>{title}</b>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        deletePost(id);
+                      }}
+                      type="button"
+                      className="btn btn-outline-danger"
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
                   </span>
-                </p>
-                <p className="card-text">{domain}</p>
+                ) : (
+                  <React.Fragment />
+                )}
               </div>
-              <div className="mb-3 ">
-                <p className="card-subtitle text-muted mb-1">
-                  {(type === 8 ? 'Full-Time' : 'Part-Time') +
-                    ` (${type} hours)`}
-                </p>
-                <p className="card-text">
-                  <b>{location}</b>
-                </p>
-              </div>
+            </div>
+            <div className="mb-3 border-bottom">
+              <p className="card-text m-0 mb-1">
+                <span>
+                  <Link className="post-link" to={`/post/${id}`}>
+                    <b>{title}</b>
+                  </Link>{' '}
+                </span>
+              </p>
+              <p className="card-text">{domain}</p>
+            </div>
+            <div className="mb-3 ">
+              <p className="card-subtitle text-muted mb-1">
+                {(type === 8 ? 'Full-Time' : 'Part-Time') + ` (${type} hours)`}
+              </p>
+              <p className="card-text">
+                <b>{location}</b>
+              </p>
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     </React.Fragment>
   );
 };

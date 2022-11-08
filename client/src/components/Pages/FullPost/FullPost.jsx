@@ -60,7 +60,11 @@ const FullPost = () => {
   }, [id]);
   return (
     <React.Fragment>
-      <UpperSection currentPost={currentPost} formatDate={formatDate} />
+      <UpperSection
+        currentPost={currentPost}
+        formatDate={formatDate}
+        user={user}
+      />
       <MiddleSection currentPost={currentPost} />
       <LowerSection
         id={id}

@@ -33,7 +33,11 @@ const Comment = ({
             height="50"
           />
           <div className="d-flex flex-column mx-2">
-            <Link to={`/users/${comment?.user?.id}`}>
+            <Link
+              to={`/users/${comment?.user?.id}/?isCurrentUser=${
+                comment?.user?.id.id === user?.id ? 'true' : 'false'
+              }`}
+            >
               <h5 className="d-inline">{comment?.user?.name}</h5>
             </Link>
             <p className="d-inline">

@@ -32,7 +32,7 @@ const Navbar = () => {
     <div className="navbar-container">
       <div className="navbar-container-left">
         <div className="navbar-item">
-          <NavLink className="nav-link" exact to="/home">
+          <NavLink className="nav-link" to="/home">
             <p className="navbar-title"> Home</p>
           </NavLink>
         </div>
@@ -40,7 +40,10 @@ const Navbar = () => {
           user ? (
             <React.Fragment>
               <div className="navbar-item">
-                <NavLink className="nav-link" exact to={`/users/${user.id}`}>
+                <NavLink
+                  className="nav-link"
+                  to={`/users/${user.id}/?isCurrentUser=true`}
+                >
                   <p className="navbar-title"> Profile</p>
                 </NavLink>
               </div>
@@ -56,12 +59,12 @@ const Navbar = () => {
           ) : (
             <React.Fragment>
               <div className="navbar-item">
-                <NavLink className="nav-link" exact to="/register">
+                <NavLink className="nav-link" to="/register">
                   <p className="navbar-title">Register</p>
                 </NavLink>
               </div>
               <div className="navbar-item">
-                <NavLink className="nav-link" exact to="/login">
+                <NavLink className="nav-link" to="/login">
                   <p className="navbar-title"> Log In</p>
                 </NavLink>
               </div>
@@ -69,7 +72,7 @@ const Navbar = () => {
           )
         ) : (
           <div className="navbar-item">
-            <NavLink className="nav-link" exact to="/">
+            <NavLink className="nav-link" to="/">
               <p className="navbar-title">Loading..</p>
             </NavLink>
           </div>

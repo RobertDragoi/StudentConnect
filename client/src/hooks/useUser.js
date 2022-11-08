@@ -1,22 +1,26 @@
 // Hook meant to be used to retrieve user based on react-router-dom params
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import UserContext from '../state/UserState/userContext';
 import usersService from '../services/users';
 
 export default function useUser() {
   const { id } = useParams();
+  // eslint-disable-next-line no-unused-vars
+  const [searchedParams, setSearchParams] = useSearchParams();
+
   const [loading, setLoading] = useState(false);
   const { user: authUser, updateUser } = useContext(UserContext);
   const [user, setUser] = useState(null);
   const [isCurrentUser, setIsCurrentUser] = useState(false);
   const [updatedUser, setUpdatedUser] = useState(user);
-  const [edit, setEdit] = useState(false);
+  const [dataEdit, setDataEdit] = useState(false);
+  const [skillsEdit, setSkillsEdit] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        if (authUser?.id !== id) {
+        if (searchedParams.get('isCurrentUser') === 'false') {
           setLoading(true);
           const response = await usersService.getUser(id);
           setUser(response.data);
@@ -27,6 +31,7 @@ export default function useUser() {
           setIsCurrentUser(true);
           setUser(authUser);
           setUpdatedUser(authUser);
+          console.log('Fetching authenticated user');
         }
       } catch (e) {
         setUser(null);
@@ -43,7 +48,9 @@ export default function useUser() {
     isCurrentUser,
     updatedUser,
     setUpdatedUser,
-    edit,
-    setEdit,
+    dataEdit,
+    setDataEdit,
+    skillsEdit,
+    setSkillsEdit,
   };
 }

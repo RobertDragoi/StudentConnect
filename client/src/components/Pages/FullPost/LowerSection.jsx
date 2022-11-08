@@ -80,7 +80,7 @@ LowerSection.propTypes = {
   formatDate: PropTypes.func,
   setupdatedComment: PropTypes.func,
   setEdit: PropTypes.func,
-  edit: PropTypes.bool,
+  edit: PropTypes.object,
   body: PropTypes.string,
   user: PropTypes.object,
   id: PropTypes.string,
