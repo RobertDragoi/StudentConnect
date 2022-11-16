@@ -94,6 +94,10 @@ const userUpdater = async (request, response, next) => {
         student?.education === undefined
           ? searchedUser.student?.education
           : student?.education;
+      searchedUser.student.skills =
+        student?.skills === undefined
+          ? searchedUser.student.skills
+          : student?.skills;
     } else if (company && searchedUser.company) {
       searchedUser.company.creationDate =
         company?.creationDate === undefined
@@ -111,7 +115,6 @@ const userUpdater = async (request, response, next) => {
     logger.info(error);
     response.status(400).json({ error: 'no such user found!' });
   }
-
   next();
 };
 
