@@ -1,0 +1,119 @@
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusSquare, faPencil } from '@fortawesome/free-solid-svg-icons';
+import './Skills.css';
+
+const Skills = ({
+  skillsEdit,
+  setSkillsEdit,
+  setUpdatedUser,
+  updatedUser,
+  updateUser,
+  skills,
+}) => {
+  const skillRef = useRef();
+  const onEdit = () => {
+    switch (skillsEdit) {
+      case true:
+        setSkillsEdit(false);
+        break;
+      case false:
+        setSkillsEdit(true);
+        break;
+      default:
+    }
+  };
+  const addSkill = (e) => {
+    e.preventDefault();
+    let tempSkills = [...skills, skillRef.current.value];
+    let aux = updatedUser;
+    Object.keys(aux).forEach((key) => {
+      Object.keys(aux[key]).forEach((key2) => {
+        if (key2 === 'skills') {
+          aux[key][key2] = tempSkills;
+        }
+      });
+    });
+    setUpdatedUser(aux);
+    updateUser(aux);
+  };
+  const removeSkill = (skill) => {
+    let tempSkills = skills.filter((sk) => sk !== skill);
+    let aux = updatedUser;
+    Object.keys(aux).forEach((key) => {
+      Object.keys(aux[key]).forEach((key2) => {
+        if (key2 === 'skills') {
+          aux[key][key2] = tempSkills;
+        }
+      });
+    });
+    setUpdatedUser(aux);
+    updateUser(aux);
+  };
+  return (
+    <div className="card mb-3">
+      <div className="card-body">
+        <div className="row d-flex flex-row justify-content-between">
+          <div className="col-sm-4  py-1 d-flex justify-content-around">
+            <button
+              onClick={addSkill}
+              type="button"
+              className="btn"
+              style={{
+                backgroundColor: 'orangered',
+                color: 'white',
+              }}
+            >
+              <FontAwesomeIcon icon={faPlusSquare} color="white" />
+            </button>
+            <button
+              onClick={onEdit}
+              type="button"
+              className="btn"
+              style={{
+                backgroundColor: 'orangered',
+                color: 'white',
+              }}
+            >
+              <FontAwesomeIcon icon={faPencil} color="white" />
+            </button>
+          </div>
+
+          <div className="col-sm-5 py-1 d-flex justify-content-end">
+            <input
+              className="form-control form-control-sm"
+              type="text"
+              name="skill"
+              ref={skillRef}
+            />
+          </div>
+        </div>
+        <div className="skill-container">
+          {skills?.map((item, index) => (
+            <div key={`skill-${index}`} className="skill-item">
+              {skillsEdit ? (
+                <button
+                  className="skill-button"
+                  onClick={() => removeSkill(item)}
+                ></button>
+              ) : (
+                <></>
+              )}
+              {item}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+export default Skills;
+Skills.propTypes = {
+  skills: PropTypes.arrayOf(PropTypes.string),
+  skillsEdit: PropTypes.bool,
+  setSkillsEdit: PropTypes.func,
+  setUpdatedUser: PropTypes.func,
+  updatedUser: PropTypes.object,
+  updateUser: PropTypes.func,
+};

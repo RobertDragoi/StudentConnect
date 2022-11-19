@@ -15,5 +15,6 @@ const userTags = {
   posts: 'Anunțuri',
   personLabel: 'Student',
   companyLabel: 'Companie',
+  skills: 'Aptitudini',
 };
 export { userTags };

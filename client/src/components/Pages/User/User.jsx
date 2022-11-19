@@ -14,7 +14,6 @@ import {
   faInstagram,
   faLinkedin,
 } from '@fortawesome/free-brands-svg-icons';
-import { serialize } from 'object-to-formdata';
 import useUser from '../../../hooks/useUser';
 import Spinner from '../../Layout/Spinner/Spinner';
 import { BASE_URL } from '../../../utils/config';
@@ -68,9 +67,7 @@ export const User = () => {
     setUpdatedUser(aux);
   };
   const onSubmit = () => {
-    const formData = serialize(updatedUser);
-    console.log('Entering Update!');
-    updateUser(formData);
+    updateUser(updatedUser);
     setDataEdit(false);
   };
   return (
@@ -461,7 +458,20 @@ export const User = () => {
                   </div>
                 </div>
               </div>
-              <Skills skillsEdit={skillsEdit} setSkillsEdit={setSkillsEdit} />
+              <h4 className="user-title">{userTags.skills}</h4>
+              {user?.type === 'student' ? (
+                <Skills
+                  skills={user?.student?.skills}
+                  skillsEdit={skillsEdit}
+                  setSkillsEdit={setSkillsEdit}
+                  updateUser={updateUser}
+                  setUpdatedUser={setUpdatedUser}
+                  updatedUser={updatedUser}
+                />
+              ) : (
+                <></>
+              )}
+
               <h4 className="user-title">{userTags.posts}</h4>
               <div>
                 {posts.map((post) => {
