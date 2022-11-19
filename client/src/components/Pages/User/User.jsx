@@ -1,26 +1,17 @@
 import React, { useContext } from 'react';
-import Post from '../../Layout/Post/Post';
 import PostContext from '../../../state/PostState/postContext';
 import ReactImageFallback from 'react-image-fallback';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faPhone,
-  faAddressCard,
-  faBuilding,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
-import {
-  faFacebookF,
-  faInstagram,
-  faLinkedin,
-} from '@fortawesome/free-brands-svg-icons';
+import { faBuilding, faUser } from '@fortawesome/free-solid-svg-icons';
 import useUser from '../../../hooks/useUser';
-import Spinner from '../../Layout/Spinner/Spinner';
 import { BASE_URL } from '../../../utils/config';
 import { formatDate } from '../../../utils/functions';
-import { studies, domains } from '../../../placeholders';
 import { userTags } from './tags';
+import Spinner from '../../Layout/Spinner/Spinner';
+import Data from './Data';
+import Posts from './Posts';
 import Skills from './Skills';
+import Contact from './Contact';
 import './User.css';
 
 export const User = () => {
@@ -162,337 +153,32 @@ export const User = () => {
                   </span>
                 )}
               </h4>
-              <div className="card mt-3 ">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-3 py-1 d-flex justify-content-center align-items-center">
-                      <FontAwesomeIcon icon={faFacebookF} color="blue" />
-                    </div>
-                    <div className="col-sm-9 py-1   border-bottom">
-                      {dataEdit === true ? (
-                        <input
-                          onChange={onChange}
-                          className="form-control form-control-sm"
-                          type="text"
-                          name="facebook"
-                          defaultValue={user?.contact?.facebook}
-                        />
-                      ) : user?.contact?.facebook ? (
-                        <a
-                          style={{ textDecoration: 'none' }}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                          href={user?.contact?.facebook}
-                          className="font-size-sm m-0"
-                        >
-                          {user?.contact?.facebook.split('/')[3]}
-                        </a>
-                      ) : (
-                        <p className="text-muted font-size-sm m-0">
-                          {userTags.notSet}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-3 py-1 d-flex justify-content-center align-items-center">
-                      <FontAwesomeIcon icon={faInstagram} color="purple" />
-                    </div>
-                    <div className="col-sm-9 py-1   border-bottom">
-                      {dataEdit === true ? (
-                        <input
-                          onChange={onChange}
-                          className="form-control form-control-sm"
-                          type="text"
-                          name="instagram"
-                          defaultValue={user?.contact?.instagram}
-                        />
-                      ) : user?.contact?.instagram ? (
-                        <p className="text-muted font-size-sm m-0">
-                          {user?.contact?.instagram}
-                        </p>
-                      ) : (
-                        <p className="text-muted font-size-sm m-0">
-                          {userTags.notSet}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-3 py-1 d-flex justify-content-center align-items-center">
-                      <FontAwesomeIcon icon={faLinkedin} color="blue" />
-                    </div>
-                    <div className="col-sm-9 py-1   border-bottom">
-                      {dataEdit === true ? (
-                        <input
-                          className="form-control form-control-sm"
-                          onChange={onChange}
-                          type="text"
-                          name="linkedin"
-                          defaultValue={user?.contact?.linkedin}
-                        />
-                      ) : user?.contact?.linkedin ? (
-                        <a
-                          style={{ textDecoration: 'none' }}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                          href={user?.contact?.linkedin}
-                          className="font-size-sm m-0 m-0"
-                        >
-                          {user?.contact?.linkedin.split('/')[4]}
-                        </a>
-                      ) : (
-                        <p className="text-muted font-size-sm m-0 m-0">
-                          {userTags.notSet}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-3 py-1 d-flex justify-content-center align-items-center">
-                      <FontAwesomeIcon icon={faPhone} color="green" />
-                    </div>
-                    <div className="col-sm-9 py-1   border-bottom">
-                      {dataEdit === true ? (
-                        <input
-                          className="form-control form-control-sm"
-                          onChange={onChange}
-                          type="text"
-                          name="phone"
-                          defaultValue={user?.contact?.phone}
-                        />
-                      ) : user?.contact?.phone ? (
-                        <p className="text-muted font-size-sm m-0">
-                          {user?.contact?.phone}
-                        </p>
-                      ) : (
-                        <p className="text-muted font-size-sm m-0">
-                          {userTags.notSet}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-3 py-1 d-flex justify-content-center align-items-center">
-                      <FontAwesomeIcon icon={faAddressCard} color="orange" />
-                    </div>
-                    <div className="col-sm-9 py-1   ">
-                      {dataEdit === true ? (
-                        <input
-                          onChange={onChange}
-                          className="form-control form-control-sm-sm form-control form-control-sm"
-                          type="text"
-                          name="others"
-                          defaultValue={user?.contact?.others}
-                        />
-                      ) : user?.contact?.others ? (
-                        <p className="text-muted font-size-sm m-0">
-                          {user?.contact?.others}
-                        </p>
-                      ) : (
-                        <p className="text-muted font-size-sm m-0">
-                          {userTags.notSet}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <Contact user={user} dataEdit={dataEdit} onChange={onChange} />
             </div>
             <div className="col-md-8">
-              <div className="card mb-3">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-3 py-1 border-bottom">
-                      <p className="tag-text">{userTags.email}</p>
-                    </div>
-
-                    <div className="col-sm-9 py-1   border-bottom">
-                      {dataEdit === true ? (
-                        <>
-                          {user?.email}
-                          <span className="text-danger">*</span>
-                        </>
-                      ) : (
-                        user?.email
-                      )}
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-3 py-1 border-bottom">
-                      <p className="tag-text">
-                        {user?.type === 'student'
-                          ? userTags.fullName
-                          : userTags.companyName}
-                      </p>
-                    </div>
-                    <div className="col-sm-9 py-1   border-bottom">
-                      {dataEdit === true ? (
-                        <input
-                          onChange={onChange}
-                          className="form-control form-control-sm"
-                          type="text"
-                          name="name"
-                          defaultValue={user?.name}
-                        />
-                      ) : (
-                        user?.name
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-3 py-1 border-bottom">
-                      <p className="text">{userTags.address}</p>
-                    </div>
-                    <div className="col-sm-9 py-1   border-bottom">
-                      {dataEdit === true ? (
-                        <input
-                          onChange={onChange}
-                          className="form-control form-control-sm"
-                          type="text"
-                          name="address"
-                          defaultValue={user?.address}
-                        />
-                      ) : (
-                        user?.address
-                      )}
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-3 py-1 border-bottom">
-                      <p className="tag-text">
-                        {user?.type === 'student'
-                          ? userTags.education
-                          : userTags.activity}
-                      </p>
-                    </div>
-                    <div className="col-sm-9 py-1   border-bottom">
-                      {dataEdit === true ? (
-                        user?.type === 'student' ? (
-                          <select
-                            className="form-control"
-                            onChange={onChange}
-                            name="education"
-                          >
-                            {studies.map((study, key) => (
-                              <option key={`studies-${key}`} value={study}>
-                                {study}
-                              </option>
-                            ))}
-                          </select>
-                        ) : (
-                          <select
-                            className="form-control"
-                            onChange={onChange}
-                            name="activityDomain"
-                          >
-                            {domains.map((domain, key) => (
-                              <option
-                                key={`activityDomain-${key}`}
-                                value={domain}
-                              >
-                                {domain}
-                              </option>
-                            ))}
-                          </select>
-                        )
-                      ) : user?.type === 'student' ? (
-                        user?.student?.education
-                      ) : (
-                        user?.company?.activityDomain
-                      )}
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-3 py-1 border-bottom">
-                      <p className="tag-text">
-                        {user?.type === 'student'
-                          ? userTags.birthDate
-                          : userTags.creationDate}
-                      </p>
-                    </div>
-                    <div className="col-sm-9 py-1   border-bottom">
-                      {dataEdit === true ? (
-                        user?.type === 'student' ? (
-                          <input
-                            onChange={onChange}
-                            className="form-control form-control-sm"
-                            type="date"
-                            name="birthDate"
-                            defaultValue={user?.student?.birthDate}
-                          />
-                        ) : (
-                          <input
-                            onChange={onChange}
-                            className="form-control form-control-sm"
-                            type="date"
-                            name="creationDate"
-                            defaultValue={user?.company?.creationDate}
-                          />
-                        )
-                      ) : user?.type === 'student' ? (
-                        formatDate(user?.student?.birthDate)
-                      ) : (
-                        formatDate(user?.company?.creationDate)
-                      )}
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-3 py-1">
-                      <p className="tag-text">{userTags.description}</p>
-                    </div>
-                    <div className="col-sm-9 py-1  ">
-                      {dataEdit === true ? (
-                        <textarea
-                          onChange={onChange}
-                          className="form-control form-control-sm"
-                          type="text"
-                          name="description"
-                          defaultValue={user?.description}
-                        />
-                      ) : (
-                        user?.description
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h4 className="user-title">{userTags.skills}</h4>
+              <Data
+                dataEdit={dataEdit}
+                user={user}
+                onChange={onChange}
+                formatDate={formatDate}
+              />
               {user?.type === 'student' ? (
-                <Skills
-                  skills={user?.student?.skills}
-                  skillsEdit={skillsEdit}
-                  setSkillsEdit={setSkillsEdit}
-                  updateUser={updateUser}
-                  setUpdatedUser={setUpdatedUser}
-                  updatedUser={updatedUser}
-                />
+                <>
+                  <h4 className="user-title">{userTags.skills}</h4>
+                  <Skills
+                    skills={user?.student?.skills}
+                    skillsEdit={skillsEdit}
+                    setSkillsEdit={setSkillsEdit}
+                    updateUser={updateUser}
+                    setUpdatedUser={setUpdatedUser}
+                    updatedUser={updatedUser}
+                  />
+                </>
               ) : (
                 <></>
               )}
-
               <h4 className="user-title">{userTags.posts}</h4>
-              <div>
-                {posts.map((post) => {
-                  if (post?.user?.id === user?.id) {
-                    return (
-                      <Post
-                        key={post.id}
-                        id={post.id}
-                        title={post.title}
-                        domain={post.domain}
-                        createdAt={post.createdAt}
-                        picture={`${BASE_URL}/${post.user.profilePicture}`}
-                        description={post.description}
-                        type={post.workHours}
-                        location={post.workPlace}
-                        user={post.user}
-                      />
-                    );
-                  }
-                })}
-              </div>
+              <Posts posts={posts} user={user} url={BASE_URL} />
             </div>
           </div>
         ) : (

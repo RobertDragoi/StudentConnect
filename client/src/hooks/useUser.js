@@ -9,8 +9,12 @@ export default function useUser() {
   // eslint-disable-next-line no-unused-vars
   const [searchedParams, setSearchParams] = useSearchParams();
 
+  const {
+    user: authUser,
+    updateUser,
+    loading: authLoading,
+  } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
-  const { user: authUser, updateUser } = useContext(UserContext);
   const [user, setUser] = useState(null);
   const [isCurrentUser, setIsCurrentUser] = useState(false);
   const [updatedUser, setUpdatedUser] = useState(user);
@@ -43,7 +47,7 @@ export default function useUser() {
 
   return {
     updateUser,
-    loading,
+    loading: isCurrentUser ? authLoading : loading,
     user,
     isCurrentUser,
     updatedUser,

@@ -10,7 +10,7 @@
 .skill-item {
   position: relative;
   width: fit-content !important;
-  background-color: rgb(183, 182, 182);
+  background-color: #6c757d;
   color: white;
   padding: 0px 16px 0px 16px;
   font-size: 17px;
