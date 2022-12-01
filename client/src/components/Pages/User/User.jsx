@@ -38,12 +38,12 @@ export const User = () => {
   const { data: user } = useQuery({
     queryKey: ['getUser', id],
     queryFn: () => getUser(id),
-    staleTime: 6000,
+    staleTime: 60000,
   });
   const { isFetching, data: posts } = useQuery({
     queryKey: ['getPosts'],
     queryFn: getPosts,
-    staleTime: 6000,
+    staleTime: 60000,
   });
 
   const onEdit = () => {

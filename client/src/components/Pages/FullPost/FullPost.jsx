@@ -25,7 +25,7 @@ const FullPost = () => {
   const { isLoading, data: currentPost } = useQuery({
     queryKey: ['getPost', id],
     queryFn: () => getPost(id),
-    staleTime: 6000,
+    staleTime: 60000,
   });
   const socket = socketIOClient('http://localhost:4007');
   socket.on('RefreshPage', (msg) => {
