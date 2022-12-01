@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import UserContext from '../../../state/UserState/userContext';
 import SearchBar from '../SearchBar/SearchBar';
@@ -7,26 +8,26 @@ import './Navbar.css';
 
 const Navbar = () => {
   const userContext = useContext(UserContext);
-  const { user, loading, logout, loadUser, refreshToken } = userContext;
+  const { user, logout, loadUser, refreshToken } = userContext;
 
-  const tokensRefresher = async () => {
-    if (Cookies.get('auth-token') && !user) {
-      console.log('Load user');
-      await loadUser();
-    }
-    if (Cookies.get('refresh-token') && !Cookies.get('auth-token')) {
-      console.log('Refresh token && load user');
-      await refreshToken();
-      await loadUser();
-    }
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      tokensRefresher();
-    }, 250);
-    return () => clearInterval(interval);
-  }, [user]);
+  const { isLoading } = useQuery({
+    queryKey: ['loadUser', user],
+    queryFn: async () => {
+      if (Cookies.get('auth-token') && !user) {
+        console.log('Load user');
+        await loadUser();
+        return;
+      }
+      if (Cookies.get('refresh-token') && !Cookies.get('auth-token')) {
+        console.log('Refresh token && load user');
+        await refreshToken();
+        await loadUser();
+        return;
+      }
+    },
+    staleTime: 6000,
+    refetchInterval: 60000 * 15,
+  });
 
   return (
     <div className="navbar-container">
@@ -36,7 +37,7 @@ const Navbar = () => {
             <p className="navbar-title"> Home</p>
           </NavLink>
         </div>
-        {!loading ? (
+        {!isLoading ? (
           user ? (
             <React.Fragment>
               <div className="navbar-item">

@@ -13,25 +13,34 @@ import Errors from './components/Layout/Errors/Errors';
 import PostState from './state/PostState/PostState';
 import UserState from './state/UserState/UserState';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const App = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
   return (
     <div className="d-flex flex-column">
       <Router>
         <PostState>
           <UserState>
-            <NavBar />
-            <Errors />
-            <Routes>
-              <Route exact path="/login" element={<LoginForm />} />
-              <Route exact path="/register" element={<RegisterForm />} />
-              <Route exact path="/home" element={<Home />} />
-              <Route exact path="/users/:id" element={<User />} />
-              <Route exact path="/post/:id" element={<FullPost />} />
-              <Route exact path="/createpost" element={<PostForm />} />
-              <Route exact path="/" element={<Welcome />} />
-            </Routes>
-            <Footer />
+            <QueryClientProvider client={queryClient}>
+              <NavBar />
+              <Errors />
+              <Routes>
+                <Route exact path="/login" element={<LoginForm />} />
+                <Route exact path="/register" element={<RegisterForm />} />
+                <Route exact path="/home" element={<Home />} />
+                <Route exact path="/users/:id" element={<User />} />
+                <Route exact path="/post/:id" element={<FullPost />} />
+                <Route exact path="/createpost" element={<PostForm />} />
+                <Route exact path="/" element={<Welcome />} />
+              </Routes>
+              <Footer />
+            </QueryClientProvider>
           </UserState>
         </PostState>
       </Router>

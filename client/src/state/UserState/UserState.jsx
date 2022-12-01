@@ -65,7 +65,19 @@ const UserState = (props) => {
     dispatch({ type: LOGOUT });
     navigate('/');
   };
-
+  const getUser = async (id) => {
+    try {
+      const user = await usersService.getUser(id);
+      console.log(user);
+      return user;
+    } catch (error) {
+      dispatch({ type: LOGIN_FAIL, payload: error.message });
+    }
+  };
+  const getUsers = async () => {
+    const users = await usersService.getUsers();
+    return users;
+  };
   const updateUser = async (formData) => {
     try {
       const updatedUser = await usersService.updateUser(formData);
@@ -94,6 +106,8 @@ const UserState = (props) => {
         register,
         login,
         logout,
+        getUser,
+        getUsers,
         updateUser,
         loadUser,
       }}

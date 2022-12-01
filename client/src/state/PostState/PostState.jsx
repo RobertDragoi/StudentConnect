@@ -1,33 +1,26 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
-
 import PostContext from './postContext';
 import PostReducer from './postReducer';
 import postService from '../../services/post';
 import {
-  LOAD_POSTS,
-  POSTS_LOADED,
+  ADD_POST,
+  DELETE_POST,
+  MODIFY_POST,
   SET_FILTERS,
   REMOVE_FILTER,
   SET_SEARCH,
-  DELETE_POST,
-  ADD_POST,
-  GET_POST,
   POST_ERROR,
-  MODIFY_POST,
 } from '../../types';
+
 const PostState = (props) => {
   const initialState = {
-    currentPost: null,
     filters: [],
-    posts: [],
     search: null,
-    loading: false,
     error: null,
   };
   const [state, dispatch] = useReducer(PostReducer, initialState);
   const getPosts = async () => {
-    console.log('IN FETCH DATA');
     try {
       const query = postService.makeQuery();
       if (state.search) {
@@ -37,30 +30,25 @@ const PostState = (props) => {
         query.filter(filter.field, filter.value);
       }
       console.log('-----', query);
-      dispatch({ type: LOAD_POSTS });
       const posts = await query.exec();
-      dispatch({ type: POSTS_LOADED, payload: posts });
+      return posts;
     } catch (error) {
       console.log('IT ERRORED>>>' + error);
-      dispatch({ type: POST_ERROR, payload: error.response.data.msg });
-    }
-  };
-  useEffect(() => {
-    console.log('REFETCHING');
-    getPosts();
-  }, [state.search, state.filters]);
-  const createPost = async (formData) => {
-    try {
-      const post = await postService.createPost(formData);
-      dispatch({ type: ADD_POST, payload: post });
-    } catch (error) {
       dispatch({ type: POST_ERROR, payload: error.response.data.msg });
     }
   };
   const getPost = async (id) => {
     try {
       const post = await postService.getPost(id);
-      dispatch({ type: GET_POST, payload: post });
+      return post;
+    } catch (error) {
+      dispatch({ type: POST_ERROR, payload: error.response.data.msg });
+    }
+  };
+  const createPost = async (formData) => {
+    try {
+      await postService.createPost(formData);
+      dispatch({ type: ADD_POST });
     } catch (error) {
       dispatch({ type: POST_ERROR, payload: error.response.data.msg });
     }
@@ -68,15 +56,15 @@ const PostState = (props) => {
   const deletePost = async (id) => {
     try {
       await postService.deletePost(id);
-      dispatch({ type: DELETE_POST, payload: id });
+      dispatch({ type: DELETE_POST });
     } catch (error) {
       dispatch({ type: POST_ERROR, payload: error.response.data.msg });
     }
   };
   const manageComment = async (id, formData, action) => {
     try {
-      const post = await postService.manageComment(id, formData, action);
-      dispatch({ type: MODIFY_POST, payload: post });
+      await postService.manageComment(id, formData, action);
+      dispatch({ type: MODIFY_POST });
     } catch (error) {
       dispatch({ type: POST_ERROR, payload: error.response.data.msg });
     }
@@ -100,6 +88,7 @@ const PostState = (props) => {
         ...state,
         createPost,
         getPost,
+        getPosts,
         deletePost,
         manageComment,
         setSearch,

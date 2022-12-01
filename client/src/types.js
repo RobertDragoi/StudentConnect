@@ -12,8 +12,6 @@ export const LOGOUT = 'LOGOUT';
 export const REFRESH_TOKEN = 'REFRESH_TOKEN';
 
 export const SET_SEARCH = 'SET_SEARCH';
-export const POSTS_LOADED = 'POSTS_LOADED';
-export const LOAD_POSTS = 'LOAD_POSTS';
 export const SET_FILTERS = 'SET_FILTERS';
 export const REMOVE_FILTER = 'REMOVE_FILTER';
 export const CLEAR_FILTERS = 'CLEAR_FILTERS';

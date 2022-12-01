@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useMutation } from '@tanstack/react-query';
 import ReactImageFallback from 'react-image-fallback';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,11 +11,9 @@ import { formatDate } from '../../../utils/functions';
 import './Post.css';
 
 const Post = (props) => {
-  const userContext = useContext(UserContext);
-  const postContext = useContext(PostContext);
-  const { user } = userContext;
-  const { deletePost } = postContext;
   const {
+    render,
+    setRender,
     className,
     picture,
     user: postUser,
@@ -25,6 +24,14 @@ const Post = (props) => {
     createdAt,
     type,
   } = props;
+  const userContext = useContext(UserContext);
+  const postContext = useContext(PostContext);
+  const { user } = userContext;
+  const { deletePost } = postContext;
+  const mutation = useMutation({
+    mutationFn: () => deletePost(id),
+  });
+
   return (
     <React.Fragment>
       <div className="post-container">
@@ -68,7 +75,8 @@ const Post = (props) => {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        deletePost(id);
+                        mutation.mutate();
+                        setRender(!render);
                       }}
                       type="button"
                       className="btn btn-outline-danger"
@@ -110,6 +118,8 @@ export default Post;
 
 Post.propTypes = {
   className: PropTypes.string,
+  render: PropTypes.bool,
+  setRender: PropTypes.func,
   picture: PropTypes.string,
   user: PropTypes.object,
   createdAt: PropTypes.string,

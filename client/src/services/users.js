@@ -3,12 +3,12 @@ import { BASE_URL } from '../utils/config';
 
 const getUsers = async () => {
   const res = await axios.get(`${BASE_URL}/api/users`);
-  return res;
+  return res.data;
 };
 
 const getUser = async (id) => {
   const res = await axios.get(`${BASE_URL}/api/users/${id}`);
-  return res;
+  return res.data;
 };
 
 const updateUser = async (formData) => {

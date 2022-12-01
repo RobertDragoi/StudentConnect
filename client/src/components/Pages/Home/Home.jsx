@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Fab } from 'react-tiny-fab';
-import 'react-tiny-fab/dist/styles.css';
+import { useQuery } from '@tanstack/react-query';
 import Post from '../../Layout/Post/Post';
 import Spinner from '../../Layout/Spinner/Spinner';
 import CurrentFilters from '../../Layout/CurrentFilters/CurrentFilters';
@@ -9,16 +9,24 @@ import UserContext from '../../../state/UserState/userContext';
 import PostContext from '../../../state/PostState/postContext';
 import { BASE_URL } from '../../../utils/config';
 import { homeTags } from './tags';
+import 'react-tiny-fab/dist/styles.css';
 import './Home.css';
 
 const Home = () => {
   const [type, setType] = useState('companies');
+  const [render, setRender] = useState(false);
   const postContext = useContext(PostContext);
   const userContext = useContext(UserContext);
-  const { posts, loading } = postContext;
+  const { getPosts, search, filters } = postContext;
   const { isAuthenticated } = userContext;
-  const studentsPosts = posts.filter((post) => post.user.type === 'student');
-  const companiesPosts = posts.filter((post) => post.user.type === 'company');
+  const { isFetching, data: posts } = useQuery({
+    queryKey: ['getPosts', filters, search, render],
+    queryFn: getPosts,
+    staleTime: 6000,
+  });
+  console.log(isFetching ? 'Posts loading' : 'Posts loaded');
+  const studentsPosts = posts?.filter((post) => post.user.type === 'student');
+  const companiesPosts = posts?.filter((post) => post.user.type === 'company');
 
   return (
     <div className="main-body">
@@ -58,46 +66,47 @@ const Home = () => {
                 )}
               </div>
             </div>
-            {!loading ? (
-              type === 'students' ? (
-                studentsPosts.map((post) => {
-                  return (
-                    <Post
-                      key={post.id}
-                      id={post.id}
-                      className="col sm-8"
-                      title={post.title}
-                      domain={post.domain}
-                      createdAt={post.createdAt}
-                      picture={`${BASE_URL}/${post.user.profilePicture}`}
-                      description={post.description}
-                      type={post.workHours}
-                      location={post.workPlace}
-                      user={post.user}
-                    />
-                  );
-                })
-              ) : (
-                companiesPosts.map((post) => {
-                  return (
-                    <Post
-                      key={post.id}
-                      id={post.id}
-                      className="col sm-8"
-                      title={post.title}
-                      domain={post.domain}
-                      createdAt={post.createdAt}
-                      picture={`${BASE_URL}/${post.user.profilePicture}`}
-                      description={post.description}
-                      type={post.workHours}
-                      location={post.workPlace}
-                      user={post.user}
-                    />
-                  );
-                })
-              )
-            ) : (
+            {isFetching ? (
               <Spinner />
+            ) : type === 'students' ? (
+              studentsPosts.map((post) => {
+                return (
+                  <Post
+                    key={post.id}
+                    id={post.id}
+                    className="col sm-8"
+                    setRender={setRender}
+                    title={post.title}
+                    domain={post.domain}
+                    createdAt={post.createdAt}
+                    picture={`${BASE_URL}/${post.user.profilePicture}`}
+                    description={post.description}
+                    type={post.workHours}
+                    location={post.workPlace}
+                    user={post.user}
+                  />
+                );
+              })
+            ) : (
+              companiesPosts.map((post) => {
+                return (
+                  <Post
+                    key={post.id}
+                    id={post.id}
+                    className="col sm-8"
+                    render={render}
+                    setRender={setRender}
+                    title={post.title}
+                    domain={post.domain}
+                    createdAt={post.createdAt}
+                    picture={`${BASE_URL}/${post.user.profilePicture}`}
+                    description={post.description}
+                    type={post.workHours}
+                    location={post.workPlace}
+                    user={post.user}
+                  />
+                );
+              })
             )}
             <Link to="/createpost">
               {isAuthenticated ? (

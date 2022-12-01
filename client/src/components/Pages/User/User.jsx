@@ -1,12 +1,15 @@
 import React, { useContext } from 'react';
-import PostContext from '../../../state/PostState/postContext';
+import { useParams } from 'react-router-dom';
 import ReactImageFallback from 'react-image-fallback';
+import { useQuery } from '@tanstack/react-query';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faUser } from '@fortawesome/free-solid-svg-icons';
 import useUser from '../../../hooks/useUser';
 import { BASE_URL } from '../../../utils/config';
 import { formatDate } from '../../../utils/functions';
 import { userTags } from './tags';
+import PostContext from '../../../state/PostState/postContext';
+import UserContext from '../../../state/UserState/userContext';
 import Spinner from '../../Layout/Spinner/Spinner';
 import Data from './Data';
 import Posts from './Posts';
@@ -15,10 +18,13 @@ import Contact from './Contact';
 import './User.css';
 
 export const User = () => {
+  console.log('User component');
+  const { id } = useParams();
   const postContext = useContext(PostContext);
-  const { posts } = postContext;
+  const userContext = useContext(UserContext);
+  const { getPosts } = postContext;
+  const { getUser } = userContext;
   const {
-    user,
     updateUser,
     loading,
     updatedUser,
@@ -29,6 +35,17 @@ export const User = () => {
     skillsEdit,
     setSkillsEdit,
   } = useUser();
+  const { data: user } = useQuery({
+    queryKey: ['getUser', id],
+    queryFn: () => getUser(id),
+    staleTime: 6000,
+  });
+  const { isFetching, data: posts } = useQuery({
+    queryKey: ['getPosts'],
+    queryFn: getPosts,
+    staleTime: 6000,
+  });
+
   const onEdit = () => {
     switch (dataEdit) {
       case true:
@@ -41,7 +58,7 @@ export const User = () => {
     }
   };
   const onChange = (e) => {
-    let aux = updatedUser;
+    let aux = user;
     Object.keys(aux).forEach((key) => {
       if (key === e.target.name) {
         aux[key] = e.target.value;
@@ -57,7 +74,8 @@ export const User = () => {
     });
     setUpdatedUser(aux);
   };
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     updateUser(updatedUser);
     setDataEdit(false);
   };
@@ -178,7 +196,11 @@ export const User = () => {
                 <></>
               )}
               <h4 className="user-title">{userTags.posts}</h4>
-              <Posts posts={posts} user={user} url={BASE_URL} />
+              {isFetching ? (
+                <Spinner />
+              ) : (
+                <Posts posts={posts} user={user} url={BASE_URL} />
+              )}
             </div>
           </div>
         ) : (

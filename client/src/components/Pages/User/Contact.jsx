@@ -7,8 +7,8 @@ import {
   faLinkedin,
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { userTags } from './tags';
+
 const Contact = ({ user, dataEdit, onChange }) => {
   return (
     <div className="card mt-3 ">

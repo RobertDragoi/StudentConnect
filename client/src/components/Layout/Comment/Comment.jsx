@@ -10,7 +10,7 @@ const Comment = ({
   user,
   setEdit,
   edit,
-  setupdatedComment,
+  setUpdatedComment,
   manageComment,
   id,
   fetchPost,
@@ -55,7 +55,7 @@ const Comment = ({
                     id: comment?.id,
                     bool: edit.bool ? false : true,
                   });
-                  setupdatedComment({
+                  setUpdatedComment({
                     user: user?.id,
                     body: comment?.body,
                   });
@@ -117,7 +117,7 @@ Comment.propTypes = {
   id: PropTypes.string,
   formatDate: PropTypes.func,
   setEdit: PropTypes.func,
-  setupdatedComment: PropTypes.func,
+  setUpdatedComment: PropTypes.func,
   onSubmitUpdated: PropTypes.func,
   onChangeUpdated: PropTypes.func,
   manageComment: PropTypes.func,

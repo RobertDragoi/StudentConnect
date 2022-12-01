@@ -4,7 +4,7 @@ import Post from '../../Layout/Post/Post';
 const Posts = ({ posts, user, url }) => {
   return (
     <div>
-      {posts.map((post) => {
+      {posts?.map((post) => {
         if (post?.user?.id === user?.id) {
           return (
             <Post
