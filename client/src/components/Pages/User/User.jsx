@@ -1,31 +1,26 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import ReactImageFallback from 'react-image-fallback';
-import { useQuery } from '@tanstack/react-query';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faUser } from '@fortawesome/free-solid-svg-icons';
-import useUser from '../../../hooks/useUser';
 import { BASE_URL } from '../../../utils/config';
 import { formatDate } from '../../../utils/functions';
-import { userTags } from './tags';
-import PostContext from '../../../state/PostState/postContext';
-import UserContext from '../../../state/UserState/userContext';
+import { useQuery } from '@tanstack/react-query';
+import useUser from '../../../hooks/useUser';
 import Spinner from '../../Layout/Spinner/Spinner';
 import Data from './Data';
 import Posts from './Posts';
 import Skills from './Skills';
 import Contact from './Contact';
+import { userTags } from './tags';
 import './User.css';
 
 export const User = () => {
-  console.log('User component');
   const { id } = useParams();
-  const postContext = useContext(PostContext);
-  const userContext = useContext(UserContext);
-  const { getPosts } = postContext;
-  const { getUser } = userContext;
   const {
     updateUser,
+    getUser,
+    getPosts,
     loading,
     updatedUser,
     setUpdatedUser,

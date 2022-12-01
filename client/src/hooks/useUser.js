@@ -2,12 +2,13 @@
 import { useSearchParams } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import UserContext from '../state/UserState/userContext';
-
-export default function useUser() {
+import PostContext from '../state/PostState/postContext';
+const useUser = () => {
   // eslint-disable-next-line no-unused-vars
   const [searchedParams, setSearchParams] = useSearchParams();
 
-  const { updateUser, loading: authLoading } = useContext(UserContext);
+  const { updateUser, getUser, loading } = useContext(UserContext);
+  const { getPosts } = useContext(PostContext);
   const [updatedUser, setUpdatedUser] = useState(null);
   const [dataEdit, setDataEdit] = useState(false);
   const [skillsEdit, setSkillsEdit] = useState(false);
@@ -15,7 +16,9 @@ export default function useUser() {
   console.log('useUser');
   return {
     updateUser,
-    loading: authLoading,
+    getUser,
+    getPosts,
+    loading,
     isCurrentUser:
       searchedParams.get('isCurrentUser') === 'true' ? true : false,
     updatedUser,
@@ -25,4 +28,5 @@ export default function useUser() {
     skillsEdit,
     setSkillsEdit,
   };
-}
+};
+export default useUser;
