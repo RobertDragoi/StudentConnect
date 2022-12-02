@@ -12,26 +12,28 @@ import './Post.css';
 
 const Post = (props) => {
   const {
-    render,
-    setRender,
-    className,
-    picture,
-    user: postUser,
     id,
+    className,
+    setRender,
     title,
     domain,
-    location,
     createdAt,
+    picture,
     type,
+    location,
+    user: postUser,
   } = props;
   const userContext = useContext(UserContext);
   const postContext = useContext(PostContext);
   const { user } = userContext;
   const { deletePost } = postContext;
   const mutation = useMutation({
-    mutationFn: () => deletePost(id),
+    mutationFn: async () => await deletePost(id),
   });
-
+  if (mutation.isSuccess) {
+    console.log(`Post ${id} deleted`);
+    setRender(id);
+  }
   return (
     <React.Fragment>
       <div className="post-container">
@@ -73,10 +75,11 @@ const Post = (props) => {
                 {user?.id === postUser.id ? (
                   <span>
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
+                      onClick={() => {
                         mutation.mutate();
-                        setRender(!render);
+                        //setTimeout(() => {
+                        //  setRender(id);
+                        //}, 1500);
                       }}
                       type="button"
                       className="btn btn-outline-danger"
@@ -118,7 +121,6 @@ export default Post;
 
 Post.propTypes = {
   className: PropTypes.string,
-  render: PropTypes.bool,
   setRender: PropTypes.func,
   picture: PropTypes.string,
   user: PropTypes.object,
@@ -127,6 +129,5 @@ Post.propTypes = {
   type: PropTypes.number,
   title: PropTypes.string,
   domain: PropTypes.string,
-  description: PropTypes.string,
   location: PropTypes.string,
 };

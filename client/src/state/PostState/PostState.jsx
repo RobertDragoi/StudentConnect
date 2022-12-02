@@ -29,11 +29,9 @@ const PostState = (props) => {
       for (let filter of state.filters) {
         query.filter(filter.field, filter.value);
       }
-      console.log('-----', query);
       const posts = await query.exec();
       return posts;
     } catch (error) {
-      console.log('IT ERRORED>>>' + error);
       dispatch({ type: POST_ERROR, payload: error.response.data.msg });
     }
   };
