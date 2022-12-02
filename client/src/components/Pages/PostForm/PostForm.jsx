@@ -23,7 +23,7 @@ const PostForm = () => {
     createPost(post);
     navigate('/home');
   };
-  console.log(post);
+
   return (
     <div className="container">
       <div className="row">

@@ -69,7 +69,6 @@ const PostState = (props) => {
   };
 
   const setSearch = async (searchText) => {
-    console.log('SETTING SEARCH FIELD! SHOULD TRIGGER RERENDER');
     dispatch({ type: SET_SEARCH, payload: searchText });
   };
   const setFilters = (filters) => {

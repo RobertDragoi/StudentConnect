@@ -90,7 +90,6 @@ const Home = () => {
                   mainButtonStyles={{ backgroundColor: 'orangered' }}
                   alwaysShowTitle={true}
                   icon={'+'}
-                  onClick={() => console.log('button')}
                 ></Fab>
               ) : null}
             </Link>
