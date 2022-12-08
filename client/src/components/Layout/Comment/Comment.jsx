@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useMutation } from '@tanstack/react-query';
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -10,13 +11,37 @@ const Comment = ({
   user,
   setEdit,
   edit,
+  updatedComment,
   setUpdatedComment,
+  setRender,
   manageComment,
   id,
-  fetchPost,
-  onSubmitUpdated,
   onChangeUpdated,
 }) => {
+  const deleteMutation = useMutation({
+    mutationFn: async () =>
+      await manageComment(id, { id: comment.id }, 'delete'),
+  });
+  const modifyMutation = useMutation({
+    mutationFn: async () =>
+      await manageComment(
+        id,
+        {
+          ...updatedComment,
+          updated: formatDate(Date.now()),
+          id: edit.id,
+        },
+        'modify'
+      ),
+  });
+  if (deleteMutation.isSuccess) {
+    console.log(`Comment ${id} deleted`);
+    setRender(comment.id);
+  }
+  if (modifyMutation.isSuccess) {
+    console.log(`Comment ${id} modified`);
+    setRender(comment.id);
+  }
   return (
     <div
       key={comment.id}
@@ -69,8 +94,7 @@ const Comment = ({
             <span>
               <button
                 onClick={async () => {
-                  await manageComment(id, { id: comment.id }, 'delete');
-                  fetchPost(id);
+                  deleteMutation.mutate();
                 }}
                 type="button"
                 className="btn btn-outline-danger mx-1"
@@ -84,7 +108,11 @@ const Comment = ({
       <div className="row" style={{ backgroundColor: '#efeff0' }}>
         <div className="m-1">
           {edit.bool && edit.id === comment.id ? (
-            <form onSubmit={onSubmitUpdated}>
+            <form
+              onSubmit={async () => {
+                modifyMutation.mutate();
+              }}
+            >
               <div className="form-group">
                 <textarea
                   onChange={onChangeUpdated}
@@ -111,14 +139,15 @@ const Comment = ({
 };
 export default Comment;
 Comment.propTypes = {
-  comment: PropTypes.string,
+  comment: PropTypes.object,
   edit: PropTypes.bool,
   user: PropTypes.object,
   id: PropTypes.string,
   formatDate: PropTypes.func,
   setEdit: PropTypes.func,
+  updatedComment: PropTypes.object,
   setUpdatedComment: PropTypes.func,
-  onSubmitUpdated: PropTypes.func,
+  setRender: PropTypes.func,
   onChangeUpdated: PropTypes.func,
   manageComment: PropTypes.func,
   fetchPost: PropTypes.func,

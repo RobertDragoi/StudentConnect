@@ -4,6 +4,7 @@ import ReactImageFallback from 'react-image-fallback';
 import { postTags } from './tags';
 import { Link } from 'react-router-dom';
 const UpperSection = ({ currentPost, formatDate, user }) => {
+  console.log('UpperSection');
   return (
     <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
       <div className="row">

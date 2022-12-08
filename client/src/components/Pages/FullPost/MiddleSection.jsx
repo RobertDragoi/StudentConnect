@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { postTags } from './tags';
 
 const MiddleSection = ({ currentPost }) => {
+  console.log('MiddleSection');
   return (
     <div className="container p-5 my-3 bg-white text-black rounded-lg shadow ">
       <div className="row justify-content-space-around ">

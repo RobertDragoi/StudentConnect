@@ -77,9 +77,6 @@ const Post = (props) => {
                     <button
                       onClick={() => {
                         mutation.mutate();
-                        //setTimeout(() => {
-                        //  setRender(id);
-                        //}, 1500);
                       }}
                       type="button"
                       className="btn btn-outline-danger"

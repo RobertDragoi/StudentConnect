@@ -1,29 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useMutation } from '@tanstack/react-query';
 import Comment from '../../Layout/Comment/Comment';
 
 const LowerSection = ({
+  id,
   currentPost,
   isAuthenticated,
-  onSubmit,
   onChange,
-  onSubmitUpdated,
   onChangeUpdated,
-  getPost,
+  setRender,
+  comment,
   manageComment,
   body,
   formatDate,
   user,
-  setupdatedComment,
+  updatedComment,
+  setUpdatedComment,
   setEdit,
   edit,
-  id,
 }) => {
+  const mutation = useMutation({
+    mutationFn: async () => await manageComment(id, comment, 'add'),
+  });
+  if (mutation.isSuccess) {
+    console.log('Comment created');
+    setRender();
+  }
   return (
-    <React.Fragment>
+    <>
       {isAuthenticated ? (
         <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
-          <form onSubmit={onSubmit}>
+          <form onSubmit={() => mutation.mutate()}>
             <div className="form-group">
               <textarea
                 onChange={onChange}
@@ -55,33 +63,34 @@ const LowerSection = ({
           user={user}
           setEdit={setEdit}
           edit={edit}
-          setupdatedComment={setupdatedComment}
+          updatedComment={updatedComment}
+          setUpdatedComment={setUpdatedComment}
+          setRender={setRender}
           manageComment={manageComment}
           id={id}
-          fetchPost={getPost}
-          onSubmitUpdated={onSubmitUpdated}
           onChangeUpdated={onChangeUpdated}
         />
       ))}
-    </React.Fragment>
+    </>
   );
 };
 
 export default LowerSection;
 LowerSection.propTypes = {
+  id: PropTypes.string,
   currentPost: PropTypes.object,
   isAuthenticated: PropTypes.bool,
   onChange: PropTypes.func,
   onChangeUpdated: PropTypes.func,
-  onSubmit: PropTypes.func,
-  onSubmitUpdated: PropTypes.func,
   getPost: PropTypes.func,
+  setRender: PropTypes.func,
+  comment: PropTypes.object,
   manageComment: PropTypes.func,
   formatDate: PropTypes.func,
-  setupdatedComment: PropTypes.func,
+  updatedComment: PropTypes.object,
+  setUpdatedComment: PropTypes.func,
   setEdit: PropTypes.func,
   edit: PropTypes.object,
   body: PropTypes.string,
   user: PropTypes.object,
-  id: PropTypes.string,
 };
