@@ -1,6 +1,6 @@
 const usersRouter = require('express').Router();
 const middleware = require('../utils/middleware');
-const { getUsers, getUser, updateUser } = require('../services/users');
+const { getUsers, getUser, updateUser } = require('../services/user');
 
 usersRouter.get('/', getUsers);
 

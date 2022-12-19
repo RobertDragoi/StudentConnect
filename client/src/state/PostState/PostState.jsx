@@ -3,15 +3,7 @@ import PropTypes from 'prop-types';
 import PostContext from './postContext';
 import PostReducer from './postReducer';
 import postService from '../../services/post';
-import {
-  ADD_POST,
-  DELETE_POST,
-  MODIFY_POST,
-  SET_FILTERS,
-  REMOVE_FILTER,
-  SET_SEARCH,
-  POST_ERROR,
-} from '../../types';
+import { SET_FILTERS, REMOVE_FILTER, SET_SEARCH, POST_ERROR } from '../types';
 
 const PostState = (props) => {
   const initialState = {
@@ -46,7 +38,6 @@ const PostState = (props) => {
   const createPost = async (formData) => {
     try {
       await postService.createPost(formData);
-      dispatch({ type: ADD_POST });
     } catch (error) {
       dispatch({ type: POST_ERROR, payload: error.response.data.msg });
     }
@@ -54,7 +45,6 @@ const PostState = (props) => {
   const deletePost = async (id) => {
     try {
       await postService.deletePost(id);
-      dispatch({ type: DELETE_POST });
     } catch (error) {
       dispatch({ type: POST_ERROR, payload: error.response.data.msg });
     }
@@ -62,7 +52,6 @@ const PostState = (props) => {
   const manageComment = async (id, formData, action) => {
     try {
       await postService.manageComment(id, formData, action);
-      dispatch({ type: MODIFY_POST });
     } catch (error) {
       dispatch({ type: POST_ERROR, payload: error.response.data.msg });
     }

@@ -7,7 +7,7 @@ const {
   getPost,
   manageComment,
   deletePost,
-} = require('../services/posts');
+} = require('../services/post');
 postsRouter.post(
   '/',
   middleware.tokenExtractor,

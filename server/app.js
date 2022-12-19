@@ -48,6 +48,6 @@ app.use(express.json());
 app.use('/public', express.static('public'));
 
 app.use('/api/auth', require('./routes/auth'));
-app.use('/api/users', require('./routes/users'));
-app.use('/api/posts', require('./routes/posts'));
+app.use('/api/user', require('./routes/user'));
+app.use('/api/post', require('./routes/post'));
 module.exports = app;

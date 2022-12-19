@@ -7,7 +7,7 @@ import {
   LOAD_USER,
   LOADING,
   LOGOUT,
-} from '../../types';
+} from '../types';
 
 export default function (state, action) {
   switch (action.type) {

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import UserContext from './userContext';
 import UserReducer from './userReducer';
 import authService from '../../services/auth';
-import usersService from '../../services/users';
+import userService from '../../services/user';
 import {
   REGISTER_SUCCES,
   REGISTER_FAIL,
@@ -15,7 +15,7 @@ import {
   LOAD_USER,
   LOADING,
   LOGOUT,
-} from '../../types';
+} from '../types';
 
 const UserState = (props) => {
   let navigate = useNavigate();
@@ -67,7 +67,7 @@ const UserState = (props) => {
   };
   const getUser = async (id) => {
     try {
-      const user = await usersService.getUser(id);
+      const user = await userService.getUser(id);
       console.log(user);
       return user;
     } catch (error) {
@@ -75,12 +75,12 @@ const UserState = (props) => {
     }
   };
   const getUsers = async () => {
-    const users = await usersService.getUsers();
+    const users = await userService.getUsers();
     return users;
   };
   const updateUser = async (formData) => {
     try {
-      const updatedUser = await usersService.updateUser(formData);
+      const updatedUser = await userService.updateUser(formData);
       dispatch({ type: LOAD_USER, payload: updatedUser });
     } catch (error) {
       dispatch({ type: LOGIN_FAIL, payload: error.response.data.msg });

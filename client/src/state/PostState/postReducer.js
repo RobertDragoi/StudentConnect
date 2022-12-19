@@ -1,24 +1,6 @@
-import {
-  SET_SEARCH,
-  SET_FILTERS,
-  REMOVE_FILTER,
-  ADD_POST,
-  POST_ERROR,
-  DELETE_POST,
-  MODIFY_POST,
-} from '../../types';
+import { SET_SEARCH, SET_FILTERS, REMOVE_FILTER, POST_ERROR } from '../types';
 export default function (state, action) {
   switch (action.type) {
-    case ADD_POST:
-      return { ...state };
-    case DELETE_POST:
-      return {
-        ...state,
-      };
-    case MODIFY_POST:
-      return {
-        ...state,
-      };
     case POST_ERROR:
       return { ...state, error: action.payload };
     case SET_SEARCH:
