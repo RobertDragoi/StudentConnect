@@ -1,4 +1,3 @@
-const logger = require('../utils/logger');
 const User = require('../models/user');
 
 const getUsers = async (req, res) => {
@@ -13,7 +12,6 @@ const getUser = async (request, response) => {
     const searchedUser = await User.findById(id);
     response.json(searchedUser);
   } catch (error) {
-    logger.error(error.message);
     response.status(500).json({ msg: 'No such user found!' });
   }
 };

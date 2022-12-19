@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import PostContext from '../../../state/PostState/postContext';
+import React from 'react';
+import useModalFilters from '../../../hooks/useModalFilters';
 import { Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 import { locations, domains } from '../../../placeholders';
@@ -7,52 +7,15 @@ import { modalTags } from './tags';
 import './ModalFilters.css';
 
 const ModalFilters = () => {
-  const [show, setShow] = useState(false);
-  const postContext = useContext(PostContext);
-  const { setFilters } = postContext;
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [city, setCity] = useState('');
-  const [domain, setDomain] = useState('');
-  const [type, setType] = useState('');
-  const submitFilters = (e) => {
-    e.preventDefault();
-
-    handleClose();
-    let filters = [];
-    if (city) {
-      filters.push({
-        displayField: 'City',
-        displayValue: city,
-        field: 'workPlace',
-        value: city,
-      });
-    }
-    if (domain)
-      filters.push({
-        displayField: 'Domain',
-        displayValue: domain,
-        field: 'domain',
-        value: domain,
-      });
-    if (type === 'part-time') {
-      filters.push({
-        displayField: 'Type',
-        displayValue: 'Part-Time',
-        field: 'workHours[$lt]',
-        value: 8,
-      });
-    } else if (type === 'full-time') {
-      filters.push({
-        displayField: 'Type',
-        displayValue: 'Full-Time',
-        field: 'workHours[$gte]',
-        value: 8,
-      });
-    }
-
-    setFilters(filters);
-  };
+  const {
+    show,
+    setDomain,
+    setWorkPlace,
+    setWorkHours,
+    handleShow,
+    handleClose,
+    submitFilters,
+  } = useModalFilters();
 
   return (
     <>
@@ -69,9 +32,10 @@ const ModalFilters = () => {
                 <div className="anyClass">
                   <select
                     className="form-control"
-                    onChange={(e) => setCity(e.target.value)}
-                    name="city"
+                    onChange={(e) => setWorkPlace(e.target.value)}
+                    name="workPlace"
                   >
+                    <option>{modalTags.choose}</option>
                     {locations.map((location, key) => (
                       <option key={`location${key}`} value={location}>
                         {location}
@@ -88,6 +52,7 @@ const ModalFilters = () => {
                     onChange={(e) => setDomain(e.target.value)}
                     name="domain"
                   >
+                    <option>{modalTags.choose}</option>
                     {domains.map((domain, key) => (
                       <option key={`domain_${key}`} value={domain}>
                         {domain}
@@ -101,27 +66,40 @@ const ModalFilters = () => {
                 <div className="form-check">
                   <input
                     className="form-check-input"
-                    value="part-time"
-                    onChange={(e) => setType(e.target.value)}
-                    type="radio"
-                    id="part-time"
-                    name="job-type"
-                  ></input>
-                  <label className="form-check-label" htmlFor="part-time">
-                    {modalTags.partTime}
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
                     value="full-time"
-                    onChange={(e) => setType(e.target.value)}
+                    onChange={(e) => setWorkHours(e.target.value)}
                     type="radio"
                     id="full-time"
                     name="job-type"
                   ></input>
                   <label className="form-check-label" htmlFor="full-time">
                     {modalTags.fullTime}
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    value="part-time1"
+                    onChange={(e) => setWorkHours(e.target.value)}
+                    type="radio"
+                    id="part-time1"
+                    name="job-type"
+                  ></input>
+                  <label className="form-check-label" htmlFor="part-time">
+                    {modalTags.partTime1}
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    value="part-time2"
+                    onChange={(e) => setWorkHours(e.target.value)}
+                    type="radio"
+                    id="part-time2"
+                    name="job-type"
+                  ></input>
+                  <label className="form-check-label" htmlFor="part-time">
+                    {modalTags.partTime2}
                   </label>
                 </div>
               </div>

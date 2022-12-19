@@ -27,7 +27,6 @@ const createPost = async (req, res) => {
         res.json(post);
       });
   } catch (error) {
-    console.log(error);
     res.status(500).send({ msg: 'Error posting!' });
   }
 };
@@ -49,7 +48,7 @@ const getPost = async (req, res) => {
     ]);
     res.json(post);
   } catch (error) {
-    res.status(404).json({ msg: 'no such post found' });
+    res.status(404).send({ msg: 'no such post found' });
   }
 };
 
@@ -58,7 +57,7 @@ const deletePost = async (req, res) => {
     await Post.findByIdAndRemove(req.params.id);
     res.status(204).end();
   } catch (error) {
-    res.status(404).json({ msg: 'cant delete post' });
+    res.status(404).send({ msg: 'cant delete post' });
   }
 };
 
@@ -125,7 +124,7 @@ const manageComment = async (req, res) => {
     }
     res.json(post);
   } catch (error) {
-    res.status(404).json({ msg: 'post or comment not found' });
+    res.status(404).send({ msg: 'post or comment not found' });
   }
 };
 
