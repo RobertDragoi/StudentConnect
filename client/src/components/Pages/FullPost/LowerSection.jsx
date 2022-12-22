@@ -20,10 +20,10 @@ const LowerSection = ({
   setEdit,
   edit,
 }) => {
-  const mutation = useMutation({
+  const modifyMutation = useMutation({
     mutationFn: async () => await manageComment(id, comment, 'add'),
   });
-  if (mutation.isSuccess) {
+  if (modifyMutation.isSuccess) {
     console.log('Comment created');
     setRender();
   }
@@ -31,7 +31,7 @@ const LowerSection = ({
     <>
       {isAuthenticated ? (
         <div className="container shadow p-5 my-3 bg-white text-black rounded-lg shadow-sm p-3">
-          <form onSubmit={() => mutation.mutate()}>
+          <form onSubmit={() => modifyMutation.mutate()}>
             <div className="form-group">
               <textarea
                 onChange={onChange}

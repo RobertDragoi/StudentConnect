@@ -27,10 +27,10 @@ const Post = (props) => {
   const postContext = useContext(PostContext);
   const { user } = userContext;
   const { deletePost } = postContext;
-  const mutation = useMutation({
+  const deleteMutation = useMutation({
     mutationFn: async () => await deletePost(id),
   });
-  if (mutation.isSuccess) {
+  if (deleteMutation.isSuccess) {
     console.log(`Post ${id} deleted`);
     setRender(id);
   }
@@ -76,7 +76,7 @@ const Post = (props) => {
                   <span>
                     <button
                       onClick={() => {
-                        mutation.mutate();
+                        deleteMutation.mutate();
                       }}
                       type="button"
                       className="btn btn-outline-danger"

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 import PostContext from '../../../state/PostState/postContext';
 import { locations, domains, experience } from '../../../placeholders';
 import { postTags } from './tags';
@@ -18,10 +19,15 @@ const PostForm = () => {
   const onChange = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
   };
+  const createMutation = useMutation({
+    mutationFn: async () => await createPost(post),
+  });
+  if (createMutation.isSuccess) {
+    navigate('/home');
+  }
   const onSubmit = (e) => {
     e.preventDefault();
-    createPost(post);
-    navigate('/home');
+    createMutation.mutate();
   };
 
   return (
