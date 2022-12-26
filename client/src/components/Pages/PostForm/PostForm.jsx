@@ -21,10 +21,9 @@ const PostForm = () => {
   };
   const createMutation = useMutation({
     mutationFn: async () => await createPost(post),
+    onSuccess: () => navigate('/home'),
   });
-  if (createMutation.isSuccess) {
-    navigate('/home');
-  }
+
   const onSubmit = (e) => {
     e.preventDefault();
     createMutation.mutate();

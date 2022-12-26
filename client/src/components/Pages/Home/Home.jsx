@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import useHome from '../../../hooks/useHome';
 import Spinner from '../../Layout/Spinner/Spinner';
 import CurrentFilters from '../../Layout/CurrentFilters/CurrentFilters';
-
 import StudentsPosts from './StudentsPosts';
 import CompaniesPosts from './CompaniesPosts';
 import { BASE_URL } from '../../../utils/config';
@@ -28,6 +27,7 @@ const Home = () => {
     queryKey: ['getPosts', filters, search, render],
     queryFn: getPosts,
     staleTime: 60000,
+    refetchInterval: 60000,
   });
   console.log(isFetching ? 'Posts loading' : `Posts loaded: ${posts.length}`);
 

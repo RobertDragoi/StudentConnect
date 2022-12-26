@@ -21,7 +21,6 @@ export const User = () => {
     updateUser,
     getUser,
     getPosts,
-    loading,
     updatedUser,
     setUpdatedUser,
     isCurrentUser,
@@ -29,10 +28,13 @@ export const User = () => {
     setDataEdit,
     skillsEdit,
     setSkillsEdit,
+    onChange,
+    onSubmit,
   } = useUser();
-  const { data: user } = useQuery({
+  const { data: user, isLoading } = useQuery({
     queryKey: ['getUser', id],
-    queryFn: () => getUser(id),
+    queryFn: async () => await getUser(id),
+    onSuccess: (data) => setUpdatedUser(data),
     staleTime: 60000,
   });
   const { isFetching, data: posts } = useQuery({
@@ -41,43 +43,10 @@ export const User = () => {
     staleTime: 60000,
   });
 
-  const onEdit = () => {
-    switch (dataEdit) {
-      case true:
-        setDataEdit(false);
-        break;
-      case false:
-        setDataEdit(true);
-        break;
-      default:
-    }
-  };
-  const onChange = (e) => {
-    let aux = user;
-    Object.keys(aux).forEach((key) => {
-      if (key === e.target.name) {
-        aux[key] = e.target.value;
-      }
-      if (key === 'profilePicture') {
-        aux[key] = (e.target.files && e.target.files[0]) || aux[key];
-      }
-      Object.keys(aux[key]).forEach((key2) => {
-        if (key2 === e.target.name) {
-          aux[key][key2] = e.target.value;
-        }
-      });
-    });
-    setUpdatedUser(aux);
-  };
-  const onSubmit = (e) => {
-    e.preventDefault();
-    updateUser(updatedUser);
-    setDataEdit(false);
-  };
   return (
     <div className="main-body">
       <div className="container">
-        {!loading ? (
+        {!isLoading ? (
           <div className="row gutters-sm">
             <div className="col-md-4 mb-3">
               <div className="card mb-3">
@@ -116,7 +85,7 @@ export const User = () => {
                       <h4>{user?.name}</h4>
                       {dataEdit === false && isCurrentUser && (
                         <button
-                          onClick={onEdit}
+                          onClick={() => setDataEdit(!dataEdit)}
                           type="button"
                           className="btn"
                           style={{

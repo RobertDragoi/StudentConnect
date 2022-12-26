@@ -20,13 +20,17 @@ const LowerSection = ({
   setEdit,
   edit,
 }) => {
+  console.log('LowerSection');
   const modifyMutation = useMutation({
     mutationFn: async () => await manageComment(id, comment, 'add'),
+    onSuccess: () => {
+      if (modifyMutation.isSuccess) {
+        console.log('Comment created');
+        setRender('Comment created');
+      }
+    },
   });
-  if (modifyMutation.isSuccess) {
-    console.log('Comment created');
-    setRender();
-  }
+
   return (
     <>
       {isAuthenticated ? (

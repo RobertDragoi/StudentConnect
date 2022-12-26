@@ -1,6 +1,5 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-//import socketIOClient from 'socket.io-client';
 import useFullPost from '../../../hooks/useFullPost';
 import Spinner from '../../Layout/Spinner/Spinner';
 import UpperSection from './UpperSection';

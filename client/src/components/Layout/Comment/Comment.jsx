@@ -21,6 +21,10 @@ const Comment = ({
   const deleteMutation = useMutation({
     mutationFn: async () =>
       await manageComment(id, { id: comment.id }, 'delete'),
+    onSuccess: () => {
+      console.log(`Comment ${comment?.id} deleted`);
+      setRender(`Comment ${comment?.id} deleted`);
+    },
   });
   const modifyMutation = useMutation({
     mutationFn: async () =>
@@ -33,15 +37,12 @@ const Comment = ({
         },
         'modify'
       ),
+    onSuccess: () => {
+      console.log(`Comment ${comment?.id} modified`);
+      setRender(`Comment ${comment?.id} modified`);
+    },
   });
-  if (deleteMutation.isSuccess) {
-    console.log(`Comment ${id} deleted`);
-    setRender(comment.id);
-  }
-  if (modifyMutation.isSuccess) {
-    console.log(`Comment ${id} modified`);
-    setRender(comment.id);
-  }
+
   return (
     <div
       key={comment.id}
@@ -140,7 +141,7 @@ const Comment = ({
 export default Comment;
 Comment.propTypes = {
   comment: PropTypes.object,
-  edit: PropTypes.bool,
+  edit: PropTypes.object,
   user: PropTypes.object,
   id: PropTypes.string,
   formatDate: PropTypes.func,

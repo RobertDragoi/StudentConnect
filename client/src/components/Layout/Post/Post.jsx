@@ -29,11 +29,12 @@ const Post = (props) => {
   const { deletePost } = postContext;
   const deleteMutation = useMutation({
     mutationFn: async () => await deletePost(id),
+    onSuccess: () => {
+      console.log(`Post ${id} deleted`);
+      setRender(id);
+    },
   });
-  if (deleteMutation.isSuccess) {
-    console.log(`Post ${id} deleted`);
-    setRender(id);
-  }
+
   return (
     <React.Fragment>
       <div className="post-container">

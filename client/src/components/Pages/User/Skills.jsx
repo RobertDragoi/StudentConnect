@@ -13,19 +13,8 @@ const Skills = ({
   skills,
 }) => {
   const skillRef = useRef();
-  const onEdit = () => {
-    switch (skillsEdit) {
-      case true:
-        setSkillsEdit(false);
-        break;
-      case false:
-        setSkillsEdit(true);
-        break;
-      default:
-    }
-  };
-  const addSkill = (e) => {
-    e.preventDefault();
+
+  const addSkill = () => {
     let tempSkills = [...skills, skillRef.current.value];
     let aux = updatedUser;
     Object.keys(aux).forEach((key) => {
@@ -56,19 +45,21 @@ const Skills = ({
       <div className="card-body">
         <div className="row d-flex flex-row justify-content-between">
           <div className="col-sm-4  py-1 d-flex justify-content-around">
+            {skillsEdit && (
+              <button
+                onClick={addSkill}
+                type="button"
+                className="btn"
+                style={{
+                  backgroundColor: 'orangered',
+                  color: 'white',
+                }}
+              >
+                <FontAwesomeIcon icon={faPlusSquare} color="white" />
+              </button>
+            )}
             <button
-              onClick={addSkill}
-              type="button"
-              className="btn"
-              style={{
-                backgroundColor: 'orangered',
-                color: 'white',
-              }}
-            >
-              <FontAwesomeIcon icon={faPlusSquare} color="white" />
-            </button>
-            <button
-              onClick={onEdit}
+              onClick={() => setSkillsEdit(!skillsEdit)}
               type="button"
               className="btn"
               style={{
@@ -80,13 +71,15 @@ const Skills = ({
             </button>
           </div>
 
-          <div className="col-sm-5 py-1 d-flex justify-content-end">
-            <input
-              className="form-control form-control-sm"
-              type="text"
-              name="skill"
-              ref={skillRef}
-            />
+          <div className="col-sm-6 py-1 d-flex justify-content-end">
+            {skillsEdit && (
+              <input
+                className="form-control form-control-sm"
+                type="text"
+                name="skill"
+                ref={skillRef}
+              />
+            )}
           </div>
         </div>
         <div className="skill-container">

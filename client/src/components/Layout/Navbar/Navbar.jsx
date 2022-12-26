@@ -11,7 +11,7 @@ const Navbar = () => {
   const { user, logout, loadUser, refreshToken } = userContext;
 
   const { isLoading } = useQuery({
-    queryKey: ['loadUser', user],
+    queryKey: ['loadUser'],
     queryFn: async () => {
       if (Cookies.get('auth-token') && !user) {
         console.log('Load user');
