@@ -13,7 +13,6 @@ import {
   LOGIN_FAIL,
   CLEAR_ERRORS,
   LOAD_USER,
-  LOADING,
   LOGOUT,
 } from '../types';
 
@@ -21,11 +20,9 @@ const UserState = (props) => {
   let navigate = useNavigate();
 
   const initialState = {
-    token: localStorage.token,
     isAuthenticated: false,
     user: null,
     error: null,
-    loading: false,
   };
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
@@ -40,8 +37,8 @@ const UserState = (props) => {
 
   const register = async (formData) => {
     try {
-      const token = await authService.register(formData);
-      dispatch({ type: REGISTER_SUCCES, payload: token });
+      await authService.register(formData);
+      dispatch({ type: REGISTER_SUCCES });
       loadUser();
     } catch (error) {
       dispatch({ type: REGISTER_FAIL, payload: error.message });
@@ -51,8 +48,8 @@ const UserState = (props) => {
 
   const login = async (formData) => {
     try {
-      const token = await authService.login(formData);
-      dispatch({ type: LOGIN_SUCCES, payload: token });
+      await authService.login(formData);
+      dispatch({ type: LOGIN_SUCCES });
       loadUser();
     } catch (error) {
       dispatch({ type: LOGIN_FAIL, payload: error.message });
@@ -89,7 +86,6 @@ const UserState = (props) => {
 
   const loadUser = async () => {
     try {
-      dispatch({ type: LOADING });
       const loadedUser = await authService.loadUser();
       dispatch({ type: LOAD_USER, payload: loadedUser });
     } catch (error) {

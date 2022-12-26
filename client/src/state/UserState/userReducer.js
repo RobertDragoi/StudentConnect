@@ -5,7 +5,6 @@ import {
   LOGIN_FAIL,
   CLEAR_ERRORS,
   LOAD_USER,
-  LOADING,
   LOGOUT,
 } from '../types';
 
@@ -16,7 +15,6 @@ export default function (state, action) {
       return {
         ...state,
         isAuthenticated: true,
-        token: action.payload,
         error: null,
       };
 
@@ -24,25 +22,22 @@ export default function (state, action) {
       return {
         ...state,
         isAuthenticated: false,
-        token: null,
         error: action.payload,
       };
 
     case LOGIN_FAIL:
       return { ...state, error: action.payload };
-    case LOADING:
-      return { ...state, loading: true };
+
     case LOAD_USER:
       return {
         ...state,
         isAuthenticated: true,
         user: action.payload,
         error: null,
-        loading: false,
       };
 
     case LOGOUT:
-      return { ...state, token: null, user: null, isAuthenticated: false };
+      return { ...state, user: null, isAuthenticated: false };
 
     case CLEAR_ERRORS:
       return {
