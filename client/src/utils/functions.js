@@ -1,4 +1,4 @@
-const formatDate = (date) => {
+export const formatDate = (date) => {
   if (!date) {
     return 'Not set';
   }
@@ -15,4 +15,3 @@ const formatDate = (date) => {
   if (minutes.length < 2) minutes = '0' + minutes;
   return [day, month, year].join('-') + ' ' + [hours, minutes].join(':');
 };
-export { formatDate };
