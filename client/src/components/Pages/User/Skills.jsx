@@ -7,47 +7,20 @@ import './Skills.css';
 const Skills = ({
   skillsEdit,
   setSkillsEdit,
-  setUpdatedUser,
-  updatedUser,
-  updateUser,
   skills,
+  addSkill,
+  removeSkill,
 }) => {
   const skillRef = useRef();
 
-  const addSkill = () => {
-    let tempSkills = [...skills, skillRef.current.value];
-    let aux = updatedUser;
-    Object.keys(aux).forEach((key) => {
-      Object.keys(aux[key]).forEach((key2) => {
-        if (key2 === 'skills') {
-          aux[key][key2] = tempSkills;
-        }
-      });
-    });
-    setUpdatedUser(aux);
-    updateUser(aux);
-  };
-  const removeSkill = (skill) => {
-    let tempSkills = skills.filter((sk) => sk !== skill);
-    let aux = updatedUser;
-    Object.keys(aux).forEach((key) => {
-      Object.keys(aux[key]).forEach((key2) => {
-        if (key2 === 'skills') {
-          aux[key][key2] = tempSkills;
-        }
-      });
-    });
-    setUpdatedUser(aux);
-    updateUser(aux);
-  };
   return (
     <div className="card mb-3">
       <div className="card-body">
         <div className="row d-flex flex-row justify-content-between">
           <div className="col-sm-4  py-1 d-flex justify-content-around">
-            {skillsEdit && (
+            {!skillsEdit && (
               <button
-                onClick={addSkill}
+                onClick={() => addSkill(skills, skillRef)}
                 type="button"
                 className="btn"
                 style={{
@@ -72,7 +45,7 @@ const Skills = ({
           </div>
 
           <div className="col-sm-6 py-1 d-flex justify-content-end">
-            {skillsEdit && (
+            {!skillsEdit && (
               <input
                 className="form-control form-control-sm"
                 type="text"
@@ -88,7 +61,7 @@ const Skills = ({
               {skillsEdit ? (
                 <button
                   className="skill-button"
-                  onClick={() => removeSkill(item)}
+                  onClick={() => removeSkill(skills, item)}
                 ></button>
               ) : (
                 <></>
@@ -103,10 +76,9 @@ const Skills = ({
 };
 export default Skills;
 Skills.propTypes = {
+  addSkill: PropTypes.func,
+  removeSkill: PropTypes.func,
   skills: PropTypes.arrayOf(PropTypes.string),
   skillsEdit: PropTypes.bool,
   setSkillsEdit: PropTypes.func,
-  setUpdatedUser: PropTypes.func,
-  updatedUser: PropTypes.object,
-  updateUser: PropTypes.func,
 };

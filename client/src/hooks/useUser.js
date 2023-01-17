@@ -39,7 +39,32 @@ const useUser = () => {
     modifyMutation.mutate();
     setDataEdit(false);
   };
-
+  const addSkill = (skills, skillRef) => {
+    let tempSkills = [...skills, skillRef.current.value];
+    let aux = updatedUser;
+    Object.keys(aux).forEach((key) => {
+      Object.keys(aux[key]).forEach((key2) => {
+        if (key2 === 'skills') {
+          aux[key][key2] = tempSkills;
+        }
+      });
+    });
+    setUpdatedUser(aux);
+    modifyMutation.mutate();
+  };
+  const removeSkill = (skills, skill) => {
+    let tempSkills = skills.filter((sk) => sk !== skill);
+    let aux = updatedUser;
+    Object.keys(aux).forEach((key) => {
+      Object.keys(aux[key]).forEach((key2) => {
+        if (key2 === 'skills') {
+          aux[key][key2] = tempSkills;
+        }
+      });
+    });
+    setUpdatedUser(aux);
+    modifyMutation.mutate();
+  };
   return {
     updateUser,
     getUser,
@@ -52,6 +77,8 @@ const useUser = () => {
     setDataEdit,
     skillsEdit,
     setSkillsEdit,
+    addSkill,
+    removeSkill,
     onChange,
     onSubmit,
   };

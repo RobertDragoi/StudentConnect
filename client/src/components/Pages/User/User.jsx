@@ -18,10 +18,8 @@ import './User.css';
 export const User = () => {
   const { id } = useParams();
   const {
-    updateUser,
     getUser,
     getPosts,
-    updatedUser,
     setUpdatedUser,
     isCurrentUser,
     dataEdit,
@@ -30,6 +28,8 @@ export const User = () => {
     setSkillsEdit,
     onChange,
     onSubmit,
+    addSkill,
+    removeSkill,
   } = useUser();
   const { data: user, isLoading } = useQuery({
     queryKey: ['getUser', id],
@@ -148,12 +148,11 @@ export const User = () => {
                 <>
                   <h4 className="user-title">{userTags.skills}</h4>
                   <Skills
+                    addSkill={addSkill}
+                    removeSkill={removeSkill}
                     skills={user?.student?.skills}
                     skillsEdit={skillsEdit}
                     setSkillsEdit={setSkillsEdit}
-                    updateUser={updateUser}
-                    setUpdatedUser={setUpdatedUser}
-                    updatedUser={updatedUser}
                   />
                 </>
               ) : (

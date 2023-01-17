@@ -25,7 +25,7 @@ const Navbar = () => {
         return;
       }
     },
-    refetchInterval: 60000 * 15,
+    refetchInterval: 60000,
   });
 
   return (

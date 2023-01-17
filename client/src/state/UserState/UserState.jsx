@@ -65,7 +65,6 @@ const UserState = (props) => {
   const getUser = async (id) => {
     try {
       const user = await userService.getUser(id);
-      console.log(user);
       return user;
     } catch (error) {
       dispatch({ type: LOGIN_FAIL, payload: error.message });
@@ -88,6 +87,7 @@ const UserState = (props) => {
     try {
       const loadedUser = await authService.loadUser();
       dispatch({ type: LOAD_USER, payload: loadedUser });
+      return loadedUser;
     } catch (error) {
       logout();
       dispatch({ type: LOGIN_FAIL, payload: error.response.data.msg });
