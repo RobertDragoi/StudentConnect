@@ -23,13 +23,13 @@ const Home = () => {
     filters,
     isAuthenticated,
   } = useHome();
-  const { isFetching, data: posts } = useQuery({
+  const { isLoading, data: posts } = useQuery({
     queryKey: ['getPosts', filters, search, render],
     queryFn: getPosts,
     staleTime: 60000,
     refetchInterval: 60000,
   });
-  console.log(isFetching ? 'Posts loading' : `Posts loaded: ${posts.length}`);
+  console.log(isLoading ? 'Posts loading' : `Posts loaded: ${posts.length}`);
 
   return (
     <div className="main-body">
@@ -69,7 +69,7 @@ const Home = () => {
                 )}
               </div>
             </div>
-            {isFetching ? (
+            {isLoading ? (
               <Spinner />
             ) : type === 'students' ? (
               <StudentsPosts

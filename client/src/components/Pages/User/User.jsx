@@ -31,13 +31,13 @@ export const User = () => {
     addSkill,
     removeSkill,
   } = useUser();
-  const { data: user, isLoading } = useQuery({
+  const { data: user, isLoading: isUserLoading } = useQuery({
     queryKey: ['getUser', id],
     queryFn: async () => await getUser(id),
     onSuccess: (data) => setUpdatedUser(data),
     staleTime: 60000,
   });
-  const { isFetching, data: posts } = useQuery({
+  const { isLoading, data: posts } = useQuery({
     queryKey: ['getPosts'],
     queryFn: getPosts,
     staleTime: 60000,
@@ -46,7 +46,7 @@ export const User = () => {
   return (
     <div className="main-body">
       <div className="container">
-        {!isLoading ? (
+        {!isUserLoading ? (
           <div className="row gutters-sm">
             <div className="col-md-4 mb-3">
               <div className="card mb-3">
@@ -159,7 +159,7 @@ export const User = () => {
                 <></>
               )}
               <h4 className="user-title">{userTags.posts}</h4>
-              {isFetching ? (
+              {isLoading ? (
                 <Spinner />
               ) : (
                 <Posts posts={posts} user={user} url={BASE_URL} />

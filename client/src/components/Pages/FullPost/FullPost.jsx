@@ -26,7 +26,7 @@ const FullPost = () => {
     onChangeUpdated,
     formatDate,
   } = useFullPost();
-  const { isFetching, data: currentPost } = useQuery({
+  const { isLoading, data: currentPost } = useQuery({
     queryKey: ['getPost', id, render],
     queryFn: () => getPost(id),
     staleTime: 60000,
@@ -34,7 +34,7 @@ const FullPost = () => {
 
   return (
     <>
-      {isFetching ? (
+      {isLoading ? (
         <Spinner />
       ) : (
         <>
