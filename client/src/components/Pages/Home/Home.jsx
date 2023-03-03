@@ -7,6 +7,7 @@ import Spinner from '../../Layout/Spinner/Spinner';
 import CurrentFilters from '../../Layout/CurrentFilters/CurrentFilters';
 import StudentsPosts from './StudentsPosts';
 import CompaniesPosts from './CompaniesPosts';
+import Ad from '../../Layout/AdsComponent/AdsComponent';
 import { BASE_URL } from '../../../utils/config';
 import { homeTags } from './tags';
 import 'react-tiny-fab/dist/styles.css';
@@ -35,7 +36,9 @@ const Home = () => {
     <div className="main-body">
       <div className="container py-5">
         <div className="row">
-          <div className="col-md-2 " />
+          <div className="col-md-2 ">
+            <Ad dataAdSlot="5286029466" />
+          </div>
           <div className="col-md-8">
             <div className="d-flex flex-column align-items-center">
               <div className="d-flex flex-row justify-content-center">
@@ -94,7 +97,9 @@ const Home = () => {
               ) : null}
             </Link>
           </div>
-          <div className="col-md-2 " />
+          <div className="col-md-2 ">
+            <Ad dataAdSlot="5286029466" />
+          </div>
         </div>
       </div>
     </div>
