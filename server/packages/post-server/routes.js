@@ -1,13 +1,13 @@
 const postsRouter = require('express').Router();
 const { check } = require('express-validator');
-const middleware = require('../utils/middleware');
+const middleware = require('./utils/middleware');
 const {
   createPost,
   getPosts,
   getPost,
   manageComment,
   deletePost,
-} = require('../services/post');
+} = require('./services');
 postsRouter.post(
   '/',
   middleware.tokenExtractor,

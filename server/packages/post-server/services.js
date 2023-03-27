@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
-const Post = require('../models/post');
-const Comment = require('../models/comment');
-
+const Post = require('./models/post');
+const Comment = require('./models/comment');
+const axios = require('axios');
 const createPost = async (req, res) => {
   const { title, experience, description, domain, workHours, workPlace } =
     req.body;
@@ -10,9 +10,12 @@ const createPost = async (req, res) => {
     res.status(400).send({ errors: validationErrors.array() });
   }
   try {
+    const user = await axios.get(
+      `http://localhost:4003/api/user/${req.user.id}`
+    );
     let post = new Post({
       title,
-      user: req.user.id,
+      user: user.data,
       description,
       domain,
       workHours,
@@ -20,44 +23,37 @@ const createPost = async (req, res) => {
       workPlace,
     });
     await post.save();
-    const id = post.id;
-    Post.findById(id)
-      .populate('user')
-      .then((post) => {
-        res.json(post);
-      });
+    res.send({ status: 200 });
   } catch (error) {
-    res.status(500).send({ msg: 'Error posting!' });
+    res.status(500).send(error.message);
   }
 };
 
 const getPosts = async (req, res, next) => {
   req.model = Post;
-  req.populate = [
-    { path: 'user' },
-    { path: 'comments', populate: { path: 'user' } },
-  ];
   next();
 };
 
 const getPost = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id).populate([
-      { path: 'user' },
-      { path: 'comments', populate: { path: 'user' } },
-    ]);
-    res.json(post);
+    const post = await Post.findById(req.params.id);
+    const comments = await Comment.find({ _id: { $in: post.comments } });
+    res.json({ ...post._doc, comments: comments });
   } catch (error) {
-    res.status(404).send({ msg: 'no such post found' });
+    res.status(404).send(error.message);
   }
 };
 
 const deletePost = async (req, res) => {
   try {
+    const post = await Post.findById(req.params.id);
     await Post.findByIdAndRemove(req.params.id);
+    console.log(post);
+    await Comment.deleteMany({ _id: { $in: post.comments } });
+
     res.status(204).end();
   } catch (error) {
-    res.status(404).send({ msg: 'cant delete post' });
+    res.status(404).send({ msg: 'Cannot delete post' });
   }
 };
 
@@ -65,67 +61,49 @@ const manageComment = async (req, res) => {
   try {
     const action = req.header('action');
     let comment = null;
-    let post = null;
     let user,
       body,
       id = null;
     switch (action) {
       case 'add':
-        user = req.body.user;
+        user = await axios.get(`http://localhost:4003/api/user/${req.user.id}`);
         body = req.body.body;
-        comment = new Comment({ user, body });
+        comment = new Comment({ user: user.data, body });
         await comment.save();
-        post = await Post.findOneAndUpdate(
+        await Post.findOneAndUpdate(
           { _id: req.params.id },
           { $push: { comments: comment.id } },
           { new: true }
-        ).populate([
-          { path: 'user' },
-          {
-            path: 'comments',
-            populate: { path: 'user' },
-          },
-        ]);
+        );
         break;
       case 'delete':
         id = req.body.id;
-
         await Comment.findByIdAndRemove(id);
-        post = await Post.findOneAndUpdate(
+        await Post.findOneAndUpdate(
           { _id: req.params.id },
           { $pull: { comments: id } },
           { new: true }
-        ).populate([
-          { path: 'user' },
-          {
-            path: 'comments',
-            populate: { path: 'user' },
-          },
-        ]);
+        );
         break;
       case 'modify':
         id = req.body.id;
-        user = req.body.user;
         body = req.body.body;
-
         await Comment.findByIdAndUpdate(id, {
-          user: user,
           body: body,
           updated: req.body.updated,
         });
-        post = await Post.findById(req.params.id).populate([
-          { path: 'user' },
-          {
-            path: 'comments',
-            populate: { path: 'user' },
-          },
-        ]);
         break;
     }
-    res.json(post);
+    res.send({ status: 200 });
   } catch (error) {
-    res.status(404).send({ msg: 'post or comment not found' });
+    res.status(404).send({ msg: 'Post or comment not found' });
   }
 };
 
-module.exports = { createPost, getPosts, getPost, manageComment, deletePost };
+module.exports = {
+  createPost,
+  getPosts,
+  getPost,
+  manageComment,
+  deletePost,
+};

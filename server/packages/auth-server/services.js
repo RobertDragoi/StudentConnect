@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
-const config = require('../utils/config');
-const User = require('../models/user');
-const Student = require('../models/student');
-const Company = require('../models/company');
+const config = require('./utils/config');
+const User = require('./models/user');
+const Student = require('./models/student');
+const Company = require('./models/company');
 
 const loadUser = async (req, res) => {
   try {
