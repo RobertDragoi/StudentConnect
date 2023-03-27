@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Post from '../../Layout/Post/Post';
-const Posts = ({ posts, user, url }) => {
+const Posts = ({ posts, user }) => {
   return (
     <div>
       {posts?.map((post) => {
@@ -13,7 +13,7 @@ const Posts = ({ posts, user, url }) => {
               title={post.title}
               domain={post.domain}
               createdAt={post.createdAt}
-              picture={`${url}/${post.user.profilePicture}`}
+              picture={`/img/${post.user.profilePicture}`}
               description={post.description}
               type={post.workHours}
               location={post.workPlace}
@@ -29,5 +29,4 @@ export default Posts;
 Posts.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.object),
   user: PropTypes.object,
-  url: PropTypes.string,
 };

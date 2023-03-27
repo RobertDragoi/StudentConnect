@@ -8,7 +8,6 @@ import CurrentFilters from '../../Layout/CurrentFilters/CurrentFilters';
 import StudentsPosts from './StudentsPosts';
 import CompaniesPosts from './CompaniesPosts';
 import Ad from '../../Layout/AdsComponent/AdsComponent';
-import { BASE_URL } from '../../../utils/config';
 import { homeTags } from './tags';
 import 'react-tiny-fab/dist/styles.css';
 import './Home.css';
@@ -75,17 +74,9 @@ const Home = () => {
             {isLoading ? (
               <Spinner />
             ) : type === 'students' ? (
-              <StudentsPosts
-                posts={posts}
-                setRender={setRender}
-                baseUrl={BASE_URL}
-              />
+              <StudentsPosts posts={posts} setRender={setRender} />
             ) : (
-              <CompaniesPosts
-                posts={posts}
-                setRender={setRender}
-                baseUrl={BASE_URL}
-              />
+              <CompaniesPosts posts={posts} setRender={setRender} />
             )}
             <Link to="/createpost">
               {isAuthenticated ? (

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../utils/config';
+import { VITE_POST_SERVER_URL } from '../utils/config';
 
 /*
 const query = new QueryBuilder().filter('email' 'abcd@gmail.com').filter(...).paginate().sort().exec()
@@ -7,7 +7,7 @@ const query = new QueryBuilder().filter('email' 'abcd@gmail.com').filter(...).pa
 
 class QueryBuilder {
   constructor(resourceRoute) {
-    this.baseUrl = `${BASE_URL}${resourceRoute}?`;
+    this.baseUrl = `${VITE_POST_SERVER_URL}${resourceRoute}?`;
     return this;
   }
 

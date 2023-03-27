@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import ReactImageFallback from 'react-image-fallback';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faUser } from '@fortawesome/free-solid-svg-icons';
-import { BASE_URL } from '../../../utils/config';
 import { formatDate } from '../../../utils/functions';
 import { useQuery } from '@tanstack/react-query';
 import useUser from '../../../hooks/useUser';
@@ -57,7 +56,7 @@ export const User = () => {
                         <ReactImageFallback
                           src={
                             user &&
-                            `${BASE_URL}/${user.profilePicture}?${
+                            `/img/${user.profilePicture}?${
                               Date.now() /* Hack to rerender image after submit */
                             }`
                           }
@@ -159,11 +158,7 @@ export const User = () => {
                 <></>
               )}
               <h4 className="user-title">{userTags.posts}</h4>
-              {isLoading ? (
-                <Spinner />
-              ) : (
-                <Posts posts={posts} user={user} url={BASE_URL} />
-              )}
+              {isLoading ? <Spinner /> : <Posts posts={posts} user={user} />}
             </div>
           </div>
         ) : (

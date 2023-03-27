@@ -1,4 +1,4 @@
-import { BASE_URL } from '../utils/config';
+import { VITE_AUTH_SERVER_URL } from '../utils/config';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 
@@ -30,19 +30,29 @@ const refreshToken = async () => {
       Authorization: Cookies.get('refresh-token'),
     },
   };
-  const res = await axios.post(`${BASE_URL}/api/auth/refresh`, {}, config);
+  const res = await axios.post(
+    `${VITE_AUTH_SERVER_URL}/api/auth/refresh`,
+    {},
+    config
+  );
   setAuthToken(res.data.authToken);
 };
 
 const register = async (formData) => {
-  const res = await axios.post(`${BASE_URL}/api/auth/register`, formData);
+  const res = await axios.post(
+    `${VITE_AUTH_SERVER_URL}/api/auth/register`,
+    formData
+  );
   setAuthToken(res.data.authToken);
   setRefreshToken(res.data.refreshToken);
   return res.data.authToken;
 };
 
 const login = async (formData) => {
-  const res = await axios.post(`${BASE_URL}/api/auth/login`, formData);
+  const res = await axios.post(
+    `${VITE_AUTH_SERVER_URL}/api/auth/login`,
+    formData
+  );
   setAuthToken(res.data.authToken);
   setRefreshToken(res.data.refreshToken);
   return res.data.authToken;
@@ -61,7 +71,7 @@ const loadUser = async () => {
       Authorization: Cookies.get('auth-token'),
     },
   };
-  const res = await axios.get(`${BASE_URL}/api/auth/user`, config);
+  const res = await axios.get(`${VITE_AUTH_SERVER_URL}/api/auth/user`, config);
   return res.data;
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Post from '../../Layout/Post/Post';
-const CompaniesPosts = ({ posts, setRender, baseUrl }) => {
+const CompaniesPosts = ({ posts, setRender }) => {
   return (
     <div>
       {posts.map((post) => {
@@ -15,7 +15,7 @@ const CompaniesPosts = ({ posts, setRender, baseUrl }) => {
               title={post.title}
               domain={post.domain}
               createdAt={post.createdAt}
-              picture={`${baseUrl}/${post.user.profilePicture}`}
+              picture={`/img/${post.user.profilePicture}`}
               type={post.workHours}
               location={post.workPlace}
               user={post.user}
@@ -29,5 +29,4 @@ export default CompaniesPosts;
 CompaniesPosts.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.object),
   setRender: PropTypes.func,
-  baseUrl: PropTypes.string,
 };
