@@ -5,14 +5,14 @@ const getUsers = async (req, res) => {
   res.json(users);
 };
 
-const getUser = async (request, response) => {
-  const id = request.params.id;
+const getUser = async (req, res) => {
+  const id = req.params.id;
 
   try {
     const searchedUser = await User.findById(id);
-    response.json(searchedUser);
+    res.json(searchedUser);
   } catch (error) {
-    response.status(500).json({ msg: 'No such user found!' });
+    res.status(500).json({ msg: 'No such user found!' });
   }
 };
 

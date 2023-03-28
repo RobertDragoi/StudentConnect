@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
-const Post = require('./models/post');
-const Comment = require('./models/comment');
 const axios = require('axios');
+const Post = require('./models/post');
+
 const createPost = async (req, res) => {
   const { title, experience, description, domain, workHours, workPlace } =
     req.body;
@@ -11,7 +11,7 @@ const createPost = async (req, res) => {
   }
   try {
     const user = await axios.get(
-      `http://localhost:4003/api/user/${req.user.id}`
+      `http://user-server:4003/api/user/${req.user.id}`
     );
     let post = new Post({
       title,
@@ -23,7 +23,7 @@ const createPost = async (req, res) => {
       workPlace,
     });
     await post.save();
-    res.send({ status: 200 });
+    res.status(200).end();
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -37,8 +37,13 @@ const getPosts = async (req, res, next) => {
 const getPost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    const comments = await Comment.find({ _id: { $in: post.comments } });
-    res.json({ ...post._doc, comments: comments });
+    const comments = await axios.post(
+      'http://comment-server:4004/api/comment/get',
+      {
+        commentIds: post.comments,
+      }
+    );
+    res.json({ ...post._doc, comments: comments.data });
   } catch (error) {
     res.status(404).send(error.message);
   }
@@ -48,8 +53,9 @@ const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     await Post.findByIdAndRemove(req.params.id);
-    console.log(post);
-    await Comment.deleteMany({ _id: { $in: post.comments } });
+    await axios.post('http://comment-server:4004/api/comment/delete', {
+      commentIds: post.comments,
+    });
 
     res.status(204).end();
   } catch (error) {
@@ -60,25 +66,23 @@ const deletePost = async (req, res) => {
 const manageComment = async (req, res) => {
   try {
     const action = req.header('action');
-    let comment = null;
-    let user,
-      body,
-      id = null;
+    let body, comment, id;
     switch (action) {
       case 'add':
-        user = await axios.get(`http://localhost:4003/api/user/${req.user.id}`);
         body = req.body.body;
-        comment = new Comment({ user: user.data, body });
-        await comment.save();
+        comment = await axios.post('http://comment-server:4004/api/comment', {
+          id: req.user.id,
+          body,
+        });
         await Post.findOneAndUpdate(
           { _id: req.params.id },
-          { $push: { comments: comment.id } },
+          { $push: { comments: comment.data.id } },
           { new: true }
         );
         break;
       case 'delete':
         id = req.body.id;
-        await Comment.findByIdAndRemove(id);
+        await axios.delete(`http://comment-server:4004/api/comment/${id}`);
         await Post.findOneAndUpdate(
           { _id: req.params.id },
           { $pull: { comments: id } },
@@ -88,13 +92,13 @@ const manageComment = async (req, res) => {
       case 'modify':
         id = req.body.id;
         body = req.body.body;
-        await Comment.findByIdAndUpdate(id, {
-          body: body,
-          updated: req.body.updated,
+        await axios.put(`http://comment-server:4004/api/comment/${id}`, {
+          id,
+          body,
         });
         break;
     }
-    res.send({ status: 200 });
+    res.status(200).end();
   } catch (error) {
     res.status(404).send({ msg: 'Post or comment not found' });
   }

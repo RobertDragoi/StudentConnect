@@ -4,11 +4,12 @@
   "description": "Collective Project Proposed By IBM, West University of Timisoara, 2nd Year, Winter Semester",
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "concurrently \"npm run auth-server\" \"npm run post-server\" \"npm run user-server\"",
+    "server": "concurrently \"npm run auth-server\" \"npm run post-server\" \"npm run user-server\" \"npm run comment-server\"",
     "client": "npm start --prefix ../client",
     "auth-server": "nodemon ./packages/auth-server/main.js",
     "post-server": "nodemon ./packages/post-server/main.js",
     "user-server": "nodemon ./packages/user-server/main.js",
+    "comment-server": "nodemon ./packages/comment-server/main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --fix --ext .js,.jsx ."
   },
