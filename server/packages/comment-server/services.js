@@ -4,13 +4,19 @@ const Comment = require('./models/comment');
 
 const createComment = async (req, res) => {
   const body = req.body.body;
-  const id = req.body.id;
   const validationErrors = validationResult(req);
   if (!validationErrors.isEmpty()) {
     res.status(400).send({ errors: validationErrors.array() });
   }
   try {
-    const user = await axios.get(`http://user-server:4003/api/user/${id}`);
+    const user = await axios.get(
+      `http://user-server:4003/api/user/${req.user.id}`,
+      {
+        headers: {
+          Authorization: req.header('Authorization'),
+        },
+      }
+    );
     const comment = new Comment({ user: user.data, body });
     await comment.save();
     res.json(comment);

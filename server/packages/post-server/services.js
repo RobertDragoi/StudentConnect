@@ -11,7 +11,12 @@ const createPost = async (req, res) => {
   }
   try {
     const user = await axios.get(
-      `http://user-server:4003/api/user/${req.user.id}`
+      `http://user-server:4003/api/user/${req.user.id}`,
+      {
+        headers: {
+          Authorization: req.header('Authorization'),
+        },
+      }
     );
     let post = new Post({
       title,
@@ -53,9 +58,17 @@ const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     await Post.findByIdAndRemove(req.params.id);
-    await axios.post('http://comment-server:4004/api/comment/delete', {
-      commentIds: post.comments,
-    });
+    await axios.post(
+      'http://comment-server:4004/api/comment/delete',
+      {
+        commentIds: post.comments,
+      },
+      {
+        headers: {
+          Authorization: req.header('Authorization'),
+        },
+      }
+    );
 
     res.status(204).end();
   } catch (error) {
@@ -65,15 +78,23 @@ const deletePost = async (req, res) => {
 
 const manageComment = async (req, res) => {
   try {
+    const config = {
+      headers: {
+        Authorization: req.header('Authorization'),
+      },
+    };
     const action = req.header('action');
     let body, comment, id;
     switch (action) {
       case 'add':
         body = req.body.body;
-        comment = await axios.post('http://comment-server:4004/api/comment', {
-          id: req.user.id,
-          body,
-        });
+        comment = await axios.post(
+          'http://comment-server:4004/api/comment',
+          {
+            body,
+          },
+          config
+        );
         await Post.findOneAndUpdate(
           { _id: req.params.id },
           { $push: { comments: comment.data.id } },
@@ -82,7 +103,10 @@ const manageComment = async (req, res) => {
         break;
       case 'delete':
         id = req.body.id;
-        await axios.delete(`http://comment-server:4004/api/comment/${id}`);
+        await axios.delete(
+          `http://comment-server:4004/api/comment/${id}`,
+          config
+        );
         await Post.findOneAndUpdate(
           { _id: req.params.id },
           { $pull: { comments: id } },
@@ -92,10 +116,14 @@ const manageComment = async (req, res) => {
       case 'modify':
         id = req.body.id;
         body = req.body.body;
-        await axios.put(`http://comment-server:4004/api/comment/${id}`, {
-          id,
-          body,
-        });
+        await axios.put(
+          `http://comment-server:4004/api/comment/${id}`,
+          {
+            id,
+            body,
+          },
+          config
+        );
         break;
     }
     res.status(200).end();

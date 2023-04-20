@@ -4,7 +4,7 @@ const { getUsers, getUser, updateUser } = require('./services');
 
 userRouter.get('/', getUsers);
 
-userRouter.get('/:id', getUser);
+userRouter.get('/:id', middleware.tokenExtractor, getUser);
 
 /* 
  ! Only able to PUT if id matches token id.

@@ -1,6 +1,6 @@
-import { VITE_AUTH_SERVER_URL } from '../utils/config';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { VITE_AUTH_SERVER_URL } from '../utils/config';
 
 const setAuthToken = async (token) => {
   if (token) {
@@ -68,7 +68,6 @@ const loadUser = async () => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
-      Authorization: Cookies.get('auth-token'),
     },
   };
   const res = await axios.get(`${VITE_AUTH_SERVER_URL}/api/auth/user`, config);

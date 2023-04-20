@@ -1,5 +1,5 @@
-import QueryBuilder from './queryBuilder';
 import axios from 'axios';
+import QueryBuilder from './queryBuilder';
 import { VITE_POST_SERVER_URL } from '../utils/config';
 
 const BASE_RESOURCE_ROUTE = '/api/post';

@@ -8,7 +8,6 @@ const User = require('../models/user');
 
 const tokenExtractor = (req, res, next) => {
   const token = req.header('Authorization');
-
   if (!token) {
     res.status(401).json({ error: 'no token provided' });
   }
