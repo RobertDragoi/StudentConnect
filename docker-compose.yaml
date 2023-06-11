@@ -6,29 +6,23 @@ services:
     container_name: client-container
     ports:
       - 3000:3000
-    env_file:
-      - ./client/.env
   auth-server:
     image: auth-server
     container_name: auth-server-container
     ports:
       - 4001:4001
-    env_file: ./server/packages/auth-server/.env
   post-server:
     image: post-server
     container_name: post-server-container
     ports:
       - 4002:4002
-    env_file: ./server/packages/post-server/.env
   user-server:
     image: user-server
     container_name: user-server-container
     ports:
       - 4003:4003
-    env_file: ./server/packages/user-server/.env
   comment-server:
     image: comment-server
     container_name: comment-server-container
     ports:
       - 4004:4004
-    env_file: ./server/packages/comment-server/.env
