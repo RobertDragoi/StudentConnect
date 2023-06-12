@@ -1,38 +1,96 @@
 version: "3.7"
-
 services:
   client:
+    restart: always
     image: client
+    deploy:
+      resources:
+        limits:
+          cpus: ${CPU_LIMIT:-0.50}
+          memory: ${MEMORY_LIMIT:-512M}
+        reservations:
+          cpus: ${CPU_RESERVATION:-0.25}
+          memory: ${MEMORY_RESERVATION:-256M}
     container_name: client-container
     ports:
       - 3000:3000
     env_file:
       - ./client/.env
+    networks:
+      - studentconnect
   auth-server:
+    restart: always
     image: auth-server
+    deploy:
+      resources:
+        limits:
+          cpus: ${CPU_LIMIT:-0.50}
+          memory: ${MEMORY_LIMIT:-256M}
+        reservations:
+          cpus: ${CPU_RESERVATION:-0.25}
+          memory: ${MEMORY_RESERVATION:-128M}
     container_name: auth-server-container
     ports:
       - 4001:4001
     env_file:
       - ./server/packages/auth-server/.env
+    networks:
+      - studentconnect
   post-server:
+    restart: always
     image: post-server
+    deploy:
+      resources:
+        limits:
+          cpus: ${CPU_LIMIT:-0.50}
+          memory: ${MEMORY_LIMIT:-256M}
+        reservations:
+          cpus: ${CPU_RESERVATION:-0.25}
+          memory: ${MEMORY_RESERVATION:-128M}   
     container_name: post-server-container
     ports:
       - 4002:4002
     env_file:
       - ./server/packages/post-server/.env
+    networks:
+      - studentconnect
   user-server:
+    restart: always
     image: user-server
+    deploy:
+      resources:
+        limits:
+          cpus: ${CPU_LIMIT:-0.50}
+          memory: ${MEMORY_LIMIT:-256M}
+        reservations:
+          cpus: ${CPU_RESERVATION:-0.25}
+          memory: ${MEMORY_RESERVATION:-128M}
     container_name: user-server-container
     ports:
       - 4003:4003
     env_file:
       - ./server/packages/user-server/.env
+    networks:
+      - studentconnect
   comment-server:
+    restart: always
     image: comment-server
+    deploy:
+      resources:
+        limits:
+          cpus: ${CPU_LIMIT:-0.50}
+          memory: ${MEMORY_LIMIT:-256M}
+        reservations:
+          cpus: ${CPU_RESERVATION:-0.25}
+          memory: ${MEMORY_RESERVATION:-128M}
     container_name: comment-server-container
     ports:
       - 4004:4004
     env_file:
       - ./server/packages/comment-server/.env
+    networks:
+      - studentconnect
+
+
+networks:
+  studentconnect:
