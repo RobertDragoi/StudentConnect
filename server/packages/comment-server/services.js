@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
 const axios = require('axios');
 const Comment = require('./models/comment');
-
+const { USER_SERVER } = require('./utils/config');
 const createComment = async (req, res) => {
   const body = req.body.body;
   const validationErrors = validationResult(req);
@@ -9,14 +9,11 @@ const createComment = async (req, res) => {
     res.status(400).send({ errors: validationErrors.array() });
   }
   try {
-    const user = await axios.get(
-      `http://user-server:4003/api/user/${req.user.id}`,
-      {
-        headers: {
-          Authorization: req.header('Authorization'),
-        },
-      }
-    );
+    const user = await axios.get(`${USER_SERVER}/api/user/${req.user.id}`, {
+      headers: {
+        Authorization: req.header('Authorization'),
+      },
+    });
     const comment = new Comment({ user: user.data, body });
     await comment.save();
     res.json(comment);

@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
 const axios = require('axios');
 const Post = require('./models/post');
-
+const { COMMENT_SERVER, USER_SERVER } = require('./utils/config');
 const createPost = async (req, res) => {
   const { title, experience, description, domain, workHours, workPlace } =
     req.body;
@@ -10,14 +10,11 @@ const createPost = async (req, res) => {
     res.status(400).send({ errors: validationErrors.array() });
   }
   try {
-    const user = await axios.get(
-      `http://user-server:4003/api/user/${req.user.id}`,
-      {
-        headers: {
-          Authorization: req.header('Authorization'),
-        },
-      }
-    );
+    const user = await axios.get(`${USER_SERVER}/api/user/${req.user.id}`, {
+      headers: {
+        Authorization: req.header('Authorization'),
+      },
+    });
     let post = new Post({
       title,
       user: user.data,
@@ -42,12 +39,9 @@ const getPosts = async (req, res, next) => {
 const getPost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    const comments = await axios.post(
-      'http://comment-server:4004/api/comment/get',
-      {
-        commentIds: post.comments,
-      }
-    );
+    const comments = await axios.post(`${COMMENT_SERVER}/api/comment/get`, {
+      commentIds: post.comments,
+    });
     res.json({ ...post._doc, comments: comments.data });
   } catch (error) {
     res.status(404).send(error.message);
@@ -59,7 +53,7 @@ const deletePost = async (req, res) => {
     const post = await Post.findById(req.params.id);
     await Post.findByIdAndRemove(req.params.id);
     await axios.post(
-      'http://comment-server:4004/api/comment/delete',
+      '${COMMENT_SERVER}/api/comment/delete',
       {
         commentIds: post.comments,
       },
@@ -89,7 +83,7 @@ const manageComment = async (req, res) => {
       case 'add':
         body = req.body.body;
         comment = await axios.post(
-          'http://comment-server:4004/api/comment',
+          `${COMMENT_SERVER}/api/comment`,
           {
             body,
           },
@@ -103,10 +97,7 @@ const manageComment = async (req, res) => {
         break;
       case 'delete':
         id = req.body.id;
-        await axios.delete(
-          `http://comment-server:4004/api/comment/${id}`,
-          config
-        );
+        await axios.delete(`${COMMENT_SERVER}/api/comment/${id}`, config);
         await Post.findOneAndUpdate(
           { _id: req.params.id },
           { $pull: { comments: id } },
@@ -117,7 +108,7 @@ const manageComment = async (req, res) => {
         id = req.body.id;
         body = req.body.body;
         await axios.put(
-          `http://comment-server:4004/api/comment/${id}`,
+          `${COMMENT_SERVER}/api/comment/${id}`,
           {
             id,
             body,
