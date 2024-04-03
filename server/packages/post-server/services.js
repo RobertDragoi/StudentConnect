@@ -27,7 +27,7 @@ const createPost = async (req, res) => {
     await post.save();
     res.status(200).end();
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).send({ msg: error.message });
   }
 };
 
@@ -44,7 +44,7 @@ const getPost = async (req, res) => {
     });
     res.json({ ...post._doc, comments: comments.data });
   } catch (error) {
-    res.status(404).send(error.message);
+    res.status(404).send({ msg: error.message });
   }
 };
 
