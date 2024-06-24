@@ -32,7 +32,6 @@ const userUpdater = async (request, response, next) => {
   try {
     let searchedUser = await User.findById(request.user.id);
 
-    // Handling New Profile Picture Upload
     if (request?.files?.profilePicture) {
       let newProfilePicture = request.files.profilePicture;
       let acceptedFileFormats = ['jpg', 'jpeg', 'png'];
@@ -42,19 +41,16 @@ const userUpdater = async (request, response, next) => {
         throw Error('Unaccepted file format!');
       }
 
-      // create directory for sharp image move
       let uploadFolder = `public/img/${searchedUser.id}/`;
       let uploadPath = uploadFolder + `profile.${fileFormat}`;
       await mkdirp(uploadFolder);
 
-      // Resize image to 200x200
       await sharp(newProfilePicture.tempFilePath)
         .resize(200, 200)
         .toFile(uploadPath);
 
       searchedUser.profilePicture = uploadPath;
 
-      // Remove temporary file
       fs.unlinkSync(newProfilePicture.tempFilePath);
     }
 

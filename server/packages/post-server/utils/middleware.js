@@ -21,7 +21,7 @@ const tokenExtractor = (req, res, next) => {
 const limitExtractor = async (req, res, next) => {
   logger.info(req.query);
   if (req.query.limit) req.limit = parseInt(req.query.limit);
-  else req.limit = 100; // set a default limit if none provided
+  else req.limit = 100;
   next();
 };
 
@@ -30,7 +30,7 @@ const limitExtractor = async (req, res, next) => {
  */
 const pageExtractor = async (req, res, next) => {
   if (req.query.page) req.page = parseInt(req.query.page);
-  else req.page = 1; // set a default page if none provided
+  else req.page = 1;
   next();
 };
 
