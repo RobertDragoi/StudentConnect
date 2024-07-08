@@ -2,7 +2,6 @@
 
 An app for connecting students and companies in searching for jobs and employees
 
-![191046031_4046114205473691_1575625329660633106_n](https://user-images.githubusercontent.com/32110030/119680017-7fbe4c80-be49-11eb-9900-d1a206b8f3b3.png)
 
 # Installation
 
